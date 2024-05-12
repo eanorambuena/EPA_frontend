@@ -1,14 +1,19 @@
 # EPA_frontend
 <!-- # E0 :construction: -->
 
-* :pencil2: **Nombre Grupo:** Completar nombre de grupo
+* :pencil2: **Nombre Grupo:** EPA
 
 
 ## Descripción general :thought_balloon:
 
-- ¿De qué se tratará el proyecto?
-- ¿Cuál es el fin o la utilidad del proyecto?
-- ¿Quiénes son los usuarios objetivo de su aplicación?
+¿De qué se tratará el proyecto?
+ - El proyecto consiste en una aplicación web de chat que permita a los adultos mayores comunicarse con sus familiares y amigos con varias funcionalidades que faciliten la comunicación.
+
+¿Cuál es el fin o la utilidad del proyecto?
+ - El fin del proyecto es facilitar la comunicación de los adultos mayores con sus familiares y amigos, teniendo en cuenta las limitaciones que tienen.
+
+¿Quiénes son los usuarios objetivo de su aplicación?
+ - Adultos mayores.
 
 ## Historia de Usuarios :busts_in_silhouette:
 
