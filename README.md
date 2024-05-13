@@ -30,8 +30,7 @@
 
 <!-- Documento de diseño web -->
 ### :art: Documento de diseño
-![Paleta de colores](assets/Design/PrincipalColors.png)
-![Paleta de colores](assets/Design/SecondaryColors.png)
+![Paleta de colores](assets/Design/Colors.png)
 ![Paleta de colores](assets/Design/Typography.png)
 
 
@@ -43,7 +42,8 @@
 
 <!-- Logo -->
 ### :art: Logo
-![Logo](assets/Logo.jpg)
+![Logo](assets/EPA Chat logo.png)
+![Logo2](assets/EPA Chat logo darkmode.png)
 
 <!-- ejemplo de aplicacion -->
 ### :iphone: Ejemplo de aplicación
