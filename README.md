@@ -47,4 +47,4 @@
 
 <!-- ejemplo de aplicacion -->
 ### :iphone: Ejemplo de aplicación
-![Ejemplo de aplicación](assets/PatternApplication.png)
+![Ejemplo de aplicación](assets/PatternApplication.jpg)
