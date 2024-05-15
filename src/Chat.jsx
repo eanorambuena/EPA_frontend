@@ -68,7 +68,7 @@ export default function Chat() {
   ]
 
   return (
-    <section className='flex flex-col gap-6 flex-reverse'>
+    <section className='flex flex-col gap-6 flex-reverse overflow-y-auto p-4 sm:p-6 bg-amber-100'>
       {
         messages.map((message) => (
           <ChatBubble key={message.id} me={message.username === me.username} {...users[message.username]} message={message.message} hourAndMinutes={message.hourAndMinutes} />
