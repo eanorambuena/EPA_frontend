@@ -48,8 +48,7 @@
 
 <!-- Documento de diseño web -->
 ### :art: Documento de diseño
-![Paleta de colores](assets/Design/PrincipalColors.png)
-![Paleta de colores](assets/Design/SecondaryColors.png)
+![Paleta de colores](assets/Design/Colors.png)
 ![Paleta de colores](assets/Design/Typography.png)
 Además de estos colores, pequeñas variaciones de estos también podrán ser utilizados. Los colores que utilizamos provienen de tailwind, donde utilizamos los colores amber, violet y gray en general, siendo utilizados los colores red, yellow y green para las alertas.
 
@@ -69,9 +68,11 @@ Además de estos colores, pequeñas variaciones de estos también podrán ser ut
 
 <!-- Logo -->
 ### :art: Logo
-![Logo](assets/Logo.jpg)
+![Logo](assets/EPAChatLogo.png)
+![Logo2](assets/EPAChatLogoDarkmode.png)
 
 <!-- ejemplo de aplicacion -->
 ### :iphone: Ejemplo de aplicación
-![Ejemplo de aplicación](assets/PatternApplication.png)
+![Ejemplo de aplicación](assets/PatternAplication.jpg)
+
 Otros ejemplos de uso de los colores se pueden ver en las vistas principales, ya que estamos avanzando ya con la utilización de estos.
