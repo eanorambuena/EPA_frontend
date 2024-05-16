@@ -32,9 +32,16 @@
 
 <!-- Vistas principales -->
 ### :mag: Vistas principales
-![Paleta de colores](assets/Views/ResponsiveDesign1.png)
-![Paleta de colores](assets/Views/ResponsiveDesign2.png)
-![Paleta de colores](assets/Views/ResponsiveDesign3.jpg)
+![Login Mobile](assets/Views/LoginMobile.jpg)
+![Login Tablet](assets/Views/LoginTablet.jpg)
+![Login Desktop](assets/Views/LoginDesktop.jpg)
+![Chats Mobile](assets/Views/ChatsMobile.jpg)
+![Chats Tablet](assets/Views/ChatsTablet.jpg)
+![Chats Desktop](assets/Views/ChatsDesktop.jpg)
+![Chat Mobile](assets/Views/ChatMobile.jpg)
+![Chat Tablet](assets/Views/ChatTablet.jpg)
+![Chat Desktop](assets/Views/ChatDesktop.jpg)
+
 
 <!-- Logo -->
 ### :art: Logo
