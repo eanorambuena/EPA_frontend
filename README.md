@@ -51,13 +51,21 @@
 ![Paleta de colores](assets/Design/PrincipalColors.png)
 ![Paleta de colores](assets/Design/SecondaryColors.png)
 ![Paleta de colores](assets/Design/Typography.png)
+Además de estos colores, pequeñas variaciones de estos también podrán ser utilizados. Los colores que utilizamos provienen de tailwind, donde utilizamos los colores amber, violet y gray en general, siendo utilizados los colores red, yellow y green para las alertas.
 
 
 <!-- Vistas principales -->
 ### :mag: Vistas principales
-![Paleta de colores](assets/Views/ResponsiveDesign1.png)
-![Paleta de colores](assets/Views/ResponsiveDesign2.png)
-![Paleta de colores](assets/Views/ResponsiveDesign3.jpg)
+![Login Mobile](assets/Views/LoginMobile.jpg)
+![Login Tablet](assets/Views/LoginTablet.jpg)
+![Login Desktop](assets/Views/LoginDesktop.jpg)
+![Chats Mobile](assets/Views/ChatsMobile.jpg)
+![Chats Tablet](assets/Views/ChatsTablet.jpg)
+![Chats Desktop](assets/Views/ChatsDesktop.jpg)
+![Chat Mobile](assets/Views/ChatMobile.jpg)
+![Chat Tablet](assets/Views/ChatTablet.jpg)
+![Chat Desktop](assets/Views/ChatDesktop.jpg)
+
 
 <!-- Logo -->
 ### :art: Logo
@@ -66,3 +74,4 @@
 <!-- ejemplo de aplicacion -->
 ### :iphone: Ejemplo de aplicación
 ![Ejemplo de aplicación](assets/PatternApplication.png)
+Otros ejemplos de uso de los colores se pueden ver en las vistas principales, ya que estamos avanzando ya con la utilización de estos.
