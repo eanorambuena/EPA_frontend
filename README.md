@@ -73,5 +73,5 @@ Además de estos colores, pequeñas variaciones de estos también podrán ser ut
 
 <!-- ejemplo de aplicacion -->
 ### :iphone: Ejemplo de aplicación
-![Ejemplo de aplicación](assets/PatternApplication.jpg)
+![Ejemplo de aplicación](assets/PatternAplication.jpg)
 Otros ejemplos de uso de los colores se pueden ver en las vistas principales, ya que estamos avanzando ya con la utilización de estos.
