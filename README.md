@@ -28,6 +28,7 @@
 ![Paleta de colores](assets/Design/PrincipalColors.png)
 ![Paleta de colores](assets/Design/SecondaryColors.png)
 ![Paleta de colores](assets/Design/Typography.png)
+Además de estos colores, pequeñas variaciones de estos también podrán ser utilizados. Los colores que utilizamos provienen de tailwind, donde utilizamos los colores amber, violet y gray en general, siendo utilizados los colores red, yellow y green para las alertas.
 
 
 <!-- Vistas principales -->
@@ -50,3 +51,4 @@
 <!-- ejemplo de aplicacion -->
 ### :iphone: Ejemplo de aplicación
 ![Ejemplo de aplicación](assets/PatternApplication.png)
+Otros ejemplos de uso de los colores se pueden ver en las vistas principales, ya que estamos avanzando ya con la utilización de estos.
