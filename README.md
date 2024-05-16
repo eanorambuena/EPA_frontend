@@ -42,8 +42,8 @@
 
 <!-- Logo -->
 ### :art: Logo
-![Logo](assets/EPA Chat logo.png)
-![Logo2](assets/EPA Chat logo darkmode.png)
+![Logo](assets/EPAChatLogo.png)
+![Logo2](assets/EPAChatLogoDarkmode.png)
 
 <!-- ejemplo de aplicacion -->
 ### :iphone: Ejemplo de aplicación
