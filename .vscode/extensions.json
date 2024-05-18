@@ -1,5 +1,9 @@
 {
   "recommendations": [
-    "github.vscode-github-actions"
+    "github.vscode-github-actions",
+    "dbaeumer.vscode-eslint",
+    "WallabyJs.console-ninja",
+    "mhutchie.git-graph",
+    "bradlc.vscode-tailwindcss"
   ]
 }

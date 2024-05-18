@@ -1,8 +1,13 @@
+import React from 'react'
 import ChatRow from './ChatRow'
 
-export default function Chats() {
+interface Props {
+  className?: string
+}
+
+export default function Chats({ className }: Props) {
  return (
-    <ul role='list' className='w-full md:w-[70%] lg:w-[50%] divide-y divide-gray-200 dark:divide-gray-700 bg-gray-100 dark:bg-gray-900'>
+    <ul role='list' className={`w-full md:w-[70%] lg:w-[50%] divide-y divide-gray-200 dark:divide-gray-700 bg-gray-100 dark:bg-gray-900 ${className}`}>
       <ChatRow user='Andrés Smith' message='Hola te escribo del banco BICE para invitarte' imgNumber={60} />
       <ChatRow user='Cynthia Gacitúa' message='5 papas, 3 tomates, 1 kilo de pan, 3 limones' imgNumber={36} />
       <ChatRow user='Hija' message='Ya llegué a la u, te quiero' imgNumber={1} />

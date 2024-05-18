@@ -1,4 +1,11 @@
-export default function Logo({ color = '#8b5cf6', size = '50' }) {
+import React from 'react'
+
+interface Props {
+  color?: string
+  size?: string
+}
+
+export default function Logo({ color = '#8b5cf6', size = '50' } : Props) {
   return (
     <svg
       width={size}

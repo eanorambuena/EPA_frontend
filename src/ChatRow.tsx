@@ -1,4 +1,12 @@
-export default function ChatRow({ user, message, imgNumber }) {
+import React from 'react'
+
+interface Props {
+  user: string
+  message: string
+  imgNumber: number
+}
+
+export default function ChatRow({ user, message, imgNumber } : Props) {
   const  hourAndMinutes = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })
   return (
     <li className='p-4 sm:p-6 font-4xl'>
