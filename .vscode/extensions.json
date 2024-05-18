@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "WallabyJs.console-ninja",
+    "mhutchie.git-graph",
+    "bradlc.vscode-tailwindcss"
+  ]
+}
