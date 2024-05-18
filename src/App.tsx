@@ -1,3 +1,4 @@
+import React from 'react'
 import Chat from './Chat'
 import Chats from './Chats'
 import Login from './Login'
@@ -6,7 +7,7 @@ import Logo from './icons/Logo'
 export default function App() {
   const vistas = {
     0: <Chat />,
-    1: <div className='w-full h-screen flex items-start justify-center gap-6'>
+    1: <div className='w-full h-screen flex items-start justify-center gap-6 bg'>
       <Chats className='w-full xl:w-1/2 h-screen' />
       <Chat className='invisible xl:visible w-1/2 h-screen xl:flex' />
     </div>,

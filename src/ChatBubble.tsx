@@ -1,4 +1,14 @@
-export default function ChatBubble({ username, imgSrc, message, hourAndMinutes, me }) {
+import React from 'react'
+
+interface Props {
+  username: string
+  imgSrc: string
+  message: string
+  hourAndMinutes: string
+  me: boolean
+}
+
+export default function ChatBubble({ username, imgSrc, message, hourAndMinutes, me } : Props) {
   const color = me === true ? '#c4b5fd' : '#fcd34d'
   return (
     <div className={`flex gap-2.5 items:start ${me ? 'flex-row-reverse' : 'flex-row'}`}>
