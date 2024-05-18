@@ -1,7 +1,11 @@
-import React from "react"
-import ChatBubble from "./ChatBubble"
+import React from 'react'
+import ChatBubble from './ChatBubble'
 
-export default function Chat() {
+interface Props {
+  className?: string
+}
+
+export default function Chat({ className }: Props) {
   const userImgNumber = 60
   const me = {
     username: 'Yo',
@@ -69,7 +73,7 @@ export default function Chat() {
   ]
 
   return (
-    <section className='flex flex-col gap-6 flex-reverse overflow-y-auto p-4 sm:p-6 bg-amber-100'>
+    <section className={`flex flex-col gap-6 flex-reverse overflow-y-auto p-4 sm:p-6 bg-amber-100 ${className}`}>
       {
         messages.map((message) => (
           <ChatBubble key={message.id} me={message.username === me.username} {...users[message.username]} message={message.message} hourAndMinutes={message.hourAndMinutes} />
