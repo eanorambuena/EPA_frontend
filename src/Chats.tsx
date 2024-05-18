@@ -1,3 +1,4 @@
+import React from 'react'
 import ChatRow from './ChatRow'
 
 export default function Chats() {
