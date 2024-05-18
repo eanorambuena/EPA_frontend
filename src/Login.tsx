@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface Props {
-  searchParams: { message: string }
+  searchParams?: { message: string }
 }
 
 export default function Login({ searchParams } : Props) {
