@@ -20,7 +20,7 @@ export default function App() {
         <Logo />
       </header>
       <main className='flex flex-col items-center justify-center relative  max-h-[100dvh-150px] sm:max-h-[100dvh-100px] min-h-[calc(100dvh-150px)] sm:min-h-[calc(100dvh-100px)] p-6 bg-gray-100 dark:bg-gray-50'>
-        { vistas[0] }
+        { vistas[1] }
       </main>
     </>
   )

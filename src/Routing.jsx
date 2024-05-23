@@ -4,9 +4,9 @@ import App from "./App";
 function Routing() {
     return (
         <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<App />} />
-        </Routes>
+            <Routes>
+                <Route path="/" element={<App />} />
+            </Routes>
         </BrowserRouter>
     );
 }
