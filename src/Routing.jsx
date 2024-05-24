@@ -6,6 +6,9 @@ function Routing() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App />} />
+                <Route path="/about" />
+                <Route path="/chats" />
+                <Route path="/docs" />
             </Routes>
         </BrowserRouter>
     );
