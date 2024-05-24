@@ -4,13 +4,16 @@ import { ChatSchema, Auth } from './services/schema'
 
 interface Props {
   chat: ChatSchema
+  selected: boolean
+  selectChat: (id: number) => void
 }
 
-export default function ChatRow({ chat } : Props) {
+export default function ChatRow({ chat, selected, selectChat } : Props) {
   const messages = Orm.Messages.all().filter((message) => message.chat.id === chat.id)
   if (messages.length === 0) return null
+
   const lastMessage = messages.reduce((prev, current) => (prev.hourAndMinutes > current.hourAndMinutes) ? prev : current, messages[0])
-  const user = lastMessage.user
+  
   let title = chat.title
   let imgSrc = chat.imgSrc
   if (!chat.isGroup) {
@@ -22,8 +25,10 @@ export default function ChatRow({ chat } : Props) {
     }
   }
 
+  const bgColor = selected ? 'bg-gray-200 dark:bg-gray-700' : ''
+
   return (
-    <li className='p-4 sm:p-6 font-4xl'>
+    <li onClick={() => selectChat(chat.id)} className={`p-4 sm:p-6 font-4xl sm:font-3xl cursor-pointer ${bgColor}`}>
       <div className='flex items-center space-x-3 rtl:space-x-reverse'>
         <div className='flex-shrink-0'>
           <img className='w-8 h-8 rounded-full' src={imgSrc} alt={title} />

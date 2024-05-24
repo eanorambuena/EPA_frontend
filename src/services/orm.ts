@@ -5,10 +5,6 @@ class Model<T> {
     return this.data
   }
 
-  populate(data: T[]) {
-    this.data = data
-  }
-
   find(id: number) {
     const item = this.all().find(item => (item as any).id === id)
     if (!item) {
@@ -23,6 +19,14 @@ class Model<T> {
       throw new Error(`Item ${value} not found`)
     }
     return item
+  }
+
+  first() {
+    return this.all()[0]
+  }
+
+  populate(data: T[]) {
+    this.data = data
   }
 }
 
