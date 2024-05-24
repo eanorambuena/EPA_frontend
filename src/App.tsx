@@ -3,6 +3,8 @@ import Chat from './Chat'
 import Chats from './Chats'
 import Login from './Login'
 import Logo from './icons/Logo'
+import Navbar from './components/Navbar/navbar'; // Importa el componente Navbar
+
 
 export default function App() {
   const vistas = {
@@ -19,6 +21,7 @@ export default function App() {
         <h1 className='text-2xl font-bold'>EPA Chat</h1>
         <Logo />
       </header>
+      <Navbar />
       <main className='flex flex-col items-center justify-center relative  max-h-[100dvh-150px] sm:max-h-[100dvh-100px] min-h-[calc(100dvh-150px)] sm:min-h-[calc(100dvh-100px)] p-6 bg-gray-100 dark:bg-gray-50'>
         { vistas[1] }
       </main>
