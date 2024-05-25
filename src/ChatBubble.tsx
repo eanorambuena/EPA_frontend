@@ -1,6 +1,7 @@
 import React from 'react'
 import { MessageSchema, Auth } from './services/schema'
 import Dropdown from './components/Dropdown'
+import TTS from './services/tts'
 
 interface Props {
   message: MessageSchema
@@ -11,12 +12,14 @@ export default function ChatBubble({ message } : Props) {
   if (!user) return null
   const isMe = user == Auth.getCurrentUser()
   const color = isMe === true ? '#c4b5fd' : '#fcd34d'
+
   return (
     <article className={`flex gap-2.5 items:start text-gray-900 dark:text-gray-950 ${isMe ? 'flex-row-reverse' : 'flex-row'}`}>
       <img className="w-8 h-8 rounded-full" src={user.imgSrc} alt={user.name} />
       <div
         className={`flex flex-col w-full max-w-[320px] leading-1.5 p-4 transition active:scale-125 ease-in-out duration-200 z-50 motion-reduce:transition-none motion-reduce:hover:transform-none border-gray-300 ${isMe ? 'rounded-s-xl rounded-ee-xl' : 'rounded-e-xl rounded-es-xl'}`}
         style={{backgroundColor: color}}
+        onClick={() => TTS.speak(message.message)}
       >
         <div className="flex items-center justify-between rtl:space-x-reverse">
           <span className="text-sm font-semibold">{isMe ? 'Tú' : user.name}</span>
