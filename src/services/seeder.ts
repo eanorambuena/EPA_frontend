@@ -1,24 +1,30 @@
 import { Orm } from './orm'
+import { Status } from './schema'
 
 export const seed = () => {
+  const getRandomStatus = () => Math.random() > 0.5 ? Status.online : Status.offline
+
   Orm.Users.populate([
     {
       id: 1,
       username: 'yo',
       name: 'Carlos Paredes',
-      imgSrc: 'https://i.pravatar.cc/150?img=11'
+      imgSrc: 'https://i.pravatar.cc/150?img=11',
+      status: getRandomStatus()
     },
     {
       id: 2,
       username: 'andres.smith',
       name: 'Andrés Smith',
-      imgSrc: 'https://i.pravatar.cc/150?img=60'
+      imgSrc: 'https://i.pravatar.cc/150?img=60',
+      status: getRandomStatus()
     },
     {
       id: 3,
       username: 'cynthia.gacitua',
       name: 'Cynthia Gacitúa',
-      imgSrc: 'https://i.pravatar.cc/150?img=35'
+      imgSrc: 'https://i.pravatar.cc/150?img=35',
+      status: getRandomStatus()
     },
   ])
 

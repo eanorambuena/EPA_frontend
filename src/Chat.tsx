@@ -5,6 +5,7 @@ import useChatInfo from './hooks/useChatInfo'
 import Messages from './components/Messages'
 import SendMessageForm from './components/SendMessageForm'
 import useLocalStorage from './hooks/useLocalStorage'
+import Availability from './components/Availability'
 
 interface Props {
   className?: string
@@ -35,6 +36,7 @@ export default function Chat({ className  }: Props) {
       <header className='flex items-center justify-start w-full h-fit gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-t-md'>
         <img className='size-10 rounded-full' src={imgSrc} alt={title} />
         <h1 className='text-md md:text-lg font-bold'>{title}</h1>
+        <Availability chat={chat} />
       </header>
       <Messages messages={messages} />
       <SendMessageForm chat={chat} appendMessage={appendMessage} />

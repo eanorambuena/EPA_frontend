@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Auth, ChatSchema } from '../services/schema'
+import { Auth, ChatSchema, Status } from '../services/schema'
 import { Orm } from '../services/orm'
 
 interface Props {
   chat: ChatSchema
-}
-
-enum Status {
-  online = 'en línea',
-  offline = 'desconectado'
 }
 
 const colors = {
@@ -17,7 +12,6 @@ const colors = {
 }
 
 export default function Availability({ chat } : Props) {
-  const [status, setStatus] = useState<Status>(Status.offline)
   const [otherUser, setOtherUser] = useState(Auth.getCurrentUser())
 
   useEffect(() => {
@@ -28,17 +22,24 @@ export default function Availability({ chat } : Props) {
     if (otherChatMember) {
       setOtherUser(otherChatMember.user)
     }
-    setStatus(Math.random() > 0.5 ? Status.online : Status.offline)
   }, [chat])
 
   if (chat.isGroup) return null
 
   return (
-    <span
-      aria-label={`El usuario ${otherUser.name} está ${status}`}
-      className='size-2 me-1 rounded-full'
-      style={{ backgroundColor: colors[status] }}
-    >
-    </span>
+    <div className='flex items-center space-x-1'>
+      <span
+        aria-label={`El usuario ${otherUser.name} está ${otherUser.status}`}
+        className='size-2 me-1 rounded-full'
+        style={{ backgroundColor: colors[otherUser.status] }}
+      >
+      </span>
+      <span
+        className='text-xs text-gray-500 dark:text-gray-400'
+        style={{ color: colors[otherUser.status] }}
+      >
+        {otherUser.status}
+      </span>
+    </div>
   )
 }
