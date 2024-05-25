@@ -1,7 +1,4 @@
 import React from 'react'
-import Chat from './Chat'
-import Chats from './Chats'
-import Login from './Login'
 import Layout from './Layout'
 
 export default function Landing() {
@@ -18,18 +15,10 @@ export default function Landing() {
     'https://i.pravatar.cc/150?img=19',
     'https://i.pravatar.cc/150?img=20'
   ]
-  const vistas = {
-    0: <Chat />,
-    1: <div className='w-full h-screen flex items-start justify-center gap-6 bg'>
-      <Chats className='w-full xl:w-1/2 h-screen' />
-      <Chat className='invisible xl:visible w-1/2 h-screen xl:flex' />
-    </div>,
-    2: <Login />
-  }
+
   return (
     <Layout limitHeight={false}>
       <main className='w-full h-full flex flex-col items-center justify-center p-6 bg-gray-100 dark:bg-gray-50'>
-        
         <h2 className='text-2xl font-bold text-gray-500'>Bienvenido a EPA Chat</h2>
         <h3 className='text-lg font-normal text-gray-500'>¡La app de chat dirigida para adultos mayores!</h3>
 
@@ -53,7 +42,6 @@ export default function Landing() {
           <button className='px-4 py-2.5 text-lg font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none'>Iniciar sesión</button>
           <button className='px-4 py-2.5 text-lg font-semibold text-blue-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none'>Registrarse</button>
         </div>
-        
       </main>
     </Layout>
   )
