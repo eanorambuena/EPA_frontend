@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import ChatBubble from './ChatBubble'
 import { Orm } from './services/orm'
 import { Auth, ChatSchema, MessageSchema } from './services/schema'
@@ -14,12 +14,12 @@ interface Props {
 
 export default function Chat({ className, selectedChatId }: Props) {
   const [chat, setChat] = useState<ChatSchema>(Orm.Chats.find(selectedChatId || 1))
+  const { id } = useParams<{ id: string }>() as { id: string }
   if (!selectedChatId) {
-    const { id } = useParams<{ id: string }>() as { id: string }
     setChat(Orm.Chats.find(parseInt(id)))
   }
 
-  const getMessages = () => Orm.Messages.all().filter((message) => message.chat.id === selectedChatId)
+  const getMessages = useCallback<() => MessageSchema[]>(() => Orm.Messages.all().filter((message) => message.chat.id === selectedChatId), [selectedChatId])
 
   const [messages, setMessages] = useState<MessageSchema[]>(getMessages())
   const [requiresUpdate, updateChat] = useUpdate()
@@ -36,7 +36,7 @@ export default function Chat({ className, selectedChatId }: Props) {
       setChat(Orm.Chats.find(selectedChatId))
     setMessages(getMessages())
     scrollChatToBottom()
-  }, [requiresUpdate, selectedChatId])
+  }, [requiresUpdate, selectedChatId, getMessages])
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault()

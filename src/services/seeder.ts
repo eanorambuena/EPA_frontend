@@ -12,13 +12,13 @@ export const seed = () => {
       id: 2,
       username: 'andres.smith',
       name: 'Andrés Smith',
-      imgSrc: `https://i.pravatar.cc/150?img=60`
+      imgSrc: 'https://i.pravatar.cc/150?img=60'
     },
     {
       id: 3,
       username: 'cynthia.gacitua',
       name: 'Cynthia Gacitúa',
-      imgSrc: `https://i.pravatar.cc/150?img=35`
+      imgSrc: 'https://i.pravatar.cc/150?img=35'
     },
   ])
 

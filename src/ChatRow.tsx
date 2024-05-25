@@ -1,6 +1,6 @@
 import React from 'react'
 import { Orm } from './services/orm'
-import { ChatSchema, Auth, MessageSchema } from './services/schema'
+import { ChatSchema, MessageSchema } from './services/schema'
 import useChatInfo from './hooks/useChatInfo'
 import Availability from './components/Availability'
 
@@ -11,11 +11,12 @@ interface Props {
 }
 
 export default function ChatRow({ chat, selected, selectChat } : Props) {
+  const { title, imgSrc } = useChatInfo(chat)
+
   const messages = Orm.Messages.all().filter((message) => message.chat.id === chat.id)
   if (messages.length === 0) return null
 
   const lastMessage: MessageSchema = messages.reduce((prev, current) => (prev.hourAndMinutes > current.hourAndMinutes) ? prev : current, messages[0])
-  const { title, imgSrc } = useChatInfo(chat)
   const bgColor = selected ? 'bg-gray-200 dark:bg-gray-700' : ''
 
   return (

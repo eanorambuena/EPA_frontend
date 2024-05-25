@@ -1,4 +1,6 @@
-class Model<T> {
+type Schema = Record<string, any> & { id: number }
+
+class Model<T extends Schema> {
   data: T[] = []
 
   all() {
@@ -6,7 +8,7 @@ class Model<T> {
   }
 
   find(id: number) {
-    const item = this.all().find(item => (item as any).id === id)
+    const item = this.all().find(item => (item).id === id)
     if (!item) {
       throw new Error(`Item ${id} not found`)
     }
@@ -34,9 +36,9 @@ class Model<T> {
   }
 }
 
-export const Orm: Record<string, Model<any>> = {}
+export const Orm: Record<string, Model<Schema>> = {}
 
-export function createModel<T>(name: string) {
+export function createModel<T extends Schema>(name: string) {
   const x = class extends Model<T> {}
   Orm[name] = new x()
 }

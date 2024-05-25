@@ -7,13 +7,13 @@ interface Props {
 }
 
 enum Status {
-  online = 'online',
-  offline = 'offline'
+  online = 'en línea',
+  offline = 'desconectado'
 }
 
 const colors = {
-  online: 'rgb(34, 197, 94)',
-  offline: 'rgb(239 68 68)'
+  [Status.online]: 'rgb(34, 197, 94)',
+  [Status.offline]: 'rgb(239 68 68)'
 }
 
 export default function Availability({ chat } : Props) {
@@ -28,11 +28,17 @@ export default function Availability({ chat } : Props) {
     if (otherChatMember) {
       setOtherUser(otherChatMember.user)
     }
+    setStatus(Math.random() > 0.5 ? Status.online : Status.offline)
   }, [chat])
 
   if (chat.isGroup) return null
 
   return (
-    <span className='size-2 me-1 rounded-full' style={{ backgroundColor: colors[status] }}></span>
+    <span
+      aria-label={`El usuario ${otherUser.name} está ${status}`}
+      className='size-2 me-1 rounded-full'
+      style={{ backgroundColor: colors[status] }}
+    >
+    </span>
   )
 }
