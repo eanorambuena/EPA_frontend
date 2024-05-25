@@ -8,7 +8,7 @@ export default function MainPage() {
   const [selectedChatId, setSelectedChatId] = useState(Orm.Chats.first()?.id)
 
   return (
-    <Layout>
+    <Layout className='p-6'>
       <div className='w-full h-full flex md:flex-row items-start justify-center p-6 md:p-0 md:gap-6'>
         <Chats selectedChatId={selectedChatId} selectChat={setSelectedChatId} className='w-full md:w-1/2' />
         <Chat selectedChatId={selectedChatId} className='invisible xl:visible w-1/2' />
