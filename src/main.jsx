@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Landing from './Landing'
 import './index.css'
 import Routing from './Routing'
 import { seed } from './services/seeder'

@@ -1,50 +1,48 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./ImageGallery.css";
-import ZoomImage from "./ZoomImage";
 
-const ImageGallery = (allImages) => {
-
-  const images = allImages;
-
+const ImageGallery = (images) => {
   const [imageIndex, setImageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setImageIndex((prevIndex) =>
-        prevIndex === allImages.images.length - 1 ? 0 : prevIndex + 1
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [allImages.images]);
+  }, [images]);
 
   function nextImage() {
     setImageIndex((prevIndex) =>
-      prevIndex === allImages.images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   }
 
   function prevImage() {
     setImageIndex((prevIndex) =>
-      prevIndex === 0 ? allImages.images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   }
 
   function getImage(index) {
-    return allImages.images[index];
+    return images[index];
   }
 
   return (
     <div className="image-gallery">
-      <ZoomImage src={getImage(imageIndex)} />
+      <button
+        className={`transition active:scale-125 ease-in-out duration-200 z-50 motion-reduce:transition-none motion-reduce:hover:transform-none`}
+      >
+        <img src={getImage(imageIndex)} alt="gallery" />
+      </button>
       <div className="controls">
         <button onClick={prevImage}>Previous</button>
         <button onClick={nextImage}>Next</button>
       </div>
     </div>
   );
-
 };
 
 export default ImageGallery;
-
