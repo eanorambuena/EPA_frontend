@@ -6,5 +6,7 @@
       "sizes": "any",
       "type": "image/svg+xml"
     }
-  ]
+  ],
+  "start_url": "/",
+  "display": "standalone"
 }
