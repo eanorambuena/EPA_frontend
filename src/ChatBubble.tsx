@@ -20,7 +20,7 @@ export default function ChatBubble({ message } : Props) {
       >
         <div className="flex items-center justify-between rtl:space-x-reverse">
           <span className="text-sm font-semibold">{isMe ? 'Tú' : user.name}</span>
-          <span className="text-sm font-normal text-gray-500">{message.hourAndMinutes}</span>
+          <span className="text-sm font-normal text-gray-500">{message.createdAt}</span>
         </div>
         <p className="text-sm font-normal py-2.5">{message.message}</p>
         <span className="text-sm font-normal text-gray-500">Recibido</span>

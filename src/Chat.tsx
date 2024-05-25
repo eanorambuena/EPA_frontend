@@ -4,42 +4,39 @@ import { Orm } from './services/orm'
 import { Auth, ChatSchema, MessageSchema } from './services/schema'
 import { useParams } from 'react-router-dom'
 import SubmitButton from './components/SubmitButton'
-import useChatInfo from './hooks/useChatInfo.tsx'
+import useChatInfo from './hooks/useChatInfo'
+import useUpdate from './hooks/useUpdate'
 
 interface Props {
   className?: string
-  chat?: ChatSchema
+  selectedChatId?: number
 }
 
-export default function Chat({ className, chat }: Props) {
-  let currentChat
-  if (!chat) {
+export default function Chat({ className, selectedChatId }: Props) {
+  const [chat, setChat] = useState<ChatSchema>(Orm.Chats.find(selectedChatId || 1))
+  if (!selectedChatId) {
     const { id } = useParams<{ id: string }>() as { id: string }
-    currentChat = Orm.Chats.find(parseInt(id))
-  }
-  else {
-    currentChat = chat
+    setChat(Orm.Chats.find(parseInt(id)))
   }
 
-  const getMessages = () => Orm.Messages.all().filter((message) => message.chat.id === currentChat.id)
+  const getMessages = () => Orm.Messages.all().filter((message) => message.chat.id === selectedChatId)
 
   const [messages, setMessages] = useState<MessageSchema[]>(getMessages())
-  const [requiresUpdate, setRequiresUpdate] = useState(true)
-  const { title, imgSrc } = useChatInfo(currentChat)
-
+  const [requiresUpdate, updateChat] = useUpdate()
+  const { title, imgSrc } = useChatInfo(chat)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollChatToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: "end" })
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
   }
+  scrollChatToBottom()
 
   useEffect(() => {
-    if (!requiresUpdate)
-      return
+    if (selectedChatId)
+      setChat(Orm.Chats.find(selectedChatId))
     setMessages(getMessages())
     scrollChatToBottom()
-    setRequiresUpdate(false)
-  }, [requiresUpdate])
+  }, [requiresUpdate, selectedChatId])
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault()
@@ -49,13 +46,13 @@ export default function Chat({ className, chat }: Props) {
     if (text) {
       Orm.Messages.create({
         id: Orm.Messages.all().length + 1,
-        chat: currentChat,
+        chat: chat,
         message: text,
         user: Auth.getCurrentUser(),
         createdAt: new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' })
       })
-      form.reset()
-      setRequiresUpdate(true)
+      form.reset();
+      (updateChat as () => void)()
     }
   }
   
@@ -65,9 +62,7 @@ export default function Chat({ className, chat }: Props) {
         <img className='size-10 rounded-full' src={imgSrc} alt={title} />
         <h1 className='text-md md:text-xl font-bold'>{title}</h1>
       </header>
-      <main
-        className='chat-main flex flex-col w-full gap-6 flex-reverse overflow-y-auto overflow-x-hidden p-4 sm:p-6 bg-amber-100 dark:bg-gray-800'
-      >
+      <main className='h-full flex flex-col w-full gap-6 flex-reverse overflow-y-auto overflow-x-hidden p-4 sm:p-6 bg-amber-100 dark:bg-gray-800'>
         {
           messages.map((message) => (
             <ChatBubble
