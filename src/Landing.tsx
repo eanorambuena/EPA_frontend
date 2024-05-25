@@ -2,7 +2,7 @@ import React from 'react'
 import Chat from './Chat'
 import Chats from './Chats'
 import Login from './Login'
-import Logo from './icons/Logo'
+import Layout from './Layout'
 
 export default function Landing() {
   // Idea para un componente dinámico --> cambiar entre diversas imágenes de ejemplo
@@ -27,12 +27,8 @@ export default function Landing() {
     2: <Login />
   }
   return (
-    <>
-      <header className='flex items-center justify-start gap-6 p-6 bg-gray-50 dark:bg-gray-950 h-[150px] sm:h-[100px]'>
-        <h1 className='text-2xl font-bold'>EPA Chat</h1>
-        <Logo />
-      </header>
-      <main className='flex flex-col items-center justify-center relative  max-h-[100dvh-150px] sm:max-h-[100dvh-100px] min-h-[calc(100dvh-150px)] sm:min-h-[calc(100dvh-100px)] p-6 bg-gray-100 dark:bg-gray-50'>
+    <Layout limitHeight={false}>
+      <main className='w-full h-full flex flex-col items-center justify-center p-6 bg-gray-100 dark:bg-gray-50'>
         
         <h2 className='text-2xl font-bold text-gray-500'>Bienvenido a EPA Chat</h2>
         <h3 className='text-lg font-normal text-gray-500'>¡La app de chat dirigida para adultos mayores!</h3>
@@ -59,6 +55,6 @@ export default function Landing() {
         </div>
         
       </main>
-    </>
+    </Layout>
   )
 }
