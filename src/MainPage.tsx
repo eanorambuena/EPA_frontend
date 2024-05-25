@@ -17,13 +17,13 @@ export default function MainPage() {
       <div className='w-full h-full flex md:flex-row items-start justify-center p-0 md:gap-6'>
         { id ? (
           <>
-            <Chats className='hidden lg:block w-1/2' />
-            <Chat className='w-full md-[70%] lg:w-1/2' />
+            <Chats className='hidden lg:block w-1/2 shadow-md' />
+            <Chat className='w-full md-[70%] lg:w-1/2 shadow-md' />
           </>
         ) : (
           <>
-            <Chats className='w-full md-[70%] lg:w-1/2' />
-            <Chat className='hidden lg:flex w-1/2' />
+            <Chats className='w-full md-[70%] lg:w-1/2 shadow-md' />
+            <Chat className='hidden lg:flex w-1/2 shadow-md' />
           </>
         )}
       </div>

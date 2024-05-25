@@ -22,7 +22,7 @@ export default function ChatRow({ chat, isSelected } : Props) {
   if (messages.length === 0) return null
 
   const lastMessage: MessageSchema = messages.reduce((prev, current) => (prev.hourAndMinutes > current.hourAndMinutes) ? prev : current, messages[0])
-  const selectedStyles = isSelected ? 'bg-gray-200 dark:bg-gray-700 rounded-md' : ''
+  const selectedStyles = isSelected ? 'lg:bg-gray-200 lg:dark:bg-gray-700 lg:shadow-sm' : ''
 
   return (
     <button onClick={handleClick} className={`w-full p-4 sm:p-6 font-4xl sm:font-3xl cursor-pointer rounded-md ${selectedStyles}`}>

@@ -33,7 +33,7 @@ export default function Chat({ className  }: Props) {
   
   return (
     <div className={`h-full flex flex-col items-start justify-start ${className}`}>
-      <header className='flex items-center justify-start w-full h-fit gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-t-md'>
+      <header className='flex items-center justify-start w-full h-fit shadow-sm gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-t-md'>
         <img className='size-8 sm:size-10 rounded-full' src={imgSrc} alt={title} />
         <h1 className='text-sm sm:text-md md:text-lg font-bold'>{title}</h1>
         <Availability chat={chat} />
