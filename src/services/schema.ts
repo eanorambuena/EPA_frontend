@@ -18,10 +18,10 @@ createModel<ChatSchema>('Chats')
 
 export type MessageSchema = {
   id: number
-  user: UserSchema,
-  chat: ChatSchema,
+  user: UserSchema
+  chat: ChatSchema
   message: string
-  hourAndMinutes: string
+  createdAt: string
 }
 createModel<MessageSchema>('Messages')
 

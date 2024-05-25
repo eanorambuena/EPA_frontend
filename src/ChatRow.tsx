@@ -1,6 +1,7 @@
 import React from 'react'
 import { Orm } from './services/orm'
 import { ChatSchema, Auth } from './services/schema'
+import useChatInfo from './hooks/useChatInfo'
 
 interface Props {
   chat: ChatSchema
@@ -13,18 +14,7 @@ export default function ChatRow({ chat, selected, selectChat } : Props) {
   if (messages.length === 0) return null
 
   const lastMessage = messages.reduce((prev, current) => (prev.hourAndMinutes > current.hourAndMinutes) ? prev : current, messages[0])
-  
-  let title = chat.title
-  let imgSrc = chat.imgSrc
-  if (!chat.isGroup) {
-    const chatMembers = Orm.ChatMembers.all().filter((chatMember) => chatMember.chat.id === chat.id)
-    const otherChatMember = chatMembers.find((chatMember) => chatMember.user !== Auth.getCurrentUser())
-    if (otherChatMember) {
-      title = otherChatMember.user.name
-      imgSrc = otherChatMember.user.imgSrc
-    }
-  }
-
+  const { title, imgSrc } = useChatInfo(chat)
   const bgColor = selected ? 'bg-gray-200 dark:bg-gray-700' : ''
 
   return (

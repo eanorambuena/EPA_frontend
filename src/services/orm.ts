@@ -28,6 +28,10 @@ class Model<T> {
   populate(data: T[]) {
     this.data = data
   }
+
+  create(data: T) {
+    this.data.push(data)
+  }
 }
 
 export const Orm: Record<string, Model<any>> = {}

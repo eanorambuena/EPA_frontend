@@ -12,8 +12,8 @@ export default function Main() {
   }
 
   return (
-    <div className='w-full h-full flex flex-col md:flex-row items-start justify-center md:gap-6'>
-      <Chats selectedChatId={selectedChatId} selectChat={selectChat} className='w-full xl:w-1/2' />
+    <div className='w-full h-full flex md:flex-row items-start mjustify-center p-6 md:p-0 md:gap-6'>
+      <Chats selectedChatId={selectedChatId} selectChat={selectChat} className='w-full md:w-1/2' />
       <Chat chat={chat} className='invisible xl:visible w-1/2' />
     </div>
   )

@@ -7,7 +7,7 @@ function Routing() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />} />
-        <Route path='/chat/:id' element={<Chat />} />
+        <Route path='/chats/:id' element={<Chat />} />
       </Routes>
     </BrowserRouter>
   )
