@@ -2,9 +2,9 @@
   "name": "EPA Chat",
   "icons": [
     {
-      "src": "/src/assets/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/src/assets/EPAChatLogo.png",
+      "sizes": "200x200",
+      "type": "image/png"
     }
   ],
   "start_url": "/",
