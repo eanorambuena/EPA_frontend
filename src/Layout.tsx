@@ -11,7 +11,7 @@ export default function Layout({ children, limitHeight = true, className = '' }:
   return (
     <div className='h-[100dvh] w-full'>
       <Header />
-      <main className={`${limitHeight ? 'h-[90%] sm:h-[80%]' : 'h-fit'} flex flex-col items-center justify-center relative p-6 bg-gray-100 dark:bg-gray-900 ${className}`}>
+      <main className={`${limitHeight ? 'h-[85%] sm:h-[80%]' : 'h-fit'} flex flex-col items-center justify-center relative p-6 bg-gray-100 dark:bg-gray-900 ${className}`}>
         {children}
       </main>
     </div>
