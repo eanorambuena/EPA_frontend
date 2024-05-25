@@ -4,7 +4,7 @@ import Chat from './Chat'
 import Layout from './Layout'
 import { Orm } from './services/orm'
 
-export default function Main() {
+export default function MainPage() {
   const [selectedChatId, setSelectedChatId] = useState(Orm.Chats.first()?.id)
 
   return (

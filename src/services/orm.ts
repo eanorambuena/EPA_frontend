@@ -36,7 +36,7 @@ class Model<T extends Schema> {
   }
 }
 
-export const Orm: Record<string, Model<Schema>> = {}
+export const Orm: Record<string, Model<any>> = {}
 
 export function createModel<T extends Schema>(name: string) {
   const x = class extends Model<T> {}
