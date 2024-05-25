@@ -1,6 +1,7 @@
 import React from 'react'
 import Logo from './icons/Logo'
 import Main from './Main'
+import Navbar from './components/Navbar/navbar'
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
         <h1 className='text-xl font-bold'>EPA Chat</h1>
         <Logo size='30'/>
       </header>
+      <Navbar />
       <main className='h-[80%] flex flex-col items-center justify-center relative p-6 bg-gray-100 dark:bg-gray-900'>
         <Main />
       </main>

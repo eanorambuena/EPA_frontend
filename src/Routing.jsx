@@ -7,7 +7,10 @@ function Routing() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />} />
+        <Route path="/about" />
+        <Route path="/chats" />
         <Route path='/chats/:id' element={<Chat />} />
+        <Route path="/docs" />
       </Routes>
     </BrowserRouter>
   )
