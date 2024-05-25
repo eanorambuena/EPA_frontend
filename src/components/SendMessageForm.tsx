@@ -44,13 +44,13 @@ export default function SendMessageForm({ appendMessage, chat }: Props) {
     <form
       ref={$form}
       onSubmit={sendMessage}
-      className='flex items-center justify-between w-full h-fit gap-4 md:gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-b-md'
+      className='flex items-center justify-between w-full h-fit shadow-md gap-4 md:gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-b-md'
     >
       <label className='sr-only' htmlFor='text'>
         Mensaje
       </label>
       <input
-        className='flex-grow max-w-[60%] md:max-w-full rounded-md px-4 py-2 bg-violet-300 border border-violet-300 placeholder-gray-800 text-gray-800'
+        className='flex-grow max-w-[60%] sm:max-w-full rounded-md px-4 py-2 bg-violet-300 border border-violet-300 placeholder-gray-800 text-gray-800'
         name='text'
         type='text'
         ref={$input}
@@ -58,7 +58,7 @@ export default function SendMessageForm({ appendMessage, chat }: Props) {
         placeholder='Escibe un mensaje...'
         required
       />
-      <SubmitButton className='min-w-[35%] md:min-w-0'>
+      <SubmitButton>
         Enviar
       </SubmitButton>
     </form>
