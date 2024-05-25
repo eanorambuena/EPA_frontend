@@ -1,7 +1,7 @@
 import React from 'react'
-import { MessageSchema, Auth } from './services/schema'
-import Dropdown from './components/Dropdown'
-import TTS from './services/tts'
+import { MessageSchema, Auth } from '../services/schema'
+import Dropdown from './Dropdown'
+import TTS from '../services/tts'
 
 interface Props {
   message: MessageSchema

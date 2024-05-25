@@ -1,9 +1,4 @@
 /* navbar.css */
-.navbar {
-  background-color: inherit;
-  padding: 10px;
-}
-
 .navbar-links {
   list-style: none;
   margin: 0;
@@ -13,15 +8,7 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-.navbar-links li {
-  margin-right: 10px;
-}
-
-.navbar-links li:last-child {
-  margin-right: 0;
-}
-
-.navbar-links li a {
+.navbar-links a {
   text-decoration: none;
   padding: 8px 15px;
   border-radius: 5px;
@@ -29,12 +16,12 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-.navbar-links li a:hover {
+.navbar-links a:hover {
   background-color: rgb(229 231 235, --tw-bg-opacity);
 }
 
 @media (prefers-color-scheme: dark) {
-  .navbar-links li a:hover {
+  .navbar-links a:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity));
   }

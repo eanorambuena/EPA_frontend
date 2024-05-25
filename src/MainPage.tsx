@@ -1,17 +1,31 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Chats from './Chats'
 import Chat from './Chat'
 import Layout from './Layout'
-import { Orm } from './services/orm'
+import { useParams } from 'react-router-dom'
+import useLocalStorage from './hooks/useLocalStorage'
 
 export default function MainPage() {
-  const [selectedChatId, setSelectedChatId] = useState(Orm.Chats.first()?.id)
-
+  const { id } = useParams<{ id: string }>() as { id: string }
+  const [selectedChatId, setSelectedChatId] = useLocalStorage('selectedChatId', 1)
+  if (id && selectedChatId !== parseInt(id)) {
+    setSelectedChatId(parseInt(id))
+  }
+  
   return (
     <Layout className='p-6'>
       <div className='w-full h-full flex md:flex-row items-start justify-center p-6 md:p-0 md:gap-6'>
-        <Chats selectedChatId={selectedChatId} selectChat={setSelectedChatId} className='w-full md:w-1/2' />
-        <Chat selectedChatId={selectedChatId} className='invisible xl:visible w-1/2' />
+        { id ? (
+          <>
+            <Chats className='hidden lg:block w-1/2' />
+            <Chat className='w-full md-[70%] lg:w-1/2' />
+          </>
+        ) : (
+          <>
+            <Chats className='w-full md-[70%] lg:w-1/2' />
+            <Chat className='hidden lg:flex w-1/2' />
+          </>
+        )}
       </div>
     </Layout>
   )

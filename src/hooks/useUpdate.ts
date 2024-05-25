@@ -1,11 +1,9 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 export default function useUpdate() {
   const [value, setValue] = useState<boolean>(false)
   
-  const update: () => void = () => {
-    setValue(!value)
-  }
+  const update = useCallback(() => setValue((prev) => !prev), [])
 
-  return [value, update]
+  return [value, update] as const
 }
