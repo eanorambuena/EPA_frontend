@@ -3,29 +3,28 @@ import Chat from './Chat'
 import Chats from './Chats'
 import Login from './Login'
 import Logo from './icons/Logo'
+import ImageGallery from './components/ImageGallery'
 
 export default function Landing() {
   // Idea para un componente dinámico --> cambiar entre diversas imágenes de ejemplo
-  const images = [
-    'https://i.pravatar.cc/150?img=11',
-    'https://i.pravatar.cc/150?img=12',
-    'https://i.pravatar.cc/150?img=13',
-    'https://i.pravatar.cc/150?img=14',
-    'https://i.pravatar.cc/150?img=15',
-    'https://i.pravatar.cc/150?img=16',
-    'https://i.pravatar.cc/150?img=17',
-    'https://i.pravatar.cc/150?img=18',
-    'https://i.pravatar.cc/150?img=19',
-    'https://i.pravatar.cc/150?img=20'
+  const imagesDesktop = [
+    '../assets/Views/ChatsDesktop.jpg',
+    '../assets/Views/ChatDesktop.jpg',
+    '../assets/Views/LoginDesktop.jpg'
   ]
-  const vistas = {
-    0: <Chat />,
-    1: <div className='w-full h-screen flex items-start justify-center gap-6 bg'>
-      <Chats className='w-full xl:w-1/2 h-screen' />
-      <Chat className='invisible xl:visible w-1/2 h-screen xl:flex' />
-    </div>,
-    2: <Login />
-  }
+  const imagesMobile = [
+    '../assets/Views/ChatsMobile.jpg',
+    '../assets/Views/ChatMobile.jpg',
+    '../assets/Views/LoginMobile.jpg'
+  ]
+  const imagesTablet = [
+    '../assets/Views/ChatsTablet.jpg',
+    '../assets/Views/ChatTablet.jpg',
+    '../assets/Views/LoginTablet.jpg'
+  ]
+  
+
+
   return (
     <>
       <header className='flex items-center justify-start gap-6 p-6 bg-gray-50 dark:bg-gray-950 h-[150px] sm:h-[100px]'>
@@ -37,11 +36,7 @@ export default function Landing() {
         <h2 className='text-2xl font-bold text-gray-500'>Bienvenido a EPA Chat</h2>
         <h3 className='text-lg font-normal text-gray-500'>¡La app de chat dirigida para adultos mayores!</h3>
 
-        <div className='flex items-center justify-center gap-6'>
-          <img className='w-64 h-64 rounded-full' src={images[0]} alt='Foto app 1' />
-          <img className='w-64 h-64 rounded-full' src={images[1]} alt='Foto app 2' />
-          <img className='w-64 h-64 rounded-full' src={images[2]} alt='Foto app 3' />
-        </div>
+        <ImageGallery images={imagesDesktop} />
 
         <h2 className='text-xl font-semibold mt-6 text-gray-500'>¿Qué funciones tenemos para los adultos mayores?</h2>
         <ul className='text-lg font-normal text-gray-500'>
@@ -60,5 +55,6 @@ export default function Landing() {
         
       </main>
     </>
-  )
+  );
+
 }
