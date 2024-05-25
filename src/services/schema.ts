@@ -1,10 +1,16 @@
 import { createModel, Orm } from './orm'
 
+export enum Status {
+  online = 'en línea',
+  offline = 'desconectado'
+}
+
 export type UserSchema = {
   id: number
   username: string
   name: string
   imgSrc: string
+  available: boolean
 }
 createModel<UserSchema>('Users')
 
