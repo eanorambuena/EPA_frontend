@@ -1,5 +1,5 @@
 import React from 'react'
-import ChatRow from './ChatRow'
+import ChatRow from './components/ChatRow'
 import { Orm } from './services/orm'
 import useLocalStorage from './hooks/useLocalStorage'
 
