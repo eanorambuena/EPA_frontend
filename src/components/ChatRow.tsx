@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react'
-import { Orm } from './services/orm'
-import { ChatSchema, MessageSchema } from './services/schema'
-import useChatInfo from './hooks/useChatInfo'
-import Availability from './components/Availability'
+import { Orm } from '../services/orm'
+import { ChatSchema, MessageSchema } from '../services/schema'
+import useChatInfo from '../hooks/useChatInfo'
+import Availability from './Availability'
 import { useNavigate } from 'react-router-dom'
 
 interface Props {
@@ -28,7 +28,7 @@ export default function ChatRow({ chat, isSelected } : Props) {
     <button onClick={handleClick} className={`w-full p-4 sm:p-6 font-4xl sm:font-3xl cursor-pointer rounded-md ${selectedStyles}`}>
       <article className='flex items-center space-x-3 rtl:space-x-reverse'>
         <section className='flex-shrink-0'>
-          <img className='w-8 h-8 rounded-full' src={imgSrc} alt={title} />
+          <img className='size-8 rounded-full' src={imgSrc} alt={title} />
         </section>
         <section className='flex-1 min-w-0 items-start text-left rtl:text-right'>
           <header className='flex flex-row justify-between'>

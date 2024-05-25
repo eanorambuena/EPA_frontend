@@ -58,7 +58,9 @@ export default function SendMessageForm({ appendMessage, chat }: Props) {
         placeholder='Escibe un mensaje...'
         required
       />
-      <SubmitButton>Enviar</SubmitButton>
+      <SubmitButton className='min-w-[35%] md:min-w-0'>
+        Enviar
+      </SubmitButton>
     </form>
   )
 }
