@@ -26,6 +26,13 @@ export const seed = () => {
       imgSrc: 'https://i.pravatar.cc/150?img=35',
       status: getRandomStatus()
     },
+    {
+      id: 4,
+      username: 'josefa.martinez',
+      name: 'Josefa Martínez',
+      imgSrc: 'https://i.pravatar.cc/150?img=10',
+      status: getRandomStatus()
+    }
   ])
 
   Orm.Chats.populate([
@@ -40,6 +47,12 @@ export const seed = () => {
       isGroup: false,
       imgSrc: '',
       title: ''
+    },
+    {
+      id: 3,
+      isGroup: true,
+      imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Asadito.jpg/1200px-Asadito.jpg',
+      title: 'Asado Familiar'
     },
   ])
 
@@ -106,7 +119,56 @@ export const seed = () => {
       chat: Orm.Chats.find(2),
       message: '5 papas, 3 tomates, 1 kilo de pan, 3 limones',
       createdAt: '12:30'
-    }, 
+    },
+    {
+      id: 10,
+      user: Orm.Users.find(1),
+      chat: Orm.Chats.find(3),
+      message: '¿A qué hora es el asado?',
+      createdAt: '13:00'
+    },
+    {
+      id: 11,
+      user: Orm.Users.find(4),
+      chat: Orm.Chats.find(3),
+      message: 'A las 15:00',
+      createdAt: '13:01'
+    },
+    {
+      id: 12,
+      user: Orm.Users.find(3),
+      chat: Orm.Chats.find(3),
+      message: 'Esa es todas las anteriores',
+      createdAt: '13:02'
+    },
+    {
+      id: 13,
+      user: Orm.Users.find(4),
+      chat: Orm.Chats.find(3),
+      message: 'Graciaas',
+      createdAt: '13:03'
+    },
+    {
+      id: 14,
+      user: Orm.Users.find(1),
+      chat: Orm.Chats.find(3),
+      message: '¿Qué traerás a las 10?',
+      createdAt: '13:04'
+    },
+    {
+      id: 15,
+      user: Orm.Users.find(3),
+      chat: Orm.Chats.find(3),
+      message: 'Llevaré el Carbón',
+      createdAt: '13:05'
+    },
+    {
+      id: 16,
+      user: Orm.Users.find(1),
+      chat: Orm.Chats.find(3),
+      message: 'Ok',
+      createdAt: '13:08'
+    },
   ])
 
   Orm.ChatMembers.populate([
@@ -134,5 +196,23 @@ export const seed = () => {
       user: Orm.Users.find(3),
       isAdmin: false
     },
+    {
+      id: 5,
+      chat: Orm.Chats.find(3),
+      user: Orm.Users.find(1),
+      isAdmin: true
+    },
+    {
+      id: 6,
+      chat: Orm.Chats.find(3),
+      user: Orm.Users.find(4),
+      isAdmin: false
+    },
+    {
+      id: 7,
+      chat: Orm.Chats.find(3),
+      user: Orm.Users.find(3),
+      isAdmin: false
+    }
   ])
 }

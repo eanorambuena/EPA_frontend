@@ -13,7 +13,7 @@ export default function Chats({ className }: Props) {
   return (
     <section
       role='list'
-      className={`divide-y divide-gray-200 dark:divide-gray-700 bg-gray-100 dark:bg-gray-800 rounded-md first:rounded-t-md last:rounded-b-md ${className}`}
+      className={`bg-gray-100 dark:bg-gray-800 rounded-md first:rounded-t-md last:rounded-b-md ${className}`}
     >
       {
         Orm.Chats.all().map((chat) => (

@@ -22,10 +22,10 @@ export default function ChatRow({ chat, isSelected } : Props) {
   if (messages.length === 0) return null
 
   const lastMessage: MessageSchema = messages.reduce((prev, current) => (prev.hourAndMinutes > current.hourAndMinutes) ? prev : current, messages[0])
-  const bgColor = isSelected ? 'bg-gray-200 dark:bg-gray-700' : ''
+  const selectedStyles = isSelected ? 'bg-gray-200 dark:bg-gray-700 rounded-md' : ''
 
   return (
-    <button onClick={handleClick} className={`w-full p-4 sm:p-6 font-4xl sm:font-3xl cursor-pointer rounded-sm ${bgColor}`}>
+    <button onClick={handleClick} className={`w-full p-4 sm:p-6 font-4xl sm:font-3xl cursor-pointer rounded-md ${selectedStyles}`}>
       <article className='flex items-center space-x-3 rtl:space-x-reverse'>
         <section className='flex-shrink-0'>
           <img className='w-8 h-8 rounded-full' src={imgSrc} alt={title} />
