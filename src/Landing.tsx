@@ -29,6 +29,7 @@ export default function Landing() {
         <Logo />
       </header>
       <main className='flex flex-col items-center justify-center relative max-h-[calc(100dvh-150px)] sm:max-h-[calc(100dvh-100px)] min-h-[calc(100dvh-150px)] sm:min-h-[calc(100dvh-100px)] p-6 bg-gray-100 dark:bg-gray-50'>
+
         <h2 className='text-2xl font-bold text-gray-500'>Bienvenido a EPA Chat</h2>
         <h3 className='text-lg font-normal text-gray-500'>¡La app de chat dirigida para adultos mayores!</h3>
 
@@ -51,4 +52,5 @@ export default function Landing() {
       </main>
     </>
   );
+
 }
