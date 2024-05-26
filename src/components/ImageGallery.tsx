@@ -35,10 +35,6 @@ const ImageGallery = ({ images }) => {
         src={images[imageIndex]} 
         alt="gallery" />
       </button>
-      <div className="controls">
-        <button onClick={prevImage}>Previous</button>
-        <button onClick={nextImage}>Next</button>
-      </div>
     </div>
   );
 };
