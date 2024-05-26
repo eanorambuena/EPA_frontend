@@ -1,10 +1,16 @@
 import { createModel, Orm } from './orm'
 
+export enum Status {
+  online = 'en línea',
+  offline = 'desconectado'
+}
+
 export type UserSchema = {
   id: number
   username: string
   name: string
   imgSrc: string
+  available: boolean
 }
 createModel<UserSchema>('Users')
 
@@ -18,10 +24,10 @@ createModel<ChatSchema>('Chats')
 
 export type MessageSchema = {
   id: number
-  user: UserSchema,
-  chat: ChatSchema,
+  user: UserSchema
+  chat: ChatSchema
   message: string
-  hourAndMinutes: string
+  createdAt: string
 }
 createModel<MessageSchema>('Messages')
 
