@@ -7,19 +7,19 @@ import ImageGallery from './components/ImageGallery';
 
 export default function Landing() {
   const imagesDesktop = [
-    './assets/Views/ChatsDesktop.jpg',
-    './assets/Views/ChatDesktop.jpg',
-    '../assets/Views/LoginDesktop.jpg'
+    'src/assets/Views/ChatsDesktop.jpg',
+    'src/assets/Views/ChatDesktop.jpg',
+    'src/assets/Views/LoginDesktop.jpg'
   ];
   const imagesMobile = [
-    './assets/Views/ChatsMobile.jpg',
-    './assets/Views/ChatMobile.jpg',
-    './assets/Views/LoginMobile.jpg'
+    'src/assets/Views/ChatsMobile.jpg',
+    'src/assets/Views/ChatMobile.jpg',
+    'src/assets/Views/LoginMobile.jpg'
   ];
   const imagesTablet = [
-    './assets/Views/ChatsTablet.jpg',
-    './assets/Views/ChatTablet.jpg',
-    './assets/Views/LoginTablet.jpg'
+    'src/assets/Views/ChatsTablet.jpg',
+    'src/assets/Views/ChatTablet.jpg',
+    'src/assets/Views/LoginTablet.jpg'
   ];
 
   return (
