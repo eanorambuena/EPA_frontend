@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ImageGallery.css";
 
-const ImageGallery = (images) => {
+const ImageGallery = ({ images }) => {
   const [imageIndex, setImageIndex] = useState(0);
 
   useEffect(() => {
@@ -26,16 +26,14 @@ const ImageGallery = (images) => {
     );
   }
 
-  function getImage(index) {
-    return images[index];
-  }
-
   return (
     <div className="image-gallery">
       <button
-        className={`transition active:scale-125 ease-in-out duration-200 z-50 motion-reduce:transition-none motion-reduce:hover:transform-none`}
+        className={`transition active:scale-150 ease-in-out duration-200 z-50 motion-reduce:transition-none motion-reduce:hover:transform-none`}
       >
-        <img src={getImage(imageIndex)} alt="gallery" />
+        <img 
+        src={images[imageIndex]} 
+        alt="gallery" />
       </button>
       <div className="controls">
         <button onClick={prevImage}>Previous</button>
