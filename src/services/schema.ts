@@ -1,4 +1,4 @@
-import { createModel, Orm } from "./orm"
+import { createModel, Orm } from './orm'
 
 export type UserSchema = {
   id: number

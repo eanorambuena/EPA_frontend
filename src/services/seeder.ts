@@ -1,4 +1,5 @@
 import { Orm } from './orm'
+import './schema'
 
 export const seed = () => {
   Orm.Users.populate([
