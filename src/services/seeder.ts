@@ -1,5 +1,5 @@
 import { Orm } from './orm'
-import { Status } from './schema'
+import { Status } from './schema' // schema must be imported to fill the Orm
 
 export const seed = () => {
   const getRandomStatus = () => Math.random() > 0.5 ? Status.online : Status.offline
@@ -32,6 +32,13 @@ export const seed = () => {
       name: 'Josefa Martínez',
       imgSrc: 'https://i.pravatar.cc/150?img=10',
       status: getRandomStatus()
+    },
+    {
+      id: 5,
+      username: 'jose.miranda',
+      name: 'José Miranda',
+      imgSrc: 'https://i.pravatar.cc/150?img=20',
+      status: getRandomStatus()
     }
   ])
 
@@ -54,6 +61,69 @@ export const seed = () => {
       imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Asadito.jpg/1200px-Asadito.jpg',
       title: 'Asado Familiar'
     },
+    {
+      id: 4,
+      isGroup: false,
+      imgSrc: '',
+      title: ''
+    }
+  ])
+
+  Orm.ChatMembers.populate([
+    {
+      id: 1,
+      chat: Orm.Chats.find(1),
+      user: Orm.Users.find(1),
+      isAdmin: false
+    },
+    {
+      id: 2,
+      chat: Orm.Chats.find(1),
+      user: Orm.Users.find(2),
+      isAdmin: false
+    },
+    {
+      id: 3,
+      chat: Orm.Chats.find(2),
+      user: Orm.Users.find(1),
+      isAdmin: false
+    },
+    {
+      id: 4,
+      chat: Orm.Chats.find(2),
+      user: Orm.Users.find(3),
+      isAdmin: false
+    },
+    {
+      id: 5,
+      chat: Orm.Chats.find(3),
+      user: Orm.Users.find(1),
+      isAdmin: true
+    },
+    {
+      id: 6,
+      chat: Orm.Chats.find(3),
+      user: Orm.Users.find(4),
+      isAdmin: false
+    },
+    {
+      id: 7,
+      chat: Orm.Chats.find(3),
+      user: Orm.Users.find(3),
+      isAdmin: false
+    },
+    {
+      id: 8,
+      chat: Orm.Chats.find(4),
+      user: Orm.Users.find(1),
+      isAdmin: false
+    },
+    {
+      id: 9,
+      chat: Orm.Chats.find(4),
+      user: Orm.Users.find(5),
+      isAdmin: false
+    }
   ])
 
   Orm.Messages.populate([
@@ -169,50 +239,17 @@ export const seed = () => {
       message: 'Ok',
       createdAt: '13:08'
     },
-  ])
-
-  Orm.ChatMembers.populate([
     {
-      id: 1,
-      chat: Orm.Chats.find(1),
+      id: 17,
       user: Orm.Users.find(1),
-      isAdmin: false
+      chat: Orm.Chats.find(4),
+      message: 'Hola',
     },
     {
-      id: 2,
-      chat: Orm.Chats.find(1),
-      user: Orm.Users.find(2),
-      isAdmin: false
-    },
-    {
-      id: 3,
-      chat: Orm.Chats.find(2),
-      user: Orm.Users.find(1),
-      isAdmin: false
-    },
-    {
-      id: 4,
-      chat: Orm.Chats.find(2),
-      user: Orm.Users.find(3),
-      isAdmin: false
-    },
-    {
-      id: 5,
-      chat: Orm.Chats.find(3),
-      user: Orm.Users.find(1),
-      isAdmin: true
-    },
-    {
-      id: 6,
-      chat: Orm.Chats.find(3),
-      user: Orm.Users.find(4),
-      isAdmin: false
-    },
-    {
-      id: 7,
-      chat: Orm.Chats.find(3),
-      user: Orm.Users.find(3),
-      isAdmin: false
+      id: 18,
+      user: Orm.Users.find(5),
+      chat: Orm.Chats.find(4),
+      message: 'Hola?',
     }
   ])
 }
