@@ -30,7 +30,7 @@ const ImageGallery = ({ images }) => {
   return (
     <div className="image-gallery">
       <button
-        className={`transition active:scale-150 ease-in-out duration-200 z-50 motion-reduce:transition-none motion-reduce:hover:transform-none`}
+        className={`display: flex max-w-[80%] md:max-w-[70%] transition active:scale-150 ease-in-out duration-200 z-50 motion-reduce:transition-none motion-reduce:hover:transform-none`}
       >
         <img 
         src={images[imageIndex]} 
