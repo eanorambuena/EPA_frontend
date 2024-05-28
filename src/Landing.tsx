@@ -44,9 +44,9 @@ export default function Landing() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 480) {
         setImages(imagesMobile)
-      } else if (window.innerWidth <= 1024) {
+      } else if (window.innerWidth <= 768) {
         setImages(imagesTablet)
       } else {
         setImages(imagesDesktop)
@@ -66,7 +66,7 @@ export default function Landing() {
         <h1 className='text-2xl font-bold'>EPA Chat</h1>
         <Logo />
       </header>
-      <main className='flex flex-col justify-center items-center relative max-h-[calc(100dvh-150px)] sm:max-h-[calc(100dvh-100px)] min-h-[calc(100dvh-150px)] sm:min-h-[calc(100dvh-100px)] p-6 bg-gray-100 dark:bg-gray-50'>
+      <main className='flex flex-col justify-center items-center relative p-6 bg-gray-100 dark:bg-gray-50 w-full'>
         <h2 className='text-2xl font-bold text-gray-500'>Bienvenido a EPA Chat</h2>
         <h3 className='text-lg font-normal text-gray-500'>¡La app de chat dirigida para adultos mayores!</h3>
 

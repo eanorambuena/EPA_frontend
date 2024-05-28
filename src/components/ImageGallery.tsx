@@ -30,14 +30,11 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   }
 
   return (
-    <main className="flex flex-col justify-center items-center">
-      <div className="image-gallery">
-        <button
-          className={'display: justify-center flex max-w-[80%] md:max-w-[70%] transition active:scale-150 ease-in-out duration-200 z-50 motion-reduce:transition-none motion-reduce:hover:transform-none'}
-          onClick={nextImage}
-        >
+    <main className="flex flex-col justify-center items-center w-full">
+      <div className="image-gallery w-full">
+        <div className={'display: justify-center flex w-full transition active:scale-150 ease-in-out duration-200 z-50 motion-reduce:transition-none motion-reduce:hover:transform-none'}>
           <img src={images[imageIndex].src} alt="gallery" />
-        </button>
+        </div>
         <div className="image-info text-center mt-4">
           <h2 className="text-lg font-bold text-gray-500">{images[imageIndex].title}</h2>
           <p className="text-sm text-gray-500">{images[imageIndex].description}</p>
