@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from './icons/Logo'
-import MemberCard from './components/MemberCard'
+import ImageGallery from './components/ImageGallery'
 
 export default function About() {
   const members = [
@@ -22,7 +22,7 @@ export default function About() {
         <h1 className='text-2xl font-bold'>EPA Chat</h1>
         <Logo />
       </header>
-      <main className='flex-col items-center justify-center relative max-h-[calc(100dvh-150px)] sm:max-h-[calc(100dvh-100px)] min-h-[calc(100dvh-150px)] sm:min-h-[calc(100dvh-100px)] p-6 bg-gray-100 dark:bg-gray-50 text-center'>
+      <main className='flex flex-col items-center justify-center relative p-6 bg-gray-100 dark:bg-gray-50 text-center'>
         <h1 className='text-2xl font-bold text-gray-500'>Sobre nosotros</h1>
 
         <p className='font-normal text-gray-500'>Somos un grupo de estudiantes de la Universidad Católica de Chile que estamos desarrollando una aplicación de chat para adultos mayores.</p>
@@ -31,8 +31,8 @@ export default function About() {
 
         <h2 className='text-2xl font-bold text-gray-500 my-4'>Nuestro equipo</h2>
         
-        <div className='max-w[calc(30dvh-300px)] sm:max-w[calc(30dvh-100px)]'>
-          <MemberCard images={members} />
+        <div className='max-w-[400px]'>
+          <ImageGallery images={members} />
         </div>
 
        </main>
