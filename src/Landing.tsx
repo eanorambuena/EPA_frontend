@@ -1,44 +1,61 @@
-import React, { useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import Logo from './icons/Logo'
 import ImageGallery from './components/ImageGallery'
 
 export default function Landing() {
-  const imagesDesktop = [
-    {src: '/assets/ChatsDesktop.jpg',
+  const imagesDesktop = useMemo(() => [
+    {
+      src: '/assets/ChatsDesktop.jpg',
       title: 'Chats',
-      description: 'Mira todos tus chats en un solo lugar'},
-    {src: '/assets/ChatDesktop.jpg',
+      description: 'Mira todos tus chats en un solo lugar'
+    },
+    {
+      src: '/assets/ChatDesktop.jpg',
       title: 'Chat',
-      description: 'Habla con tus amigos y familiares'},
-    {src: '/assets/LoginDesktop.jpg',
+      description: 'Habla con tus amigos y familiares'
+    },
+    {
+      src: '/assets/LoginDesktop.jpg',
       title: 'Login',
       description: 'Inicia sesión o regístrate'
     }
-  ]
-  const imagesMobile = [
-    {src: '/assets/ChatsMobile.jpg',
+  ], [])
+
+  const imagesMobile = useMemo(() => [
+    {
+      src: '/assets/ChatsMobile.jpg',
       title: 'Chats',
-      description: 'Mira todos tus chats en un solo lugar'},
-    {src: '/assets/ChatMobile.jpg',
+      description: 'Mira todos tus chats en un solo lugar'
+    },
+    {
+      src: '/assets/ChatMobile.jpg',
       title: 'Chat',
-      description: 'Habla con tus amigos y familiares'},
-    {src: '/assets/LoginMobile.jpg',
+      description: 'Habla con tus amigos y familiares'
+    },
+    {
+      src: '/assets/LoginMobile.jpg',
       title: 'Login',
       description: 'Inicia sesión o regístrate'
     }
-  ]
-  const imagesTablet = [
-    {src: '/assets/ChatsTablet.jpg',
+  ], [])
+
+  const imagesTablet = useMemo(() => [
+    {
+      src: '/assets/ChatsTablet.jpg',
       title: 'Chats',
-      description: 'Mira todos tus chats en un solo lugar'},
-    {src: '/assets/ChatTablet.jpg',
+      description: 'Mira todos tus chats en un solo lugar'
+    },
+    {
+      src: '/assets/ChatTablet.jpg',
       title: 'Chat',
-      description: 'Habla con tus amigos y familiares'},
-    {src: '/assets/LoginTablet.jpg',
+      description: 'Habla con tus amigos y familiares'
+    },
+    {
+      src: '/assets/LoginTablet.jpg',
       title: 'Login',
       description: 'Inicia sesión o regístrate'
     }
-  ]
+  ], [])
 
   const [images, setImages] = useState(imagesDesktop)
 
