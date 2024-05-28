@@ -23,11 +23,11 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
     return () => clearInterval(interval)
   }, [images])
 
-  function nextImage() {
-    setImageIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    )
-  }
+  // function nextImage() {
+  //   setImageIndex((prevIndex) =>
+  //     prevIndex === images.length - 1 ? 0 : prevIndex + 1
+  //   )
+  // }
 
   return (
     <main className="flex flex-col justify-center items-center w-full">

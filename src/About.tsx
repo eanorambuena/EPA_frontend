@@ -35,7 +35,7 @@ export default function About() {
           <ImageGallery images={members} />
         </div>
 
-       </main>
+      </main>
     </>
   )
 }
