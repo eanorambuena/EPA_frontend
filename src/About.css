@@ -1,3 +1,4 @@
+/* Sacado de: https://codepen.io/nathanlong/pen/abayBej */
 body {
     background: #111115;
     display: flex;
@@ -62,5 +63,3 @@ body {
       transform: scale(3);
     }
   }
-
-/* Sacado de: https://codepen.io/nathanlong/pen/abayBej */
