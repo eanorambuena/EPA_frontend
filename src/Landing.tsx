@@ -1,26 +1,81 @@
-import React from 'react';
-import Chat from './Chat';
-import Chats from './Chats';
-import Login from './Login';
-import Logo from './icons/Logo';
-import ImageGallery from './components/ImageGallery';
+import React, { useMemo, useState, useEffect } from 'react'
+import Logo from './icons/Logo'
+import ImageGallery from './components/ImageGallery'
 
 export default function Landing() {
-  const imagesDesktop = [
-    '/assets/ChatsDesktop.jpg',
-    '/assets/ChatDesktop.jpg',
-    '/assets/LoginDesktop.jpg'
-  ];
-  const imagesMobile = [
-    '/assets/ChatsMobile.jpg',
-    '/assets/ChatMobile.jpg',
-    '/assets/LoginMobile.jpg'
-  ];
-  const imagesTablet = [
-    '/assets/ChatsTablet.jpg',
-    '/assets/ChatTablet.jpg',
-    '/assets/LoginTablet.jpg'
-  ];
+  const imagesDesktop = useMemo(() => [
+    {
+      src: '/assets/ChatsDesktop.jpg',
+      title: 'Chats',
+      description: 'Mira todos tus chats en un solo lugar'
+    },
+    {
+      src: '/assets/ChatDesktop.jpg',
+      title: 'Chat',
+      description: 'Habla con tus amigos y familiares'
+    },
+    {
+      src: '/assets/LoginDesktop.jpg',
+      title: 'Login',
+      description: 'Inicia sesión o regístrate'
+    }
+  ], [])
+
+  const imagesMobile = useMemo(() => [
+    {
+      src: '/assets/ChatsMobile.jpg',
+      title: 'Chats',
+      description: 'Mira todos tus chats en un solo lugar'
+    },
+    {
+      src: '/assets/ChatMobile.jpg',
+      title: 'Chat',
+      description: 'Habla con tus amigos y familiares'
+    },
+    {
+      src: '/assets/LoginMobile.jpg',
+      title: 'Login',
+      description: 'Inicia sesión o regístrate'
+    }
+  ], [])
+
+  const imagesTablet = useMemo(() => [
+    {
+      src: '/assets/ChatsTablet.jpg',
+      title: 'Chats',
+      description: 'Mira todos tus chats en un solo lugar'
+    },
+    {
+      src: '/assets/ChatTablet.jpg',
+      title: 'Chat',
+      description: 'Habla con tus amigos y familiares'
+    },
+    {
+      src: '/assets/LoginTablet.jpg',
+      title: 'Login',
+      description: 'Inicia sesión o regístrate'
+    }
+  ], [])
+
+  const [images, setImages] = useState(imagesDesktop)
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 480) {
+        setImages(imagesMobile)
+      } else if (window.innerWidth <= 768) {
+        setImages(imagesTablet)
+      } else {
+        setImages(imagesDesktop)
+      }
+    }
+
+    // Initial check
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [imagesDesktop, imagesTablet, imagesMobile])
 
   return (
     <>
@@ -28,12 +83,11 @@ export default function Landing() {
         <h1 className='text-2xl font-bold'>EPA Chat</h1>
         <Logo />
       </header>
-      <main className='flex flex-col items-center justify-center relative max-h-[calc(100dvh-150px)] sm:max-h-[calc(100dvh-100px)] min-h-[calc(100dvh-150px)] sm:min-h-[calc(100dvh-100px)] p-6 bg-gray-100 dark:bg-gray-50'>
-
+      <main className='flex flex-col justify-center items-center relative p-6 bg-gray-100 dark:bg-gray-50 w-full'>
         <h2 className='text-2xl font-bold text-gray-500'>Bienvenido a EPA Chat</h2>
         <h3 className='text-lg font-normal text-gray-500'>¡La app de chat dirigida para adultos mayores!</h3>
 
-        <ImageGallery images={imagesDesktop} />
+        <ImageGallery images={images} />
 
         <h2 className='text-xl font-semibold mt-6 text-gray-500'>¿Qué funciones tenemos para los adultos mayores?</h2>
         <ul className='text-lg font-normal text-gray-500'>
@@ -51,6 +105,5 @@ export default function Landing() {
         </div>
       </main>
     </>
-  );
-
+  )
 }
