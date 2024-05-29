@@ -5,12 +5,12 @@ import ImageGallery from './components/ImageGallery'
 export default function Landing() {
   const imagesDesktop = useMemo(() => [
     {
-      src: '/assets/views/ChatsDesktop.jng',
+      src: '/assets/views/ChatsDesktop.jpg',
       title: 'Chats',
       description: 'Mira todos tus chats en un solo lugar'
     },
     {
-      src: '/assets/views/ChatDesktop.jng',
+      src: '/assets/views/ChatDesktop.jpg',
       title: 'Chat',
       description: 'Habla con tus amigos y familiares'
     },
@@ -23,12 +23,12 @@ export default function Landing() {
 
   const imagesMobile = useMemo(() => [
     {
-      src: '/assets/views/ChatsMobile.jng',
+      src: '/assets/views/ChatsMobile.jpg',
       title: 'Chats',
       description: 'Mira todos tus chats en un solo lugar'
     },
     {
-      src: '/assets/views/ChatMobile.jng',
+      src: '/assets/views/ChatMobile.jpg',
       title: 'Chat',
       description: 'Habla con tus amigos y familiares'
     },
@@ -41,12 +41,12 @@ export default function Landing() {
 
   const imagesTablet = useMemo(() => [
     {
-      src: '/assets/views/ChatsTablet.jng',
+      src: '/assets/views/ChatsTablet.jpg',
       title: 'Chats',
       description: 'Mira todos tus chats en un solo lugar'
     },
     {
-      src: '/assets/views/ChatTablet.jng',
+      src: '/assets/views/ChatTablet.jpg',
       title: 'Chat',
       description: 'Habla con tus amigos y familiares'
     },
