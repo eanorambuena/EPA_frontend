@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from './icons/Logo'
+import './About.css'
 import ImageGallery from './components/ImageGallery'
 
 export default function About() {
@@ -35,7 +36,13 @@ export default function About() {
           <ImageGallery images={members} />
         </div>
 
-      </main>
+        <div className="heart">
+          <div className="heartbeat">❤️</div>
+          <div className="heartecho">❤️</div>
+        </div>
+
+      </main>      
     </>
+    
   )
 }
