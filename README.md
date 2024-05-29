@@ -55,15 +55,15 @@ Además de estos colores, pequeñas variaciones de estos también podrán ser ut
 
 <!-- Vistas principales -->
 ### :mag: Vistas principales
-![Login Mobile](assets/Views/LoginMobile.jpg)
-![Login Tablet](assets/Views/LoginTablet.jpg)
-![Login Desktop](assets/Views/LoginDesktop.jpg)
-![Chats Mobile](assets/Views/ChatsMobile.jpg)
-![Chats Tablet](assets/Views/ChatsTablet.jpg)
-![Chats Desktop](assets/Views/ChatsDesktop.jpg)
-![Chat Mobile](assets/Views/ChatMobile.jpg)
-![Chat Tablet](assets/Views/ChatTablet.jpg)
-![Chat Desktop](assets/Views/ChatDesktop.jpg)
+![Login Mobile](assets/views/LoginMobile.jpg)
+![Login Tablet](assets/views/LoginTablet.jpg)
+![Login Desktop](assets/views/LoginDesktop.jpg)
+![Chats Mobile](assets/views/ChatsMobile.jpg)
+![Chats Tablet](assets/views/ChatsTablet.jpg)
+![Chats Desktop](assets/views/ChatsDesktop.jpg)
+![Chat Mobile](assets/views/ChatMobile.jpg)
+![Chat Tablet](assets/views/ChatTablet.jpg)
+![Chat Desktop](assets/views/ChatDesktop.jpg)
 
 
 <!-- Logo -->
