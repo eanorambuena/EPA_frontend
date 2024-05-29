@@ -58,12 +58,12 @@ Además de estos colores, pequeñas variaciones de estos también podrán ser ut
 ![Login Mobile](assets/views/LoginMobile.jpg)
 ![Login Tablet](assets/views/LoginTablet.jpg)
 ![Login Desktop](assets/views/LoginDesktop.jpg)
-![Chats Mobile](assets/views/ChatsMobile.jpg)
-![Chats Tablet](assets/views/ChatsTablet.jpg)
-![Chats Desktop](assets/views/ChatsDesktop.jpg)
-![Chat Mobile](assets/views/ChatMobile.jpg)
-![Chat Tablet](assets/views/ChatTablet.jpg)
-![Chat Desktop](assets/views/ChatDesktop.jpg)
+![Chats Mobile](assets/views/ChatsMobile.png)
+![Chats Tablet](assets/views/ChatsTablet.png)
+![Chats Desktop](assets/views/ChatsDesktop.png)
+![Chat Mobile](assets/views/ChatMobile.png)
+![Chat Tablet](assets/views/ChatTablet.png)
+![Chat Desktop](assets/views/ChatDesktop.png)
 
 
 <!-- Logo -->
