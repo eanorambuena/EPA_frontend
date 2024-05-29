@@ -87,7 +87,9 @@ export default function Landing() {
         <h2 className='text-2xl font-bold text-gray-500'>Bienvenido a EPA Chat</h2>
         <h3 className='text-lg font-normal text-gray-500'>¡La app de chat dirigida para adultos mayores!</h3>
 
-        <ImageGallery images={images} />
+        <div className='flex items-center justify-center gap-6 max-width: 80%' style={{ maxWidth: '80%' }}>
+          <ImageGallery images={images} />
+        </div>
 
         <h2 className='text-xl font-semibold mt-6 text-gray-500'>¿Qué funciones tenemos para los adultos mayores?</h2>
         <ul className='text-lg font-normal text-gray-500'>
