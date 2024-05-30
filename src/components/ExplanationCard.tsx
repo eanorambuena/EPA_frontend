@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 
 interface Props {
-  color?: string
   title: string
   text: string
   images: string[]
 }
 
-const ExplanationCard = ({ color = 'white', title, text, images } : Props) => {
+const ExplanationCard = ({ title, text, images } : Props) => {
   const [indice_imagen, set_indice_imagen] = useState(0)
 
   const imagen_previa = () => {
@@ -28,11 +27,11 @@ const ExplanationCard = ({ color = 'white', title, text, images } : Props) => {
       gridTemplateColumns: '1fr',
       borderRadius: '10px',
       border: '1px solid #E1DFDF',
-      padding: '1%',
       gap: '1%',
       boxSizing: 'border-box',
-      backgroundColor: color
-    }}>
+    }}
+      className='bg-amber-300 dark:bg-violet-700 p-6'
+    >
       <h2 className='text-xl font-bold' style={{textAlign: 'left' }}>{title}</h2>
       <div style={{display: 'grid', gridTemplateColumns: '50% 45%', gap: '20px', height: '100%' }}>
         <div style={{ display: 'flex', alignItems: 'center', overflowWrap: 'break-word', wordWrap: 'break-word', overflow: 'hidden' }}>
