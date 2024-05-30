@@ -23,7 +23,7 @@ export default function About() {
         <h1 className='text-2xl font-bold'>EPA Chat</h1>
         <Logo />
       </header>
-      <main className='flex flex-col items-center justify-center relative p-6 bg-gray-100 dark:bg-gray-50 text-center'>
+      <main className='flex flex-col items-center justify-center relative p-6 bg-gray-50 dark:bg-gray-950 text-center'>
         <h1 className='text-2xl font-bold text-gray-500'>Sobre nosotros</h1>
 
         <p className='font-normal text-gray-500'>Somos un grupo de estudiantes de la Universidad Católica de Chile que estamos desarrollando una aplicación de chat para adultos mayores.</p>
