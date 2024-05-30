@@ -23,6 +23,7 @@ export default function About() {
       <main className='w-full h-full flex flex-col gap-6 py-6 items-center justify-center text-gray-800 dark:text-gray-100 p-6'>
         <h1 className='text-2xl font-bold'>Sobre nosotros</h1>
 
+
         <p className='font-normal'>Somos un grupo de estudiantes de la Universidad Católica de Chile que estamos desarrollando una aplicación de chat para adultos mayores.</p>
         <p className='font-normal my-2'>Esta aplicación tiene como objetivo ser amigable y fácil de usar para personas de la tercera edad.</p>
         <p className='font-normal my-2'>Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.</p>
