@@ -1,7 +1,7 @@
 import React from 'react'
-import Logo from './icons/Logo'
 import './About.css'
 import ImageGallery from './components/ImageGallery'
+import Layout from './Layout'
 
 export default function About() {
   const members = [
@@ -18,19 +18,17 @@ export default function About() {
   ]
 
   return (
-    <>
-      <header className='flex items-center justify-start gap-6 p-6 bg-gray-50 dark:bg-gray-950 h-[150px] sm:h-[100px]'>
-        <h1 className='text-2xl font-bold'>EPA Chat</h1>
-        <Logo />
-      </header>
-      <main className='flex flex-col items-center justify-center relative p-6 bg-gray-50 dark:bg-gray-950 text-center'>
-        <h1 className='text-2xl font-bold text-gray-500'>Sobre nosotros</h1>
+    <Layout limitHeight={false} className='p-6'>
+      
+      <main className='w-full h-full flex flex-col gap-6 py-6 items-center justify-center text-gray-800 dark:text-gray-100 p-6'>
+        <h1 className='text-2xl font-bold'>Sobre nosotros</h1>
 
-        <p className='font-normal text-gray-500'>Somos un grupo de estudiantes de la Universidad Católica de Chile que estamos desarrollando una aplicación de chat para adultos mayores.</p>
-        <p className='font-normal text-gray-500 my-2'>Esta aplicación tiene como objetivo ser amigable y fácil de usar para personas de la tercera edad.</p>
-        <p className='font-normal text-gray-500 my-2'>Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.</p>
 
-        <h2 className='text-2xl font-bold text-gray-500 my-4'>Nuestro equipo</h2>
+        <p className='font-normal'>Somos un grupo de estudiantes de la Universidad Católica de Chile que estamos desarrollando una aplicación de chat para adultos mayores.</p>
+        <p className='font-normal my-2'>Esta aplicación tiene como objetivo ser amigable y fácil de usar para personas de la tercera edad.</p>
+        <p className='font-normal my-2'>Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.</p>
+
+        <h2 className='text-2xl font-bold my-4'>Nuestro equipo</h2>
         
         <div className='max-w-[400px]'>
           <ImageGallery images={members} />
@@ -42,7 +40,7 @@ export default function About() {
         </div>
 
       </main>      
-    </>
+    </Layout>
     
   )
 }
