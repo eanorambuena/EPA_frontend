@@ -22,7 +22,7 @@ export default function DocsPage() {
                     <li><a href="#enviar_mensaje" onClick={(e) => { e.preventDefault(); scrollToSection('enviar_mensaje'); }} className="block">- Como enviar un mensaje en EPA Chat</a></li>
                     <li><a href="#agrandar_mensajes" onClick={(e) => { e.preventDefault(); scrollToSection('agrandar_mensajes'); }} className="block">- Agrandar mensajes</a></li>
                     <li><a href="#escuchar_mensajes_escritos" onClick={(e) => { e.preventDefault(); scrollToSection('escuchar_mensajes_escritos'); }} className="block">- Escuchar mensajes escritos</a></li>
-                    <li><a href="#transformar_audio_texto" onClick={(e) => { e.preventDefault(); scrollToSection('transformar_audio_texto'); }} className="block">- Transformar audio a texto para poder enviar mensajes en caso de que sea difícil escribir en el teclado</a></li>
+                    {/*<li><a href="#transformar_audio_texto" onClick={(e) => { e.preventDefault(); scrollToSection('transformar_audio_texto'); }} className="block">- Transformar audio a texto para poder enviar mensajes en caso de que sea difícil escribir en el teclado</a></li>*/}
                 </ul>
                 <br id="login"></br>
                 <ExplanationCard color="#a78bfa" title="Como entrar a tu cuenta de EPA Chat" text={"1) Ir a la barra de navegación y presionar en el logo EPA Chat.<br />2) Bajar hasta el final de la página hasta encontrar el botón de Iniciar Sesión.<br />3) Introducir telefono y contraseña, y presionar en Iniciar Sesión."} images={["assets/views/navbar_epachat.png", "assets/views/login_button.png", "assets/views/login.png"]} />
@@ -35,7 +35,7 @@ export default function DocsPage() {
                 <br id="escuchar_mensajes_escritos"></br>
                 <ExplanationCard color="#a78bfa" title="Escuchar mensajes escritos" text={"1) Ir a la barra de navegación y presionar en chats.<br />2) Elegir el chat que desee.<br />3) Al hacer click sobre un mensaje, una voz lo leerá."} images={["assets/views/navbar_chat.png", "assets/views/chat_capture.png", "assets/views/voice_chat.png"]} />
                 <br id="transformar_audio_texto"></br>
-                <ExplanationCard color="#a78bfa" title="Transformar audio a texto" text={"1) Ir a la barra de navegación y presionar en chats.<br />2) Elegir el chat que desee.<br />3) Al hacer click sobre un mensaje, una voz lo leerá."} images={["assets/views/navbar_chat.png", "assets/views/chat_capture.png", "assets/views/voice_chat.png"]} />
+                {/*<ExplanationCard color="#a78bfa" title="Transformar audio a texto" text={"1) Ir a la barra de navegación y presionar en chats.<br />2) Elegir el chat que desee.<br />3) Al hacer click sobre un mensaje, una voz lo leerá."} images={["assets/views/navbar_chat.png", "assets/views/chat_capture.png", "assets/views/voice_chat.png"]} /> */}
             </main>
         </Layout>
     );
