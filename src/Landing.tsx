@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import Logo from './icons/Logo'
 import ImageGallery from './components/ImageGallery'
+import Layout from './Layout'
 
 export default function Landing() {
   const imagesDesktop = useMemo(() => [
@@ -78,12 +79,8 @@ export default function Landing() {
   }, [imagesDesktop, imagesTablet, imagesMobile])
 
   return (
-    <>
-      <header className='flex items-center justify-start gap-6 p-6 bg-gray-50 dark:bg-gray-950 h-[150px] sm:h-[100px]'>
-        <h1 className='text-2xl font-bold'>EPA Chat</h1>
-        <Logo />
-      </header>
-      <main className='flex flex-col justify-center items-center relative p-6 bg-gray-100 dark:bg-gray-50 w-full'>
+    <Layout limitHeight={false} className='p-6'>
+      <main className='w-full h-full flex flex-col gap-6 py-6 items-center justify-center text-gray-800 dark:text-gray-100 p-6'>
         <h2 className='text-2xl font-bold text-gray-500'>Bienvenido a EPA Chat</h2>
         <h3 className='text-lg font-normal text-gray-500'>¡La app de chat dirigida para adultos mayores!</h3>
 
@@ -104,6 +101,6 @@ export default function Landing() {
           <button className='px-4 py-2.5 text-lg font-semibold text-blue-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none'>Registrarse</button>
         </div>
       </main>
-    </>
+    </Layout>
   )
 }
