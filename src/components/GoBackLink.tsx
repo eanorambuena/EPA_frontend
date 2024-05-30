@@ -21,7 +21,7 @@ export default function GoBackLink() {
     >
       <GoBackArrow />
       {' '}
-      Back
+      Volver atrás
     </a>
   )
 }
