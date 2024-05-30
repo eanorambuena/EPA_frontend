@@ -3,6 +3,7 @@ import React from 'react'
 import MainPage from './MainPage'
 import Landing from './Landing'
 import About from './About'
+import DocsPage from './DocsPage'
 
 export default function Routing() {
   return (
@@ -12,7 +13,7 @@ export default function Routing() {
         <Route path="/about" element={<About/>}/>
         <Route path='/chats/:id' element={<MainPage />} />
         <Route path="/chats" element={<MainPage />} />
-        <Route path="/docs" />
+        <Route path="/docs" element={<DocsPage />} />
       </Routes>
     </BrowserRouter>
   )
