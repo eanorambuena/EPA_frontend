@@ -18,18 +18,19 @@ const ExplanationCard = ({ title, text, images } : Props) => {
   }
 
   return (
-    <div style={{
-      width: '70%',
-      height: 'auto',
-      marginRight: '20px',
-      display: 'grid',
-      gridTemplateRows: 'auto 1fr',
-      gridTemplateColumns: '1fr',
-      borderRadius: '10px',
-      border: '1px solid #E1DFDF',
-      gap: '1%',
-      boxSizing: 'border-box',
-    }}
+    <div
+      style={{
+        width: '70%',
+        height: 'auto',
+        marginRight: '20px',
+        display: 'grid',
+        gridTemplateRows: 'auto 1fr',
+        gridTemplateColumns: '1fr',
+        borderRadius: '10px',
+        border: '1px solid #E1DFDF',
+        gap: '1%',
+        boxSizing: 'border-box',
+      }}
       className='bg-amber-300 dark:bg-violet-700 p-6'
     >
       <h2 className='text-xl font-bold' style={{textAlign: 'left' }}>{title}</h2>
