@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useEffect } from 'react'
-import Logo from './icons/Logo'
 import ImageGallery from './components/ImageGallery'
 import Layout from './Layout'
 
