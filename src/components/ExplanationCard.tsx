@@ -46,14 +46,14 @@ const ExplanationCard = ({ title, text, images }: Props) => {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <button style={{ marginRight: '10px', color: 'black' }} onClick={imagen_previa}>
             <img
-              src="https://w7.pngwing.com/pngs/654/136/png-transparent-arrow-computer-icons-encapsulated-postscript-left-arrow-angle-rectangle-black-thumbnail.png"
+              src="public/assets/views/square-arrow-left.png"
               alt="<--"
               style={{ width: '50px', height: '50px', borderRadius: '20%' }}
             />
           </button>
           <button style={{ marginRight: '10px', color: 'black' }} onClick={imagen_siguiente}>
             <img
-              src="https://toppng.com/uploads/preview/flecha-mirando-para-la-derecha-11550104467jwwuxtd8ip.png"
+              src="public/assets/views/square-arrow-right.png"
               alt="<--"
               style={{ width: '50px', height: '50px', borderRadius: '20%' }}
             />
