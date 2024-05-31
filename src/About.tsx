@@ -20,7 +20,7 @@ export default function About() {
   return (
     <Layout limitHeight={false} className='p-6'>
       
-      <main className='w-full h-full flex flex-col gap-6 py-6 items-center justify-center text-gray-800 dark:text-gray-100 p-6'>
+      <main className='w-full h-full flex flex-col gap-6 py-6 items-center justify-center text-gray-800 dark:text-gray-500 p-6'>
         <h1 className='text-2xl font-bold'>Sobre nosotros</h1>
 
 
