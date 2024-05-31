@@ -76,3 +76,7 @@ Además de estos colores, pequeñas variaciones de estos también podrán ser ut
 ![Ejemplo de aplicación](assets/PatternAplication.jpg)
 
 Otros ejemplos de uso de los colores se pueden ver en las vistas principales, ya que estamos avanzando ya con la utilización de estos.
+
+
+Además, utilizamos códigos de internet para ciertas funcionalidades de nuestra aplicación. Son los siguientes:
+1. Para el archivo About.css//About.tsx se utilizó código disponible en https://codepen.io/nathanlong/pen/abayBej para crear la animación del corazón

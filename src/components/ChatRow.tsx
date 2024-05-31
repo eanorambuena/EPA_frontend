@@ -25,7 +25,11 @@ export default function ChatRow({ chat, isSelected } : Props) {
   const selectedStyles = isSelected ? 'lg:bg-gray-200 lg:dark:bg-gray-700 lg:shadow-sm' : ''
 
   return (
-    <button onClick={handleClick} className={`w-full p-4 sm:p-6 font-4xl sm:font-3xl cursor-pointer rounded-md ${selectedStyles}`}>
+    <button
+      onClick={handleClick}
+      role='listitem'
+      className={`w-full p-4 sm:p-6 font-4xl sm:font-3xl cursor-pointer rounded-md ${selectedStyles}`}
+    >
       <article className='flex items-center space-x-3 rtl:space-x-reverse'>
         <section className='flex-shrink-0'>
           <img className='size-8 rounded-full' src={imgSrc} alt={title} />
