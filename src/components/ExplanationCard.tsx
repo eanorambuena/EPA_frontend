@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 interface Props {
   title: string;
@@ -7,15 +7,15 @@ interface Props {
 }
 console.log(window.innerWidth)
 const ExplanationCard = ({ title, text, images }: Props) => {
-  const [indice_imagen, set_indice_imagen] = useState(0);
+  const [indice_imagen, set_indice_imagen] = useState(0)
 
   const imagen_previa = () => {
-    set_indice_imagen(indice_actual => indice_actual === 0 ? images.length - 1 : indice_actual - 1);
-  };
+    set_indice_imagen(indice_actual => indice_actual === 0 ? images.length - 1 : indice_actual - 1)
+  }
 
   const imagen_siguiente = () => {
-    set_indice_imagen(indice_actual => (indice_actual + 1) % images.length);
-  };
+    set_indice_imagen(indice_actual => (indice_actual + 1) % images.length)
+  }
 
   return (
     <div
@@ -61,7 +61,7 @@ const ExplanationCard = ({ title, text, images }: Props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ExplanationCard;
+export default ExplanationCard
