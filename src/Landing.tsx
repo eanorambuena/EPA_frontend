@@ -5,17 +5,17 @@ import Layout from './Layout'
 export default function Landing() {
   const imagesDesktop = useMemo(() => [
     {
-      src: '/assets/ChatsDesktop.jpg',
+      src: '/assets/views/ChatsDesktop.png',
       title: 'Chats',
       description: 'Mira todos tus chats en un solo lugar'
     },
     {
-      src: '/assets/ChatDesktop.jpg',
+      src: '/assets/views/ChatDesktop.png',
       title: 'Chat',
       description: 'Habla con tus amigos y familiares'
     },
     {
-      src: '/assets/LoginDesktop.jpg',
+      src: '/assets/views/LoginDesktop.png',
       title: 'Login',
       description: 'Inicia sesión o regístrate'
     }
@@ -23,17 +23,17 @@ export default function Landing() {
 
   const imagesMobile = useMemo(() => [
     {
-      src: '/assets/ChatsMobile.jpg',
+      src: '/assets/views/ChatsMobile.png',
       title: 'Chats',
       description: 'Mira todos tus chats en un solo lugar'
     },
     {
-      src: '/assets/ChatMobile.jpg',
+      src: '/assets/views/ChatMobile.png',
       title: 'Chat',
       description: 'Habla con tus amigos y familiares'
     },
     {
-      src: '/assets/LoginMobile.jpg',
+      src: '/assets/views/LoginMobile.pmg',
       title: 'Login',
       description: 'Inicia sesión o regístrate'
     }
@@ -41,17 +41,17 @@ export default function Landing() {
 
   const imagesTablet = useMemo(() => [
     {
-      src: '/assets/ChatsTablet.jpg',
+      src: '/assets/views/ChatsTablet.png',
       title: 'Chats',
       description: 'Mira todos tus chats en un solo lugar'
     },
     {
-      src: '/assets/ChatTablet.jpg',
+      src: '/assets/views/ChatTablet.png',
       title: 'Chat',
       description: 'Habla con tus amigos y familiares'
     },
     {
-      src: '/assets/LoginTablet.jpg',
+      src: '/assets/views/LoginTablet.png',
       title: 'Login',
       description: 'Inicia sesión o regístrate'
     }
@@ -84,7 +84,9 @@ export default function Landing() {
         <h2 className='text-2xl font-bold text-gray-500'>Bienvenido a EPA Chat</h2>
         <h3 className='text-lg font-normal text-gray-500'>¡La app de chat dirigida para adultos mayores!</h3>
 
-        <ImageGallery images={images} />
+        <div className='flex items-center justify-center gap-6 max-width: 80%' style={{ maxWidth: '80%' }}>
+          <ImageGallery images={images} />
+        </div>
 
         <h2 className='text-xl font-semibold mt-6 text-gray-500'>¿Qué funciones tenemos para los adultos mayores?</h2>
         <ul className='text-lg font-normal text-gray-500'>
@@ -97,8 +99,18 @@ export default function Landing() {
 
         <h3 className='text-lg font-normal text-gray-500'>¿Ya estás convencid@? ¡Únete hoy!</h3>
         <div className='flex items-center justify-center gap-6'>
-          <button className='px-4 py-2.5 text-lg font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none'>Iniciar sesión</button>
-          <button className='px-4 py-2.5 text-lg font-semibold text-blue-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none'>Registrarse</button>
+          <button
+            className='bg-violet-500 border border-foreground/20 rounded-md px-4 py-2 text-white mb-2'
+            onClick={() => window.location.href = '/login'}
+          >
+            Iniciar Sesión
+          </button>
+          <button
+            className='bg-amber-500 border border-foreground/20 rounded-md px-4 py-2 text-white mb-2'
+            onClick={() => window.location.href = '/login'}
+          >
+            Registrarse
+          </button>
         </div>
       </main>
     </Layout>
