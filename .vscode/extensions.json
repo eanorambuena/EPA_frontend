@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "github.vscode-github-actions",
     "dbaeumer.vscode-eslint",
     "WallabyJs.console-ninja",
     "mhutchie.git-graph",
