@@ -15,7 +15,7 @@ export default function Landing() {
       description: 'Habla con tus amigos y familiares'
     },
     {
-      src: '/assets/views/LoginDesktop.jpg',
+      src: '/assets/views/LoginDesktop.png',
       title: 'Login',
       description: 'Inicia sesión o regístrate'
     }
@@ -33,7 +33,7 @@ export default function Landing() {
       description: 'Habla con tus amigos y familiares'
     },
     {
-      src: '/assets/views/LoginMobile.jpg',
+      src: '/assets/views/LoginMobile.pmg',
       title: 'Login',
       description: 'Inicia sesión o regístrate'
     }
@@ -51,7 +51,7 @@ export default function Landing() {
       description: 'Habla con tus amigos y familiares'
     },
     {
-      src: '/assets/views/LoginTablet.jpg',
+      src: '/assets/views/LoginTablet.png',
       title: 'Login',
       description: 'Inicia sesión o regístrate'
     }
@@ -99,8 +99,18 @@ export default function Landing() {
 
         <h3 className='text-lg font-normal text-gray-500'>¿Ya estás convencid@? ¡Únete hoy!</h3>
         <div className='flex items-center justify-center gap-6'>
-          <button className='px-4 py-2.5 text-lg font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none'>Iniciar sesión</button>
-          <button className='px-4 py-2.5 text-lg font-semibold text-blue-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none'>Registrarse</button>
+          <button
+            className='bg-violet-500 border border-foreground/20 rounded-md px-4 py-2 text-white mb-2'
+            onClick={() => window.location.href = '/login'}
+          >
+            Iniciar Sesión
+          </button>
+          <button
+            className='bg-amber-500 border border-foreground/20 rounded-md px-4 py-2 text-white mb-2'
+            onClick={() => window.location.href = '/login'}
+          >
+            Registrarse
+          </button>
         </div>
       </main>
     </Layout>

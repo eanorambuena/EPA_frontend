@@ -55,9 +55,9 @@ Además de estos colores, pequeñas variaciones de estos también podrán ser ut
 
 <!-- Vistas principales -->
 ### :mag: Vistas principales
-![Login Mobile](assets/views/LoginMobile.jpg)
-![Login Tablet](assets/views/LoginTablet.jpg)
-![Login Desktop](assets/views/LoginDesktop.jpg)
+![Login Mobile](assets/views/LoginMobile.png)
+![Login Tablet](assets/views/LoginTablet.png)
+![Login Desktop](assets/views/LoginDesktop.png)
 ![Chats Mobile](assets/views/ChatsMobile.png)
 ![Chats Tablet](assets/views/ChatsTablet.png)
 ![Chats Desktop](assets/views/ChatsDesktop.png)
