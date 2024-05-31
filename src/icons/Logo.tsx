@@ -3,15 +3,17 @@ import React from 'react'
 interface Props {
   color?: string
   size?: string
+  className?: string
 }
 
-export default function Logo({ color = '#8b5cf6', size = '50' } : Props) {
+export default function Logo({ color = '#8b5cf6', size = '50', className = '' } : Props) {
   return (
     <svg
       width={size}
       height={size}
       version='1.1'
       viewBox='0 0 52.917 52.917'
+      className={className}
     >
       <defs>
         <linearGradient id='linearGradient1'>

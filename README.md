@@ -55,15 +55,15 @@ Además de estos colores, pequeñas variaciones de estos también podrán ser ut
 
 <!-- Vistas principales -->
 ### :mag: Vistas principales
-![Login Mobile](assets/Views/LoginMobile.jpg)
-![Login Tablet](assets/Views/LoginTablet.jpg)
-![Login Desktop](assets/Views/LoginDesktop.jpg)
-![Chats Mobile](assets/Views/ChatsMobile.jpg)
-![Chats Tablet](assets/Views/ChatsTablet.jpg)
-![Chats Desktop](assets/Views/ChatsDesktop.jpg)
-![Chat Mobile](assets/Views/ChatMobile.jpg)
-![Chat Tablet](assets/Views/ChatTablet.jpg)
-![Chat Desktop](assets/Views/ChatDesktop.jpg)
+![Login Mobile](assets/views/LoginMobile.png)
+![Login Tablet](assets/views/LoginTablet.png)
+![Login Desktop](assets/views/LoginDesktop.png)
+![Chats Mobile](assets/views/ChatsMobile.png)
+![Chats Tablet](assets/views/ChatsTablet.png)
+![Chats Desktop](assets/views/ChatsDesktop.png)
+![Chat Mobile](assets/views/ChatMobile.png)
+![Chat Tablet](assets/views/ChatTablet.png)
+![Chat Desktop](assets/views/ChatDesktop.png)
 
 
 <!-- Logo -->
@@ -76,3 +76,7 @@ Además de estos colores, pequeñas variaciones de estos también podrán ser ut
 ![Ejemplo de aplicación](assets/PatternAplication.jpg)
 
 Otros ejemplos de uso de los colores se pueden ver en las vistas principales, ya que estamos avanzando ya con la utilización de estos.
+
+
+Además, utilizamos códigos de internet para ciertas funcionalidades de nuestra aplicación. Son los siguientes:
+1. Para el archivo About.css//About.tsx se utilizó código disponible en https://codepen.io/nathanlong/pen/abayBej para crear la animación del corazón
