@@ -29,13 +29,13 @@ export default function DocsPage() {
         <div id="sign_up"></div>
         <ExplanationCard title="Cómo registrarse en EPA Chat" text={'1) Ir a la barra de navegación y presionar en el logo EPA Chat.<div />2) Bajar hasta el final de la página hasta encontrar el botón de Registrarse.<div />3) Introducir telefono y contraseña, y presionar en Registrarse.'} images={['assets/views/navbar_epachat.png', 'assets/views/sign_up_button.png', 'assets/views/login.png']} />
         <div id="enviar_mensaje"></div>
-        <ExplanationCard title="Cómo enviar un mensaje en EPA Chat" text={'1) Ir a la barra de navegación y presionar en chats.<div />2) Elegir el chat que desee.<div />3) Presionar sodive Escribe un mensaje... <div />4) Escribir el mensaje.<div />5) Presionar el botón Enviar para enviar el mensaje. '} images={['assets/views/navbar_chat.png', 'assets/views/chat_capture.png', 'assets/views/write_message.png', 'assets/views/example_message.png', 'assets/views/send_message.png']} />
+        <ExplanationCard title="Cómo enviar un mensaje en EPA Chat" text={'1) Ir a la barra de navegación y presionar en chats.<div />2) Elegir el chat que desee.<div />3) Presionar sobre Escribe un mensaje... <div />4) Escribir el mensaje.<div />5) Presionar el botón Enviar para enviar el mensaje. '} images={['assets/views/navbar_chat.png', 'assets/views/chat_capture.png', 'assets/views/write_message.png', 'assets/views/example_message.png', 'assets/views/send_message.png']} />
         <div id="agrandar_mensajes"></div>
         <ExplanationCard title="Agrandar mensajes" text={'1) Ir a la barra de navegación y presionar en chats.<div />2) Elegir el chat que desee.<div />3) Al mantener presionado un mensaje cualquiera, este se agrandará.'} images={['assets/views/navbar_chat.png', 'assets/views/chat_capture.png', 'assets/views/big_chat.png']} />
         <div id="escuchar_mensajes_escritos"></div>
-        <ExplanationCard title="Escuchar mensajes escritos" text={'1) Ir a la barra de navegación y presionar en chats.<div />2) Elegir el chat que desee.<div />3) Al hacer click sodive un mensaje, una voz lo leerá.'} images={['assets/views/navbar_chat.png', 'assets/views/chat_capture.png', 'assets/views/voice_chat.png']} />
+        <ExplanationCard title="Escuchar mensajes escritos" text={'1) Ir a la barra de navegación y presionar en chats.<div />2) Elegir el chat que desee.<div />3) Al hacer click sobre un mensaje, una voz lo leerá.'} images={['assets/views/navbar_chat.png', 'assets/views/chat_capture.png', 'assets/views/voice_chat.png']} />
         <div id="transformar_audio_texto"></div>
-        {/*<ExplanationCard title="Transformar audio a texto" text={"1) Ir a la barra de navegación y presionar en chats.<div />2) Elegir el chat que desee.<div />3) Al hacer click sodive un mensaje, una voz lo leerá."} images={["assets/views/navbar_chat.png", "assets/views/chat_capture.png", "assets/views/voice_chat.png"]} /> */}
+        {/*<ExplanationCard title="Transformar audio a texto" text={"1) Ir a la barra de navegación y presionar en chats.<div />2) Elegir el chat que desee.<div />3) Al hacer click sobre un mensaje, una voz lo leerá."} images={["assets/views/navbar_chat.png", "assets/views/chat_capture.png", "assets/views/voice_chat.png"]} /> */}
       </main>
     </Layout>
   )
