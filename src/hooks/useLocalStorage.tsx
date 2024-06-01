@@ -1,7 +1,7 @@
 // https://www.geeksforgeeks.org/reactjs-uselocalstorage-custom-hook/
 
 import { useEffect, useState } from 'react'
- 
+
 export default function useLocalStorage(key, defaultValue, liveUpdate = true) {
   const [localStorageValue, setLocalStorageValue] = useState((() => {
     try {
@@ -17,7 +17,7 @@ export default function useLocalStorage(key, defaultValue, liveUpdate = true) {
       return defaultValue
     }
   })())
- 
+
   const setLocalStorageStateValue = (valueOrFn) => {
     let newValue
     if (typeof valueOrFn === 'function') {
@@ -44,5 +44,5 @@ export default function useLocalStorage(key, defaultValue, liveUpdate = true) {
 
   return [localStorageValue, setLocalStorageStateValue]
 }
- 
+
 useLocalStorage
