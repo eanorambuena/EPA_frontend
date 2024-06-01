@@ -16,8 +16,8 @@ export default function GoBackLink() {
 
   return (
     <a
-      onClick={goBack}
       className='flex items-center py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover group text-sm'
+      onClick={goBack}
     >
       <GoBackArrow />
       {' '}
