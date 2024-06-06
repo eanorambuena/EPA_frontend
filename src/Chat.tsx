@@ -30,25 +30,16 @@ export default function Chat({ className  }: Props) {
     setChat(Orm.Chats.find(selectedChatId))
     setMessages(getMessages())
   }, [getMessages, selectedChatId])
-
+  
   return (
     <div className={`h-full flex flex-col items-start justify-start ${className}`}>
       <header className='flex items-center justify-start w-full h-fit shadow-sm gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-t-md'>
-        <img
-          alt={title}
-          className='size-8 sm:size-10 rounded-full'
-          src={imgSrc}
-        />
-        <h1 className='text-sm sm:text-md md:text-lg font-bold'>
-          {title}
-        </h1>
+        <img className='size-8 sm:size-10 rounded-full' src={imgSrc} alt={title} />
+        <h1 className='text-sm sm:text-md md:text-lg font-bold'>{title}</h1>
         <Availability chat={chat} />
       </header>
       <Messages messages={messages} />
-      <SendMessageForm
-        appendMessage={appendMessage}
-        chat={chat}
-      />
+      <SendMessageForm chat={chat} appendMessage={appendMessage} />
     </div>
   )
 }

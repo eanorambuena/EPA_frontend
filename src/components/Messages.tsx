@@ -20,10 +20,7 @@ export default function Messages({ messages }: Props) {
   scrollChatToBottom(10)
 
   return (
-    <main
-      className='h-full flex flex-col w-full gap-6 flex-reverse overflow-y-auto overflow-x-hidden p-4 sm:p-6 bg-amber-100 dark:bg-gray-800'
-      ref={$messagesContainer}
-    >
+    <main ref={$messagesContainer} className='h-full flex flex-col w-full gap-6 flex-reverse overflow-y-auto overflow-x-hidden p-4 sm:p-6 bg-amber-100 dark:bg-gray-800'>
       {
         messages.map((message) => (
           <ChatBubble

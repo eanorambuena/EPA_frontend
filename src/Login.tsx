@@ -11,10 +11,7 @@ export default function Login({ searchParams } : Props) {
     <Layout>
       <div className='flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2 h-screen'>
         <form className='animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground'>
-          <label
-            className='text-md'
-            htmlFor='email'
-          >
+          <label className='text-md' htmlFor='email'>
             Teléfono
           </label>
           <input
@@ -23,22 +20,17 @@ export default function Login({ searchParams } : Props) {
             placeholder='+56912345678'
             required
           />
-          <label
-            className='text-md'
-            htmlFor='password'
-          >
+          <label className='text-md' htmlFor='password'>
             Contraseña
           </label>
           <input
             className='rounded-md px-4 py-2 bg-inherit border mb-6 border-violet-300'
+            type='password'
             name='password'
             placeholder='••••••••'
             required
-            type='password'
           />
-          <SubmitButton className='mb-2'>
-            Iniciar Sesión
-          </SubmitButton>
+          <SubmitButton className='mb-2'>Iniciar Sesión</SubmitButton>
           <button
             className='bg-amber-500 border border-foreground/20 rounded-md px-4 py-2 text-white mb-2'
           >
