@@ -243,13 +243,13 @@ export const seed = () => {
       id: 17,
       user: Orm.Users.find(1),
       chat: Orm.Chats.find(4),
-      message: 'Hola',
+      message: 'Hola'
     },
     {
       id: 18,
       user: Orm.Users.find(5),
       chat: Orm.Chats.find(4),
-      message: 'Hola?',
+      message: 'Hola?'
     }
   ])
 }

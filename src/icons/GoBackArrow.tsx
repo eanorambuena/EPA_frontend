@@ -7,15 +7,15 @@ interface Props {
 export default function GoBackArrow({ fill = 'currentColor' } : Props) {
   return (
     <svg
-      width='24'
-      height='24'
-      viewBox='0 0 24 24'
+      className='mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1'
       fill='none'
+      height='24'
       stroke={fill}
-      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
-      className='mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1'
+      strokeWidth='2'
+      viewBox='0 0 24 24'
+      width='24'
     >
       <polyline points='15 18 9 12 15 6' />
     </svg>
