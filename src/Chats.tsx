@@ -12,15 +12,15 @@ export default function Chats({ className }: Props) {
 
   return (
     <section
-      className={`bg-gray-100 dark:bg-gray-800 rounded-md first:rounded-t-md last:rounded-b-md ${className}`}
       role='list'
+      className={`bg-gray-100 dark:bg-gray-800 rounded-md first:rounded-t-md last:rounded-b-md ${className}`}
     >
       {
         Orm.Chats.all().map((chat) => (
           <ChatRow
+            key={chat.id}
             chat={chat}
             isSelected={chat.id === selectedChatId}
-            key={chat.id}
           />
         ))
       }

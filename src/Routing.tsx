@@ -11,30 +11,12 @@ export default function Routing() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          element={<Landing />}
-          path='/'
-        />
-        <Route
-          element={<About />}
-          path='/about'
-        />
-        <Route
-          element={<MainPage />}
-          path='/chats/:id'
-        />
-        <Route
-          element={<MainPage />}
-          path='/chats'
-        />
-        <Route
-          element={<DocsPage />}
-          path='/docs'
-        />
-        <Route
-          element={<Login />}
-          path='/login'
-        />
+        <Route path='/' element={<Landing />} />
+        <Route path="/about" element={<About/>}/>
+        <Route path='/chats/:id' element={<MainPage />} />
+        <Route path="/chats" element={<MainPage />} />
+        <Route path="/docs" element={<DocsPage />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
     </BrowserRouter>
   )
