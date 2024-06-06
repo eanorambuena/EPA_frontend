@@ -21,18 +21,23 @@ export default function ChatRow({ chat, isSelected } : Props) {
   const messages = Orm.Messages.all().filter((message) => message.chat.id === chat.id)
   if (messages.length === 0) return null
 
-  const lastMessage: MessageSchema = messages.reduce((prev, current) => (prev.hourAndMinutes > current.hourAndMinutes) ? prev : current, messages[0])
+  const lastMessage: MessageSchema = messages.reduce(
+    (prev, current) => (prev.hourAndMinutes > current.hourAndMinutes) ? prev : current, messages[0])
   const selectedStyles = isSelected ? 'lg:bg-gray-200 lg:dark:bg-gray-700 lg:shadow-sm' : ''
 
   return (
     <button
+      className={`w-full p-4 sm:p-6 font-4xl sm:font-3xl cursor-pointer rounded-md ${selectedStyles}`}
       onClick={handleClick}
       role='listitem'
-      className={`w-full p-4 sm:p-6 font-4xl sm:font-3xl cursor-pointer rounded-md ${selectedStyles}`}
     >
       <article className='flex items-center space-x-3 rtl:space-x-reverse'>
         <section className='flex-shrink-0'>
-          <img className='size-8 rounded-full' src={imgSrc} alt={title} />
+          <img
+            alt={title}
+            className='size-8 rounded-full'
+            src={imgSrc}
+          />
         </section>
         <section className='flex-1 min-w-0 items-start text-left rtl:text-right'>
           <header className='flex flex-row justify-between'>
