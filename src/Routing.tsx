@@ -5,6 +5,7 @@ import DocsPage from './DocsPage'
 import Landing from './Landing'
 import Login from './Login'
 import MainPage from './MainPage'
+import ContactRegister from './Contacts'
 
 
 export default function Routing() {
@@ -34,6 +35,10 @@ export default function Routing() {
         <Route
           element={<Login />}
           path='/login'
+        />
+        <Route
+          element={<ContactRegister />}
+          path='/contactRegister'
         />
       </Routes>
     </BrowserRouter>
