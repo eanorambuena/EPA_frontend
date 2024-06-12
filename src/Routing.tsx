@@ -5,7 +5,7 @@ import DocsPage from './DocsPage'
 import Landing from './Landing'
 import Login from './Login'
 import MainPage from './MainPage'
-import ContactRegister from './Contacts'
+import ContactRegister from './ContactsRegister'
 
 
 export default function Routing() {
