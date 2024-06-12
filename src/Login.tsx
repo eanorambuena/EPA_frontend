@@ -14,15 +14,15 @@ function Login({ searchParams }: Props) {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log(phone)
-    console.log(password)
+    //console.log(phone)
+    //console.log(password)
     const config_post = {
       headers: {
         'Content-Type': 'application/json',
       },
       method: 'post',
       url: `http://localhost:3000/users`,
-      data: { 'phoneNumber': phone, 'password': password }
+      data: { 'phoneNumber': phone, 'password': password, 'type': 'user'}
     }
 
     try {
