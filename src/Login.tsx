@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React from 'react'
 import SubmitButton from './components/SubmitButton'
 import Layout from './Layout'
 import { useNavigate } from 'react-router-dom'
@@ -50,7 +49,6 @@ export default function Login({ searchParams } : Props) {
             placeholder='+56912345678'
             required
             type='tel'
-            value={phone}
           />
           <label
             className='text-md'
@@ -63,11 +61,9 @@ export default function Login({ searchParams } : Props) {
             className='rounded-md px-4 py-2 bg-inherit border mb-6 border-violet-300'
             id='password'
             name='password'
-            onChange={(e) => setPassword(e.target.value)}
             placeholder='••••••••'
             required
             type='password'
-            value={password}
           />
           <SubmitButton className='mb-2'>
             Iniciar Sesión
@@ -89,5 +85,3 @@ export default function Login({ searchParams } : Props) {
     </Layout>
   )
 }
-
-export default Login
