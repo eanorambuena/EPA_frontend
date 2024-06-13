@@ -6,7 +6,6 @@ import Landing from './Landing'
 import Login from './Login'
 import MainPage from './MainPage'
 
-
 export default function Routing() {
   return (
     <BrowserRouter>
