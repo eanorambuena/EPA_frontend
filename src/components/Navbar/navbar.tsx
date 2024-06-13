@@ -30,6 +30,9 @@ export default function Navbar () {
       <NavLink to='/docs'>
         Docs
       </NavLink>
+      <NavLink to='/contactRegister'>
+        Contacts
+      </NavLink>
     </nav>
   )
 }
