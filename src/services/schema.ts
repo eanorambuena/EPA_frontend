@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { createModel, Orm } from './orm'
+import { createModel } from './orm'
 
 const API_URL = import.meta.env.VITE_BACKEND_URL
 
@@ -43,15 +43,37 @@ export type ChatMemberSchema = {
 createModel<ChatMemberSchema>('ChatMembers')
 
 export class Auth {
-  static getCurrentUser() {
-    return Orm.Users.findByAttribute('username', 'yo')
+  static currentAccessToken: string | null = null
+
+  static async getCurrentUser() {
+    let user
+    if (!this.currentAccessToken) {
+      this.currentAccessToken = localStorage.getItem('accessToken')?.replace(/"/g, '') || null
+    }
+    if (!this.currentAccessToken) {
+      return
+    }
+    await axios.get(`${API_URL}/me`, {
+      headers: {
+        Authorization: `Bearer ${this.currentAccessToken}`
+      }
+    })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error(response.data.error)
+        }
+        user = response.data
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+    return user
   }
 
   static async login(phoneNumber: string, password: string) {
     if (!phoneNumber || !password) {
       return
     }
-    let accessToken
     await axios.post(`${API_URL}/login`, {
       phoneNumber,
       password
@@ -60,16 +82,15 @@ export class Auth {
         if (response.status >= 400) {
           throw new Error(response.data.error)
         }
-        accessToken = response.data.access_token
+        this.currentAccessToken = response.data.access_token
       })
-    return accessToken
+    return this.currentAccessToken
   }
 
   static async signUp(phoneNumber: string, password: string) {
     if (!phoneNumber || !password) {
       return
     }
-    let accessToken
     await axios.post(`${API_URL}/signup`, {
       phoneNumber,
       password
@@ -78,8 +99,12 @@ export class Auth {
         if (response.status >= 400) {
           throw new Error(response.data.error)
         }
-        accessToken = await Auth.login(phoneNumber, password)
+        await Auth.login(phoneNumber, password)
       })
-    return accessToken
+    return this.currentAccessToken
+  }
+
+  static logout() {
+    this.currentAccessToken = null
   }
 }

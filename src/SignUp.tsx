@@ -68,7 +68,7 @@ export default function SignUp({ searchParams } : Props) {
             Registrarse
           </SubmitButton>
           <button
-            className='bg-amber-500 border border-foreground/20 rounded-md px-4 py-2 text-white mb-2'
+            className='bg-amber-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-amber-600 transition'
             onClick={() => navigate('/login')}
           >
             Iniciar Sesión
