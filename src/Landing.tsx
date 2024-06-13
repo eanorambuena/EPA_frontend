@@ -82,12 +82,11 @@ export default function Landing() {
       className='p-6'
       limitHeight={false}
     >
-      <main className='w-full h-full flex flex-col gap-6 py-6 items-center justify-center text-gray-800 dark:text-gray-500 p-6'>
-
-        <h2 className='text-2xl font-bold text-gray-500'>
+      <main className='w-full h-full flex flex-col gap-6 py-6 items-center justify-center text-gray-800 dark:text-gray-50 p-6'>
+        <h2 className='text-2xl font-bold'>
           Bienvenido a EPA Chat
         </h2>
-        <h3 className='text-lg font-normal text-gray-500'>
+        <h3 className='text-lg font-normal'>
           ¡La app de chat dirigida para adultos mayores!
         </h3>
         <div
@@ -96,10 +95,10 @@ export default function Landing() {
         >
           <ImageGallery images={images} />
         </div>
-        <h2 className='text-xl font-semibold mt-6 text-gray-500'>
+        <h2 className='text-xl font-semibold mt-6'>
           ¿Qué funciones tenemos para los adultos mayores?
         </h2>
-        <ul className='text-lg font-normal text-gray-500'>
+        <ul className='text-lg font-normal'>
           <li>
             Cambio de tamaño de letra
           </li>
@@ -117,7 +116,7 @@ export default function Landing() {
             ¡Y más!
           </li>
         </ul>
-        <h3 className='text-lg font-normal text-gray-500'>
+        <h3 className='text-lg font-normal'>
           ¿Ya estás convencid@? ¡Únete hoy!
         </h3>
         <div className='flex items-center justify-center gap-6'>

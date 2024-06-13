@@ -38,11 +38,11 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
             src={images[imageIndex].src}
           />
         </div>
-        <div className='image-info text-center mt-4'>
-          <h2 className='text-lg font-bold text-gray-500'>
+        <div className='image-info text-center mt-4 dark:text-gray-100'>
+          <h2 className='text-lg font-bold'>
             {images[imageIndex].title}
           </h2>
-          <p className='text-sm text-gray-500'>
+          <p className='text-sm'>
             {images[imageIndex].description}
           </p>
         </div>
