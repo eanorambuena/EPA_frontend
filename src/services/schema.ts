@@ -1,4 +1,7 @@
+import axios from 'axios'
 import { createModel, Orm } from './orm'
+
+const API_URL = import.meta.env.VITE_BACKEND_URL
 
 export enum Status {
   online = 'en línea',
@@ -42,5 +45,41 @@ createModel<ChatMemberSchema>('ChatMembers')
 export class Auth {
   static getCurrentUser() {
     return Orm.Users.findByAttribute('username', 'yo')
+  }
+
+  static async login(phoneNumber: string, password: string) {
+    if (!phoneNumber || !password) {
+      return
+    }
+    let accessToken
+    await axios.post(`${API_URL}/login`, {
+      phoneNumber,
+      password
+    })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error(response.data.error)
+        }
+        accessToken = response.data.access_token
+      })
+    return accessToken
+  }
+
+  static async signUp(phoneNumber: string, password: string) {
+    if (!phoneNumber || !password) {
+      return
+    }
+    let accessToken
+    await axios.post(`${API_URL}/signup`, {
+      phoneNumber,
+      password
+    })
+      .then(async (response) => {
+        if (response.status >= 400) {
+          throw new Error(response.data.error)
+        }
+        accessToken = await Auth.login(phoneNumber, password)
+      })
+    return accessToken
   }
 }

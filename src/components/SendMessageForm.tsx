@@ -61,7 +61,7 @@ export default function SendMessageForm({ appendMessage, chat }: Props) {
         required
         type='text'
       />
-      <SubmitButton>
+      <SubmitButton className='flex-grow sm:flex-grow-0'>
         Enviar
       </SubmitButton>
     </form>

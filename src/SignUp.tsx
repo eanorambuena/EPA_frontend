@@ -9,7 +9,7 @@ interface Props {
   searchParams?: { message: string }
 }
 
-export default function Login({ searchParams } : Props) {
+export default function SignUp({ searchParams } : Props) {
   const navigate = useNavigate()
   const setAccessToken = useLocalStorage('accessToken', '')[1]
 
@@ -19,7 +19,7 @@ export default function Login({ searchParams } : Props) {
     const phoneNumber = formData.get('phoneNumber') as string
     const password = formData.get('password') as string
     try {
-      const accessToken = await Auth.login(phoneNumber, password)
+      const accessToken = await Auth.signUp(phoneNumber, password)
       setAccessToken(accessToken)
       navigate('/')
     }
@@ -65,13 +65,13 @@ export default function Login({ searchParams } : Props) {
             type='password'
           />
           <SubmitButton className='mb-2'>
-            Iniciar Sesión
+            Registrarse
           </SubmitButton>
           <button
             className='bg-amber-500 border border-foreground/20 rounded-md px-4 py-2 text-white mb-2'
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate('/login')}
           >
-            Registrarse
+            Iniciar Sesión
           </button>
           {searchParams?.message && (
             <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>

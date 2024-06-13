@@ -6,8 +6,6 @@ interface Props {
   images: string[]
 }
 
-console.log(window.innerWidth)
-
 const ExplanationCard = ({ title, text, images }: Props) => {
   const [indice_imagen, set_indice_imagen] = useState(0)
 

@@ -5,6 +5,7 @@ import DocsPage from './DocsPage'
 import Landing from './Landing'
 import Login from './Login'
 import MainPage from './MainPage'
+import SignUp from './SignUp'
 
 export default function Routing() {
   return (
@@ -33,6 +34,10 @@ export default function Routing() {
         <Route
           element={<Login />}
           path='/login'
+        />
+        <Route
+          element={<SignUp />}
+          path='/signup'
         />
       </Routes>
     </BrowserRouter>
