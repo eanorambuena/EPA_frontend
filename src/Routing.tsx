@@ -39,6 +39,7 @@ export default function Routing() {
         <Route
           element={<SignUp />}
           path='/signup'
+        />
         <Route
           element={<ContactRegister />}
           path='/contactRegister'
