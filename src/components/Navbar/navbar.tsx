@@ -5,7 +5,7 @@ import Logo from '../../icons/Logo'
 import AuthContext from '../../hooks/useCurrentUser'
 
 export default function Navbar () {
-  const user = useContext(AuthContext)['user']
+  const user = useContext(AuthContext).user
 
   const protectedRoutes = (
     <>
