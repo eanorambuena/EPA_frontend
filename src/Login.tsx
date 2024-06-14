@@ -1,13 +1,12 @@
 import React, { useContext } from 'react'
-import SubmitButton from './components/SubmitButton'
-import Layout from './Layout'
 import { useNavigate } from 'react-router-dom'
-import { Auth } from './services/schema'
+import SubmitButton from './components/SubmitButton'
 import useLocalStorage from './hooks/useLocalStorage'
 import ToastContext, { ToastType } from './hooks/useToast'
+import Layout from './Layout'
 import { ApplicationError } from './services/errors'
+import { Auth, PhoneNumber } from './services/schema'
 import { Validate } from './services/validate'
-import { PhoneNumber } from './services/schema'
 
 export default function Login() {
   const navigate = useNavigate()

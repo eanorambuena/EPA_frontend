@@ -1,6 +1,15 @@
 import { ValidationError } from './errors'
 
 export class Validate {
+  static Email(email: string) {
+    if (!email) {
+      throw new ValidationError('Debe ingresar un correo electrónico')
+    }
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+      throw new ValidationError('Correo electrónico inválido')
+    }
+  }
+
   static PhoneNumber(phoneNumber: string) {
     if (!phoneNumber) {
       throw new ValidationError('Debe ingresar un número de teléfono')

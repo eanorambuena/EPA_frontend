@@ -1,15 +1,16 @@
 import { AxiosResponse } from 'axios'
 import { ApplicationError, AuthenticationError, ItemNotFoundError, NetworkError } from '../services/errors'
 import { ToastType, useToast } from './useToast'
+import { useCallback } from 'react'
 
 type Request = () => Promise<AxiosResponse<any, any>>
 
 type SafeRequestConfig = {
-  authenticationError?: string
-  authorizationError?: string
-  itemNotFoundError?: string
-  networkError?: string
-  applicationError?: string
+  authenticationError?: string | false
+  authorizationError?: string | false
+  itemNotFoundError?: string | false
+  networkError?: string | false
+  applicationError?: string | false
 }
 
 const handleErrors = (status: number, config: SafeRequestConfig) => {
@@ -33,20 +34,34 @@ const handleErrors = (status: number, config: SafeRequestConfig) => {
 export default function useSafeRequest() {
   const toast = useToast()
 
-  return async function safelyRequest(request: Request, config: SafeRequestConfig = {}) {
+  return useCallback(async function safelyRequest(request: Request, config: SafeRequestConfig = {}) {
     try {
-      const response = await request()
-      handleErrors(response.status, config)
-      return response
+      try {
+        const response = await request()
+        handleErrors(response.status, config)
+        return response
+      }
+      catch (error) {
+        if (error instanceof ApplicationError) {
+          if (!error.avoidToast) {
+            toast(error.message, ToastType.error)
+          }
+          return
+        }
+        handleErrors(error.response?.status, config)
+        toast('Ha ocurrido un error desconocido', ToastType.error)
+        console.error(error)
+      }
     }
     catch (error) {
       if (error instanceof ApplicationError) {
-        toast(error.message, ToastType.error)
+        if (!error.avoidToast) {
+          toast(error.message, ToastType.error)
+        }
         return
       }
-
       toast('Ha ocurrido un error desconocido', ToastType.error)
       console.error(error)
     }
-  }
+  }, [toast])
 }
