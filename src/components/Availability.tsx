@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Auth, ChatSchema, Status } from '../services/schema'
-import { Orm } from '../services/orm'
+import { Auth, ChatMemberSchema, ChatSchema, Status } from '../services/schema'
+import { useCurrentUser } from '../hooks/useCurrentUser'
 
 interface Props {
   chat: ChatSchema
@@ -12,19 +12,20 @@ const colors = {
 }
 
 export default function Availability({ chat } : Props) {
-  const [otherUser, setOtherUser] = useState(Auth.getCurrentUser())
+  /*const user = useCurrentUser().user
+  const [otherUser, setOtherUser] = useState<Auth | null>(null)
 
   useEffect(() => {
     if (chat.isGroup)
       return
-    const chatMembers = Orm.ChatMembers.all().filter((chatMember) => chatMember.chat.id === chat.id)
-    const otherChatMember = chatMembers.find((chatMember) => chatMember.user !== Auth.getCurrentUser())
+    const chatMembers: ChatMemberSchema[] = []
+    const otherChatMember = chatMembers.find((chatMember) => chatMember.userId !== user.id)
     if (otherChatMember) {
-      setOtherUser(otherChatMember.user)
+      //setOtherUser(otherChatMember.userId)
     }
-  }, [chat])
-
-  if (chat.isGroup) return null
+  }, [chat, user])*/
+  return null
+  if (chat?.isGroup) return null
 
   return (
     <div className='flex items-center space-x-1'>
