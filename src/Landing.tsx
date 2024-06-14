@@ -1,8 +1,10 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import ImageGallery from './components/ImageGallery'
 import Layout from './Layout'
+import { useCurrentUser } from './hooks/useCurrentUser'
 
 export default function Landing() {
+  const user = useCurrentUser().user
   const imagesDesktop = useMemo(() => [
     {
       src: '/assets/views/ChatsDesktop.png',
@@ -116,23 +118,27 @@ export default function Landing() {
             ¡Y más!
           </li>
         </ul>
-        <h3 className='text-lg font-normal'>
-          ¿Ya estás convencid@? ¡Únete hoy!
-        </h3>
-        <div className='flex items-center justify-center gap-6'>
-          <button
-            className='bg-violet-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-violet-600 transition'
-            onClick={() => window.location.href = '/login'}
-          >
-            Iniciar Sesión
-          </button>
-          <button
-            className='bg-amber-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-amber-600 transition'
-            onClick={() => window.location.href = '/login'}
-          >
-            Registrarse
-          </button>
-        </div>
+        { !user && (
+          <>
+            <h3 className='text-lg font-normal'>
+              ¿Ya estás convencid@? ¡Únete hoy!
+            </h3>
+            <div className='flex items-center justify-center gap-6'>
+              <button
+                className='bg-violet-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-violet-600 transition'
+                onClick={() => window.location.href = '/login'}
+              >
+                Iniciar Sesión
+              </button>
+              <button
+                className='bg-amber-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-amber-600 transition'
+                onClick={() => window.location.href = '/login'}
+              >
+                Registrarse
+              </button>
+            </div>
+          </>
+        )}
       </main>
     </Layout>
   )

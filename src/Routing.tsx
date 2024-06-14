@@ -9,12 +9,12 @@ import SignUp from './SignUp'
 import ContactRegister from './ContactsRegister'
 import useToaster from './hooks/useToaster'
 import ToastContext from './hooks/useToast'
-import AuthContext from './hooks/AuthContext'
-import useCurrentUser from './hooks/useCurrentUser'
+import AuthContext from './hooks/useCurrentUser'
+import useCurrentUserOnePerContext from './hooks/useCurrentUserOncePerContext'
 
 export default function Routing() {
   const [ref, toast] = useToaster()
-  const [user, logout] = useCurrentUser()
+  const [user, logout] = useCurrentUserOnePerContext()
 
   return (
     <ToastContext.Provider value={toast}>

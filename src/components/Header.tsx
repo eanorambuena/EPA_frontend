@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Navbar from './/Navbar/navbar'
 import { useNavigate } from 'react-router-dom'
-import AuthContext from '../hooks/AuthContext'
+import AuthContext from '../hooks/useCurrentUser'
 
 export default function Header() {
   const navigate = useNavigate()

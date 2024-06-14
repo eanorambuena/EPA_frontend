@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import { ChatSchema } from '../services/schema'
 import axios from 'axios'
 import { API_URL } from '../services/variables'
-import useCurrentUser from './useCurrentUser'
+import useCurrentUserOnePerContext from './useCurrentUserOncePerContext'
 import { ApplicationError, AuthenticationError } from '../services/errors'
 import { ToastType, useToast } from './useToast'
 
 export default function useChats() {
-  const user = useCurrentUser()[0]
+  const user = useCurrentUserOnePerContext()[0]
   const toast = useToast()
   const [chats, setChats] = useState<ChatSchema[]>([])
 
