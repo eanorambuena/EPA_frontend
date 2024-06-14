@@ -1,16 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { ToastType } from './useToast'
 
 const TOAST_DURATION = 3000
 const TOAST_EXPIRATION = 10000
 const BASE_STYLE = 'fixed bottom-4 right-4 p-4 rounded-md shadow-md z-10'
-
-export enum ToastType {
-  success = 'bg-green-500',
-  error = 'bg-red-500',
-  warning = 'bg-yellow-500',
-  info = 'bg-blue-500',
-  default = 'bg-gray-50 dark:bg-gray-950'
-}
 
 export type ToastAction = (message: string, toastType?: ToastType) => void
 
@@ -20,7 +13,7 @@ interface ToastData {
   createdAt: number
 }
 
-export default function useToast(className: string = '') {
+export default function useToaster(className: string = '') {
   const [toasted, setToasted] = useState<boolean>(false)
   const [toastSchedule, setToastSchedule] = useState<ToastData[]>([])
   const [message, setMessage] = useState<string>('')
