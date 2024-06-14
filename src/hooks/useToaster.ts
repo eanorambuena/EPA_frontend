@@ -31,9 +31,7 @@ export default function useToaster(className: string = '') {
   }, [])
 
   const removeToastFromSchedule = useCallback<() => void>(() => {
-    console.log('removing toast', toastSchedule[0])
     setToastSchedule(toastSchedule.slice(1))
-    console.log('toast schedule', toastSchedule)
   }, [toastSchedule])
 
   const toast = useCallback<ToastAction>((message, toastType = ToastType.default) => {
