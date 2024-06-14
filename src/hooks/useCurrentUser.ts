@@ -1,11 +1,13 @@
 import { createContext, useContext } from 'react'
+import { UserSchema } from '../services/schema'
 
-type AuthContextType = {
-  user: any
+export type AuthContextType = {
+  user: UserSchema | null
   logout: () => void
+  accessToken: string
 }
 
-const AuthContext = createContext<AuthContextType>({ user: null, logout: () => {} })
+const AuthContext = createContext<AuthContextType>({ user: null, logout: () => {}, accessToken: '' })
 export default AuthContext
 
 export function useCurrentUser() {

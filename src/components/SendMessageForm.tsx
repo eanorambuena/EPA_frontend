@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react'
-import { Orm } from '../services/orm'
-import { Auth, ChatSchema, MessageSchema } from '../services/schema'
+import { useCurrentUser } from '../hooks/useCurrentUser'
+import { ChatSchema, MessageSchema, MessageState } from '../services/schema'
 import SubmitButton from './SubmitButton'
 
 interface Props {
@@ -11,8 +11,9 @@ interface Props {
 export default function SendMessageForm({ appendMessage, chat }: Props) {
   const $form = useRef<HTMLFormElement>(null)
   const $input = useRef<HTMLInputElement>(null)
+  const user = useCurrentUser().user
 
-  const sendMessage = useCallback((e: React.FormEvent) => {
+  const sendMessage = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
     e.stopPropagation()
     if (!$form.current) {
@@ -23,15 +24,18 @@ export default function SendMessageForm({ appendMessage, chat }: Props) {
     if (!text) {
       return
     }
-    appendMessage({
-      id: Orm.Messages.all().length + 1,
-      chat: chat,
-      message: text,
-      user: Auth.getCurrentUser(),
-      createdAt: new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' })
+    if (!chat.id) {
+      return
+    }
+    await appendMessage({
+      chatId: chat.id,
+      content: text,
+      userId: user.id,
+      state: MessageState.sent,
+      date: new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' })
     })
     $form.current.reset()
-  }, [appendMessage, chat])
+  }, [appendMessage, chat, user])
 
   useEffect(() => {
     if (!$input.current) {

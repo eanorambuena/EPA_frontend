@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Auth, UserSchema } from '../services/schema'
 import useLocalStorage from './useLocalStorage'
+import { AuthContextType } from './useCurrentUser'
 
 export default function useCurrentUserOnePerContext() {
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '')
@@ -21,5 +22,5 @@ export default function useCurrentUserOnePerContext() {
     setAccessToken('')
   }
 
-  return [user, logout] as [UserSchema | null, () => void]
+  return {user, logout, accessToken} as AuthContextType
 }

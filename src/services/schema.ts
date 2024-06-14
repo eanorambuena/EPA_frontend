@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { createModel } from './orm'
-import { AuthenticationError } from './errors'
+import { ApplicationError, AuthenticationError, AuthorizationError } from './errors'
 import { API_URL } from './variables'
 
 export enum Status {
@@ -15,38 +14,44 @@ export enum UserType {
   user = 'user'
 }
 
+export enum ChatMemberType {
+  owner = 'owner',
+  member = 'member'
+}
+
+export enum MessageState {
+  sent = 'sent',
+  received = 'received',
+  read = 'read'
+}
+
 export type UserSchema = {
-  id: number
+  id?: number
   phoneNumber: PhoneNumber
   password?: string
   type: UserType
 }
-createModel<UserSchema>('Users')
 
 export type ChatSchema = {
-  id: number
-  isGroup: boolean
-  imgSrc: string
+  id?: number
   title: string
 }
-createModel<ChatSchema>('Chats')
 
 export type MessageSchema = {
-  id: number
-  user: UserSchema
-  chat: ChatSchema
-  message: string
-  createdAt: string
+  id?: number
+  userId: number
+  chatId: number
+  state: MessageState
+  content: string
+  date: string
 }
-createModel<MessageSchema>('Messages')
 
 export type ChatMemberSchema = {
-  id: number
-  chat: ChatSchema
-  user: UserSchema
-  isAdmin: boolean
+  id?: number
+  userId: number
+  chatId: number
+  role: ChatMemberType
 }
-createModel<ChatMemberSchema>('ChatMembers')
 
 export class Auth {
   static currentAccessToken: string | null = null
@@ -56,10 +61,10 @@ export class Auth {
       throw new AuthenticationError('Usuario o contraseña incorrectos')
     }
     else if (status === 403) {
-      throw new Error('No tienes permiso para acceder a este recurso')
+      throw new AuthorizationError('No tienes permiso para acceder a este recurso')
     }
     else if (status >= 400) {
-      throw new Error('Error de autenticación')
+      throw new ApplicationError('Error de autenticación')
     }
   }
 

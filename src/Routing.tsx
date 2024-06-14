@@ -14,11 +14,11 @@ import useCurrentUserOnePerContext from './hooks/useCurrentUserOncePerContext'
 
 export default function Routing() {
   const [ref, toast] = useToaster()
-  const [user, logout] = useCurrentUserOnePerContext()
+  const authData = useCurrentUserOnePerContext()
 
   return (
     <ToastContext.Provider value={toast}>
-      <AuthContext.Provider value={{ user, logout }}>
+      <AuthContext.Provider value={authData}>
         <div ref={ref} />
         <BrowserRouter>
           <Routes>
