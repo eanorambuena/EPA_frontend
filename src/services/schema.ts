@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { createModel } from './orm'
+import { AuthenticationError } from './errors'
 
 const API_URL = import.meta.env.VITE_BACKEND_URL
 
@@ -45,6 +46,18 @@ createModel<ChatMemberSchema>('ChatMembers')
 export class Auth {
   static currentAccessToken: string | null = null
 
+  static assertStatusCode(status: number = 500) {
+    if (status === 401) {
+      throw new AuthenticationError('Usuario o contraseña incorrectos')
+    }
+    else if (status === 403) {
+      throw new Error('No tienes permiso para acceder a este recurso')
+    }
+    else if (status >= 400) {
+      throw new Error('Error de autenticación')
+    }
+  }
+
   static async getCurrentUser() {
     let user
     if (!this.currentAccessToken) {
@@ -59,13 +72,11 @@ export class Auth {
       }
     })
       .then((response) => {
-        if (response.status >= 400) {
-          throw new Error(response.data.error)
-        }
+        this.assertStatusCode(response.status)
         user = response.data
       })
       .catch((error) => {
-        console.error(error)
+        this.assertStatusCode(error.response?.status)
       })
     return user
   }
@@ -79,10 +90,11 @@ export class Auth {
       password
     })
       .then((response) => {
-        if (response.status >= 400) {
-          throw new Error(response.data.error)
-        }
+        this.assertStatusCode(response.status)
         this.currentAccessToken = response.data.access_token
+      })
+      .catch((error) => {
+        this.assertStatusCode(error.response?.status)
       })
     return this.currentAccessToken
   }
@@ -96,10 +108,11 @@ export class Auth {
       password
     })
       .then(async (response) => {
-        if (response.status >= 400) {
-          throw new Error(response.data.error)
-        }
+        this.assertStatusCode(response.status)
         await Auth.login(phoneNumber, password)
+      })
+      .catch((error) => {
+        this.assertStatusCode(error.response?.status)
       })
     return this.currentAccessToken
   }
