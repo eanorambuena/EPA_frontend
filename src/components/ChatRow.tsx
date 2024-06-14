@@ -49,7 +49,7 @@ export default function ChatRow({ chat, isSelected } : Props) {
               <p className='font-semibold text-gray-900 truncate dark:text-white'>
                 {title}
               </p>
-              <Availability chat={chat} />
+              <Availability />
             </div>
             <p className='text-gray-500 truncate dark:text-gray-400'>
               {lastMessage?.date}
