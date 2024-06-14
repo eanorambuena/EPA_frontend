@@ -19,6 +19,13 @@ export class AuthorizationError extends ApplicationError {
   }
 }
 
+export class ItemNotFoundError extends ApplicationError {
+  constructor(message) {
+    super(message)
+    this.name = 'ItemNotFoundError'
+  }
+}
+
 export class ValidationError extends ApplicationError {
   constructor(message) {
     super(message)

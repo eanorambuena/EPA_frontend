@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import SubmitButton from './components/SubmitButton'
 import Layout from './Layout'
 import { useNavigate } from 'react-router-dom'
-import { Auth } from './services/schema'
+import { Auth, PhoneNumber } from './services/schema'
 import useLocalStorage from './hooks/useLocalStorage'
 import { Validate } from './services/validate'
 import ToastContext from './hooks/ToastContext'
@@ -21,7 +21,7 @@ export default function SignUp({ searchParams } : Props) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const phoneNumber = formData.get('phoneNumber') as string
+    const phoneNumber = formData.get('phoneNumber') as PhoneNumber
     const password = formData.get('password') as string
     try {
       Validate.PhoneNumber(phoneNumber)
