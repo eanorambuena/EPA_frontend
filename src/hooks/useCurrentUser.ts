@@ -1,25 +1,13 @@
-import { useEffect, useState } from 'react'
-import { Auth, UserSchema } from '../services/schema'
-import useLocalStorage from './useLocalStorage'
+import { createContext, useContext } from 'react'
 
-export default function useCurrentUser() {
-  const [accessToken, setAccessToken] = useLocalStorage('accessToken', '')
-  const [user, setUser] = useState<UserSchema | null>(null)
+type AuthContextType = {
+  user: any
+  logout: () => void
+}
 
-  useEffect(() => {
-    if (accessToken && !user) {
-      (async () => {
-        const currentUser = await Auth.getCurrentUser()
-        setUser(currentUser)
-      })()
-    }
-  }, [accessToken, user])
+const AuthContext = createContext<AuthContextType>({ user: null, logout: () => {} })
+export default AuthContext
 
-  const logout = () => {
-    Auth.logout()
-    setUser(null)
-    setAccessToken('')
-  }
-
-  return [user, logout] as [UserSchema | null, () => void]
+export function useCurrentUser() {
+  return useContext(AuthContext)
 }

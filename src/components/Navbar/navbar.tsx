@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import './navbar.css'
 import Logo from '../../icons/Logo'
-import AuthContext from '../../hooks/AuthContext'
+import AuthContext from '../../hooks/useCurrentUser'
 
 export default function Navbar () {
   const user = useContext(AuthContext)['user']
