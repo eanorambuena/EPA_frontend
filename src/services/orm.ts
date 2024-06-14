@@ -1,20 +1,26 @@
 import axios from 'axios'
 import { API_URL } from './variables'
-import { ItemNotFoundError } from './errors'
+import { ApplicationError, ItemNotFoundError } from './errors'
 
 type Schema = Record<string, any> & { id: number }
 
 class Model<T extends Schema> {
   name: string = ''
-  pluralName: string = ''
 
   async all() {
-    const data = await axios.get(`${API_URL}/${this.pluralName}`)
+    const data = await axios.get(`${API_URL}/${this.name}`)
     return data.data
   }
 
+  async create(item: T) {
+    const data = await axios.post(`${API_URL}/${this.name}`, item)
+    if (data.status !== 201) {
+      throw new ApplicationError(`Error al crear ${this.name}`)
+    }
+  }
+
   async find(id: number) {
-    const item = await axios.get(`${API_URL}/${this.pluralName}/${id}`)
+    const item = await axios.get(`${API_URL}/${this.name}/${id}`)
     if (!item) {
       throw new ItemNotFoundError(`No se encontró ${this.name} con id ${id}`)
     }
@@ -35,7 +41,6 @@ class Model<T extends Schema> {
 
   setName(name: string) {
     this.name = name
-    this.pluralName = name + 's'
   }
 }
 

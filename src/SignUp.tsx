@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Auth, PhoneNumber } from './services/schema'
 import useLocalStorage from './hooks/useLocalStorage'
 import { Validate } from './services/validate'
-import ToastContext from './hooks/ToastContext'
-import { ToastType } from './hooks/useToast'
+import ToastContext, { ToastType } from './hooks/useToast'
 import { ApplicationError } from './services/errors'
 
 interface Props {

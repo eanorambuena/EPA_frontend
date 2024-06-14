@@ -7,13 +7,13 @@ import Login from './Login'
 import MainPage from './MainPage'
 import SignUp from './SignUp'
 import ContactRegister from './ContactsRegister'
-import useToast from './hooks/useToast'
-import ToastContext from './hooks/ToastContext'
+import useToaster from './hooks/useToaster'
+import ToastContext from './hooks/useToast'
 import AuthContext from './hooks/AuthContext'
 import useCurrentUser from './hooks/useCurrentUser'
 
 export default function Routing() {
-  const [ref, toast] = useToast()
+  const [ref, toast] = useToaster()
   const [user, logout] = useCurrentUser()
 
   return (

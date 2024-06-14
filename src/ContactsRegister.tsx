@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import Layout from './Layout'
+import { API_URL } from './services/variables'
 
 interface Props {
   searchParams?: { message: string }
@@ -22,7 +23,7 @@ function ContactRegister({ searchParams }: Props) {
         'Content-Type': 'application/json'
       },
       method: 'post',
-      url: 'http://localhost:3000/contacts',
+      url: `${API_URL}/contacts`,
       data: { 'nickname': nickname, 'userBase': userBase, 'userContact': userContact}
     }
 
