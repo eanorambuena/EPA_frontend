@@ -1,14 +1,14 @@
 import React from 'react'
 import ChatRow from './components/ChatRow'
-import useLocalStorage from './hooks/useLocalStorage'
 import useChats from './hooks/useChats'
+import { useSelectedChatId } from './hooks/useSelectedChatId'
 
 interface Props {
   className?: string
 }
 
 export default function Chats({ className }: Props) {
-  const selectedChatId = useLocalStorage('selectedChatId', 1)[0]
+  const selectedChatId = useSelectedChatId()[0]
   const chats = useChats()
 
   return (

@@ -10,52 +10,57 @@ import ContactRegister from './ContactsRegister'
 import useToaster from './hooks/useToaster'
 import ToastContext from './hooks/useToast'
 import AuthContext from './hooks/useCurrentUser'
-import useCurrentUserOnePerContext from './hooks/useCurrentUserOncePerContext'
+import useCurrentUserOncePerContext from './hooks/useCurrentUserOncePerContext'
+import SelectedChatContext from './hooks/useSelectedChatId'
+import useLocalStorage from './hooks/useLocalStorage'
 
 export default function Routing() {
   const [ref, toast] = useToaster()
-  const authData = useCurrentUserOnePerContext()
+  const authData = useCurrentUserOncePerContext()
+  const [selectedChatId, selectChat] = useLocalStorage('selectedChatId', -1)
 
   return (
     <ToastContext.Provider value={toast}>
       <AuthContext.Provider value={authData}>
-        <div ref={ref} />
-        <BrowserRouter>
-          <Routes>
-            <Route
-              element={<Landing />}
-              path='/'
-            />
-            <Route
-              element={<About />}
-              path='/about'
-            />
-            <Route
-              element={<MainPage />}
-              path='/chats/:id'
-            />
-            <Route
-              element={<MainPage />}
-              path='/chats'
-            />
-            <Route
-              element={<DocsPage />}
-              path='/docs'
-            />
-            <Route
-              element={<Login />}
-              path='/login'
-            />
-            <Route
-              element={<SignUp />}
-              path='/signup'
-            />
-            <Route
-              element={<ContactRegister />}
-              path='/contactRegister'
-            />
-          </Routes>
-        </BrowserRouter>
+        <SelectedChatContext.Provider value={{ selectedChatId, selectChat }}>
+          <div ref={ref} />
+          <BrowserRouter>
+            <Routes>
+              <Route
+                element={<Landing />}
+                path='/'
+              />
+              <Route
+                element={<About />}
+                path='/about'
+              />
+              <Route
+                element={<MainPage />}
+                path='/chats/:id'
+              />
+              <Route
+                element={<MainPage />}
+                path='/chats'
+              />
+              <Route
+                element={<DocsPage />}
+                path='/docs'
+              />
+              <Route
+                element={<Login />}
+                path='/login'
+              />
+              <Route
+                element={<SignUp />}
+                path='/signup'
+              />
+              <Route
+                element={<ContactRegister />}
+                path='/contactRegister'
+              />
+            </Routes>
+          </BrowserRouter>
+        </SelectedChatContext.Provider>
       </AuthContext.Provider>
     </ToastContext.Provider>
   )

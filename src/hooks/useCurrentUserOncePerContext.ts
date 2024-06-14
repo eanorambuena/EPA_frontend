@@ -20,6 +20,7 @@ export default function useCurrentUserOnePerContext() {
     Auth.logout()
     setUser(null)
     setAccessToken('')
+    localStorage.clear()
   }
 
   return {user, logout, accessToken} as AuthContextType

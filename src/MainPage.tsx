@@ -3,13 +3,13 @@ import Chats from './Chats'
 import Chat from './Chat'
 import Layout from './Layout'
 import { useParams } from 'react-router-dom'
-import useLocalStorage from './hooks/useLocalStorage'
+import { useSelectedChatId } from './hooks/useSelectedChatId'
 
 export default function MainPage() {
   const { id } = useParams<{ id: string }>() as { id: string }
-  const [selectedChatId, setSelectedChatId] = useLocalStorage('selectedChatId', 1)
+  const { selectedChatId, selectChat } = useSelectedChatId()
   if (id && selectedChatId !== parseInt(id)) {
-    setSelectedChatId(parseInt(id))
+    selectChat(parseInt(id))
   }
 
   return (

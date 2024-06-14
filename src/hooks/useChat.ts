@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import useLocalStorage from './useLocalStorage'
-import { useNavigate } from 'react-router-dom'
-import { ChatSchema, MessageSchema } from '../services/schema'
-import { useToast, ToastType } from './useToast'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ApplicationError, ItemNotFoundError } from '../services/errors'
+import { ChatSchema, MessageSchema } from '../services/schema'
 import { API_URL } from '../services/variables'
 import { useCurrentUser } from './useCurrentUser'
+import { useSelectedChatId } from './useSelectedChatId'
+import { ToastType, useToast } from './useToast'
 
 export default function useChat() {
-  const selectedChatId = useLocalStorage('selectedChatId', 1)[0]
+  const  {selectedChatId } = useSelectedChatId()
   const { accessToken } = useCurrentUser()
   const toast = useToast()
   const navigate = useNavigate()
@@ -29,6 +29,10 @@ export default function useChat() {
   }
 
   useEffect(() => {
+    console.log({selectedChatId})
+    if (!selectedChatId || selectedChatId === -1) {
+      return
+    }
     (async () => {
       try {
         const chatResponse = await axios.get(`${API_URL}/chats/${selectedChatId}`, {
@@ -37,18 +41,34 @@ export default function useChat() {
           }
         })
         if (chatResponse.status !== 200) {
-          throw new ItemNotFoundError('Error al obtener el chat')
+          console.log({chatResponse})
+          throw new ApplicationError('Error al obtener el chat')
+        }
+        if (!chatResponse.data) {
+          throw new ItemNotFoundError('Chat no encontrado')
         }
         setChat(chatResponse.data)
         const messagesResponse = await axios.get(`${API_URL}/chats/${selectedChatId}/messages`)
         if (messagesResponse.status !== 200) {
-          throw new ItemNotFoundError('Error al obtener los mensajes')
+          throw new ApplicationError('Error al obtener los mensajes')
         }
         setMessages(messagesResponse.data)
       }
       catch (error) {
         navigate('/')
-        if (error instanceof ApplicationError) {
+        if (error.response?.status === 404) {
+          toast('Chat no encontrado', ToastType.error)
+          return
+        }
+        else if (error.response?.status === 403) {
+          toast('No tienes permiso para ver este chat', ToastType.error)
+          return
+        }
+        else if (error.response?.status === 401) {
+          toast('Debes iniciar sesión para ver este chat', ToastType.error)
+          return
+        }
+        else if (error instanceof ApplicationError) {
           toast(error.message, ToastType.error)
           return
         }
