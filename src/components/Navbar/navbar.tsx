@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import './navbar.css'
 import Logo from '../../icons/Logo'
+import AuthContext from '../../hooks/AuthContext'
 
 export default function Navbar () {
+  const user = useContext(AuthContext)['user']
+
+  const protectedRoutes = (
+    <>
+      <NavLink to='/chats'>
+        Chats
+      </NavLink>
+      <NavLink to='/docs'>
+        Docs
+      </NavLink>
+      <NavLink to='/contactRegister'>
+        Contactos
+      </NavLink>
+    </>
+  )
+
   return (
     <nav className='flex items-center justify-between navbar-links bg-inherit p-2 g-2 '>
       <NavLink
@@ -22,17 +39,9 @@ export default function Navbar () {
         />
       </NavLink>
       <NavLink to='/about'>
-        About
+        Nosotros
       </NavLink>
-      <NavLink to='/chats'>
-        Chats
-      </NavLink>
-      <NavLink to='/docs'>
-        Docs
-      </NavLink>
-      <NavLink to='/contactRegister'>
-        Contacts
-      </NavLink>
+      {user && protectedRoutes}
     </nav>
   )
 }
