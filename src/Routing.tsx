@@ -7,44 +7,51 @@ import Login from './Login'
 import MainPage from './MainPage'
 import SignUp from './SignUp'
 import ContactRegister from './ContactsRegister'
+import useToast from './hooks/useToast'
+import ToastContext from './hooks/ToastContext'
 
 export default function Routing() {
+  const [ref, toast] = useToast()
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          element={<Landing />}
-          path='/'
-        />
-        <Route
-          element={<About />}
-          path='/about'
-        />
-        <Route
-          element={<MainPage />}
-          path='/chats/:id'
-        />
-        <Route
-          element={<MainPage />}
-          path='/chats'
-        />
-        <Route
-          element={<DocsPage />}
-          path='/docs'
-        />
-        <Route
-          element={<Login />}
-          path='/login'
-        />
-        <Route
-          element={<SignUp />}
-          path='/signup'
-        />
-        <Route
-          element={<ContactRegister />}
-          path='/contactRegister'
-        />
-      </Routes>
-    </BrowserRouter>
+    <ToastContext.Provider value={toast}>
+      <div ref={ref} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            element={<Landing />}
+            path='/'
+          />
+          <Route
+            element={<About />}
+            path='/about'
+          />
+          <Route
+            element={<MainPage />}
+            path='/chats/:id'
+          />
+          <Route
+            element={<MainPage />}
+            path='/chats'
+          />
+          <Route
+            element={<DocsPage />}
+            path='/docs'
+          />
+          <Route
+            element={<Login />}
+            path='/login'
+          />
+          <Route
+            element={<SignUp />}
+            path='/signup'
+          />
+          <Route
+            element={<ContactRegister />}
+            path='/contactRegister'
+          />
+        </Routes>
+      </BrowserRouter>
+    </ToastContext.Provider>
   )
 }

@@ -1,17 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import SubmitButton from './components/SubmitButton'
 import Layout from './Layout'
 import { useNavigate } from 'react-router-dom'
 import { Auth } from './services/schema'
 import useLocalStorage from './hooks/useLocalStorage'
+import ToastContext from './hooks/ToastContext'
+import { ToastType } from './hooks/useToast'
 
-interface Props {
-  searchParams?: { message: string }
-}
-
-export default function Login({ searchParams } : Props) {
+export default function Login() {
   const navigate = useNavigate()
   const setAccessToken = useLocalStorage('accessToken', '')[1]
+  const toast = useContext(ToastContext)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -20,10 +19,12 @@ export default function Login({ searchParams } : Props) {
     const password = formData.get('password') as string
     try {
       const accessToken = await Auth.login(phoneNumber, password)
+      toast('Inicio de sesión exitoso', ToastType.success)
       setAccessToken(accessToken)
       navigate('/')
     }
     catch (error) {
+      toast('Usuario o contraseña incorrectos', ToastType.error)
       console.error(error)
     }
   }
@@ -74,12 +75,6 @@ export default function Login({ searchParams } : Props) {
           >
             Registrarse
           </button>
-          {/* mensaje de error si es necesario */}
-          {searchParams?.message && (
-            <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
-              {searchParams.message}
-            </p>
-          )}
         </form>
       </div>
     </Layout>
