@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import SubmitButton from './components/SubmitButton'
 import Layout from './Layout'
 import { useNavigate } from 'react-router-dom'
 import { Auth } from './services/schema'
 import useLocalStorage from './hooks/useLocalStorage'
+import { Validate } from './services/validate'
+import ToastContext from './hooks/ToastContext'
+import { ToastType } from './hooks/useToast'
+import { ApplicationError } from './services/errors'
 
 interface Props {
   searchParams?: { message: string }
@@ -12,6 +16,7 @@ interface Props {
 export default function SignUp({ searchParams } : Props) {
   const navigate = useNavigate()
   const setAccessToken = useLocalStorage('accessToken', '')[1]
+  const toast = useContext(ToastContext)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -19,11 +24,19 @@ export default function SignUp({ searchParams } : Props) {
     const phoneNumber = formData.get('phoneNumber') as string
     const password = formData.get('password') as string
     try {
+      Validate.PhoneNumber(phoneNumber)
+      Validate.Password(password)
       const accessToken = await Auth.signUp(phoneNumber, password)
+      toast('Registro exitoso', ToastType.success)
       setAccessToken(accessToken)
       navigate('/')
     }
     catch (error) {
+      if (error instanceof ApplicationError) {
+        toast(error.message, ToastType.error)
+        return
+      }
+      toast('Ha ocurrido un error desconocido', ToastType.error)
       console.error(error)
     }
   }

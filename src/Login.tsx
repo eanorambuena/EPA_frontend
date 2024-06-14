@@ -6,6 +6,8 @@ import { Auth } from './services/schema'
 import useLocalStorage from './hooks/useLocalStorage'
 import ToastContext from './hooks/ToastContext'
 import { ToastType } from './hooks/useToast'
+import { ApplicationError } from './services/errors'
+import { Validate } from './services/validate'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -18,13 +20,19 @@ export default function Login() {
     const phoneNumber = formData.get('phoneNumber') as string
     const password = formData.get('password') as string
     try {
+      Validate.PhoneNumber(phoneNumber)
+      Validate.Password(password)
       const accessToken = await Auth.login(phoneNumber, password)
       toast('Inicio de sesión exitoso', ToastType.success)
       setAccessToken(accessToken)
       navigate('/')
     }
     catch (error) {
-      toast('Usuario o contraseña incorrectos', ToastType.error)
+      if (error instanceof ApplicationError) {
+        toast(error.message, ToastType.error)
+        return
+      }
+      toast('Ha ocurrido un error desconocido', ToastType.error)
       console.error(error)
     }
   }
