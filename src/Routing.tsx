@@ -13,6 +13,7 @@ import AuthContext from './hooks/useCurrentUser'
 import useCurrentUserOncePerContext from './hooks/useCurrentUserOncePerContext'
 import SelectedChatContext from './hooks/useSelectedChatId'
 import useLocalStorage from './hooks/useLocalStorage'
+import Profile from './Profile'
 
 export default function Routing() {
   const [ref, toast] = useToaster()
@@ -53,6 +54,10 @@ export default function Routing() {
               <Route
                 element={<SignUp />}
                 path='/signup'
+              />
+              <Route
+                element={<Profile />}
+                path='/profile'
               />
               <Route
                 element={<ContactRegister />}

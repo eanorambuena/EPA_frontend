@@ -14,6 +14,8 @@ interface ToastData {
   createdAt: number
 }
 
+type ToastRef = React.MutableRefObject<HTMLDivElement | null>
+
 export default function useToaster(className: string = '') {
   const [toasted, setToasted] = useState<boolean>(false)
   const [toastSchedule, setToastSchedule] = useState<ToastData[]>([])
@@ -86,5 +88,5 @@ export default function useToaster(className: string = '') {
     }, TOAST_DURATION)
   }, [className, message, toasted, toastType, removeToastFromSchedule])
 
-  return [ref, toast] as [React.MutableRefObject<HTMLDivElement | null>, ToastAction]
+  return [ref, toast] as [ToastRef, ToastAction]
 }
