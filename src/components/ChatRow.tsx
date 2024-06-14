@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { ChatSchema, MessageSchema } from '../services/schema'
 import Availability from './Availability'
 import { useNavigate } from 'react-router-dom'
@@ -13,15 +13,20 @@ export default function ChatRow({ chat, isSelected } : Props) {
   const { title, imgSrc } = { title: chat.title, imgSrc: ''}
   const messages = useChat().messages
   const navigate = useNavigate()
+  const [lastMessage, setLastMessage] = useState<MessageSchema | null>(null)
 
   const handleClick = useCallback(() => {
     navigate(`/chats/${chat.id}`)
   }, [chat.id, navigate])
 
-  if (messages.length === 0) return null
+  useEffect(() => {
+    console.log({messages})
+    if (messages.length === 0) return
+    const lastMessage = messages.reduce(
+      (prev, current) => (prev.date > current.date) ? prev : current, messages[0])
+    setLastMessage(lastMessage)
+  }, [messages])
 
-  const lastMessage: MessageSchema = messages.reduce(
-    (prev, current) => (prev.date > current.date) ? prev : current, messages[0])
   const selectedStyles = isSelected ? 'lg:bg-gray-200 lg:dark:bg-gray-700 lg:shadow-sm' : ''
 
   return (
@@ -47,11 +52,11 @@ export default function ChatRow({ chat, isSelected } : Props) {
               <Availability chat={chat} />
             </div>
             <p className='text-gray-500 truncate dark:text-gray-400'>
-              {lastMessage.date}
+              {lastMessage?.date}
             </p>
           </header>
           <main className='text-gray-500 truncate dark:text-gray-400'>
-            {lastMessage.content}
+            {lastMessage?.content}
           </main>
         </section>
       </article>
