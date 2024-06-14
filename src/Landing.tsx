@@ -2,9 +2,11 @@ import React, { useMemo, useState, useEffect } from 'react'
 import ImageGallery from './components/ImageGallery'
 import Layout from './Layout'
 import { useCurrentUser } from './hooks/useCurrentUser'
+import useUserProfile from './hooks/useUserProfile'
 
 export default function Landing() {
   const user = useCurrentUser().user
+  const profile = useUserProfile(user?.id || -1)
   const imagesDesktop = useMemo(() => [
     {
       src: '/assets/views/ChatsDesktop.png',
@@ -138,6 +140,13 @@ export default function Landing() {
               </button>
             </div>
           </>
+        )}
+        { user && profile && (
+          <h3 className='text-lg font-normal'>
+            ¡Hola
+            {profile.username}
+            ! ¿Listo para empezar a chatear?
+          </h3>
         )}
       </main>
     </Layout>

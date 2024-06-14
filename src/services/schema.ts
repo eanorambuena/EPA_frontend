@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ApplicationError, AuthenticationError, AuthorizationError } from './errors'
+import { ApplicationError, AuthenticationError, AuthorizationError, ItemNotFoundError, NetworkError } from './errors'
 import { API_URL } from './variables'
 
 export enum Status {
@@ -53,15 +53,31 @@ export type ChatMemberSchema = {
   role: ChatMemberType
 }
 
+export type ProfileSchema = {
+  id?: number
+  username: string
+  email: string
+  status: Status
+  description: string
+  image: string
+  userId: number
+}
+
 export class Auth {
   static currentAccessToken: string | null = null
 
-  static assertStatusCode(status: number = 500) {
+  private static assertStatusCode(status: number = 500) {
     if (status === 401) {
       throw new AuthenticationError('Usuario o contraseña incorrectos')
     }
     else if (status === 403) {
-      throw new AuthorizationError('No tienes permiso para acceder a este recurso')
+      throw new AuthorizationError()
+    }
+    else if (status === 404) {
+      throw new ItemNotFoundError()
+    }
+    else if (status == 500) {
+      throw new NetworkError()
     }
     else if (status >= 400) {
       throw new ApplicationError('Error de autenticación')
