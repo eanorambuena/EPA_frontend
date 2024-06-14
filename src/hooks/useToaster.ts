@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { ToastType } from './useToast'
+import axios from 'axios'
 
 const TOAST_DURATION = 3000
 const TOAST_EXPIRATION = 10000
@@ -49,6 +50,22 @@ export default function useToaster(className: string = '') {
     }
     showToast(message, toastType)
   }, [toastSchedule, showToast, removeToastFromSchedule])
+
+  axios.interceptors.response.use(
+    response => response,
+    error => {
+      if (error.code === 'ERR_NETWORK') {
+        toast('Error de red', ToastType.error)
+      }
+      else if (error.code === 'ECONNABORTED') {
+        toast('Tiempo de espera agotado', ToastType.error)
+      }
+      else if (error.code === 'ECONNREFUSED') {
+        toast('Servidor no disponible', ToastType.error)
+      }
+      return Promise.reject(error)
+    }
+  )
 
   useEffect(() => {
     if (!ref.current || !toasted) {
