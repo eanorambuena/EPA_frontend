@@ -1,38 +1,41 @@
+import axios from 'axios'
+import { API_URL } from './variables'
+import { ItemNotFoundError } from './errors'
+
 type Schema = Record<string, any> & { id: number }
 
 class Model<T extends Schema> {
-  data: T[] = []
+  name: string = ''
+  pluralName: string = ''
 
-  all() {
-    return this.data
+  async all() {
+    const data = await axios.get(`${API_URL}/${this.pluralName}`)
+    return data.data
   }
 
-  find(id: number) {
-    const item = this.all().find(item => (item).id === id)
+  async find(id: number) {
+    const item = await axios.get(`${API_URL}/${this.pluralName}/${id}`)
     if (!item) {
-      throw new Error(`Item ${id} not found`)
+      throw new ItemNotFoundError(`No se encontró ${this.name} con id ${id}`)
     }
     return item
   }
 
-  findByAttribute(attribute: keyof T, value: string) {
-    const item = this.all().find(item => item[attribute] === value)
+  async findByAttribute(attribute: keyof T, value: string) {
+    const item = (await this.all()).find(item => item[attribute] === value)
     if (!item) {
-      throw new Error(`Item ${value} not found`)
+      throw new ItemNotFoundError(`No se encontró ${this.name} con ${String(attribute)} ${value}`)
     }
     return item
   }
 
-  first() {
-    return this.all()[0]
+  async first() {
+    return await this.all()[0]
   }
 
-  populate(data: T[]) {
-    this.data = data
-  }
-
-  create(data: T) {
-    this.data.push(data)
+  setName(name: string) {
+    this.name = name
+    this.pluralName = name + 's'
   }
 }
 
@@ -41,4 +44,5 @@ export const Orm: Record<string, Model<any>> = {}
 export function createModel<T extends Schema>(name: string) {
   const x = class extends Model<T> {}
   Orm[name] = new x()
+  Orm[name].setName(name)
 }

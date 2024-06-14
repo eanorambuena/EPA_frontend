@@ -8,6 +8,7 @@ import ToastContext from './hooks/ToastContext'
 import { ToastType } from './hooks/useToast'
 import { ApplicationError } from './services/errors'
 import { Validate } from './services/validate'
+import { PhoneNumber } from './services/schema'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -17,7 +18,7 @@ export default function Login() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-    const phoneNumber = formData.get('phoneNumber') as string
+    const phoneNumber = formData.get('phoneNumber') as PhoneNumber
     const password = formData.get('password') as string
     try {
       Validate.PhoneNumber(phoneNumber)

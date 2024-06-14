@@ -1,20 +1,25 @@
 import axios from 'axios'
 import { createModel } from './orm'
 import { AuthenticationError } from './errors'
-
-const API_URL = import.meta.env.VITE_BACKEND_URL
+import { API_URL } from './variables'
 
 export enum Status {
   online = 'en línea',
   offline = 'desconectado'
 }
 
+export type PhoneNumber = `+${string}`
+
+export enum UserType {
+  admin = 'admin',
+  user = 'user'
+}
+
 export type UserSchema = {
   id: number
-  username: string
-  name: string
-  imgSrc: string
-  available: boolean
+  phoneNumber: PhoneNumber
+  password?: string
+  type: UserType
 }
 createModel<UserSchema>('Users')
 
@@ -58,13 +63,13 @@ export class Auth {
     }
   }
 
-  static async getCurrentUser() {
-    let user
+  static async getCurrentUser(): Promise<UserSchema | null>{
+    let user: UserSchema | null = null
     if (!this.currentAccessToken) {
       this.currentAccessToken = localStorage.getItem('accessToken')?.replace(/"/g, '') || null
     }
     if (!this.currentAccessToken) {
-      return
+      return user
     }
     await axios.get(`${API_URL}/me`, {
       headers: {
