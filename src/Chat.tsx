@@ -10,7 +10,7 @@ interface Props {
 
 export default function Chat({ className  }: Props) {
   const { chat, messages, appendMessage } = useChat()
-  const { title, imgSrc } = { title: '', imgSrc: '' } // useChatInfo(chat)
+  const imgSrc = 'https://via.placeholder.com/150'
   if (!chat) {
     return null
   }
@@ -19,14 +19,14 @@ export default function Chat({ className  }: Props) {
     <div className={`h-full flex flex-col items-start justify-start ${className}`}>
       <header className='flex items-center justify-start w-full h-fit shadow-sm gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-t-md'>
         <img
-          alt={title}
+          alt={chat.title}
           className='size-8 sm:size-10 rounded-full'
           src={imgSrc}
         />
         <h1 className='text-sm sm:text-md md:text-lg font-bold'>
-          {title}
+          {chat.title}
         </h1>
-        <Availability chat={chat} />
+        <Availability />
       </header>
       <Messages messages={messages} />
       <SendMessageForm
