@@ -1,5 +1,6 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import SubmitButton from './components/SubmitButton'
 import useAuthentication from './hooks/useAuthentication'
 import { useCurrentUser } from './hooks/useCurrentUser'
@@ -7,18 +8,19 @@ import useSafeRequest from './hooks/useSafeRequest'
 import { ToastType, useToast } from './hooks/useToast'
 import useUserProfile from './hooks/useUserProfile'
 import Layout from './Layout'
+import { Status } from './services/schema'
 import { Validate } from './services/validate'
 import { API_URL } from './services/variables'
-import { Status } from './services/schema'
 
 export default function Profile() {
-  const user = useCurrentUser().user
+  const { user } = useCurrentUser()
+  const navigate = useNavigate()
   const profile = useUserProfile(user?.id)
   const toast = useToast()
   const safeRequest = useSafeRequest()
   const authenticationConfig = useAuthentication()
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const username = formData.get('username') as string
@@ -37,17 +39,22 @@ export default function Profile() {
       toast('Perfil actualizado', ToastType.success)
       return
     }
-  }
+  }, [authenticationConfig, profile, safeRequest, toast, user?.id])
 
-  const handleDelete = async () => {
-    const response = await safeRequest(async () => {
-      return await axios.delete(`${API_URL}/users/${user?.id}`, authenticationConfig)
-    })
-    if (response?.status === 200) {
-      toast('Perfil eliminado', ToastType.success)
+  const handleDelete = useCallback(async () => {
+    if (!user) {
       return
     }
-  }
+    const response = await safeRequest(async () => await axios.delete(`${API_URL}/users/${user.id}`, authenticationConfig))
+    if (!response) {
+      return
+    }
+    if (response?.status === 204) {
+      toast('Perfil eliminado', ToastType.success)
+      navigate('/login')
+      return
+    }
+  }, [authenticationConfig, navigate, safeRequest, toast, user])
 
   return (
     <Layout limitHeight={false}>
@@ -124,6 +131,7 @@ export default function Profile() {
             <button
               className='bg-red-500 rounded-md shadow-sm px-4 text-white hover:scale-105 hover:bg-red-600 transition'
               onClick={handleDelete}
+              type='button'
             >
               Eliminar Cuenta
             </button>
