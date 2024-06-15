@@ -1,12 +1,10 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ChatSchema, MessageSchema } from '../services/schema'
+import { useCallback, useEffect, useState } from 'react'
+import { ChatMemberSchema, ChatSchema, MessageSchema } from '../services/schema'
 import { API_URL } from '../services/variables'
 import useAuthentication from './useAuthentication'
-import useSafeRequest from './useSafeRequest'
 import { useCurrentUser } from './useCurrentUser'
-import useChatMembers from './useChatMembers'
+import useSafeRequest from './useSafeRequest'
 
 export type ChatInfo = {
   chat: ChatSchema | null
@@ -19,8 +17,6 @@ const FALLBACK_IMAGE = 'https://via.placeholder.com/150'
 
 export default function useChat(chatId?: number) {
   const authentication = useAuthentication()
-  const chatMembers = useChatMembers()
-  const navigate = useNavigate()
   const safelyRequest = useSafeRequest()
   const { user } = useCurrentUser()
   const [chat, setChat] = useState<ChatSchema | null>(null)
@@ -35,44 +31,43 @@ export default function useChat(chatId?: number) {
     }
   }
 
-  useEffect(() => {
-    if (!chatId || chatId === -1) {
+  const asyncSetStates = useCallback(async () => {
+    if (!chatId || !user) {
       return
     }
-    (async () => {
-      const chatResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}`, authentication))
-      if (!chatResponse) {
-        return
-      }
-      setChat(chatResponse.data)
-      const messagesResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/messages`, authentication))
-      if (!messagesResponse) {
-        return
-      }
-      setMessages(messagesResponse.data)
-    })()
-  }, [authentication, navigate, safelyRequest, chatId])
+    const chatResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}`, authentication))
+    if (!chatResponse) {
+      return
+    }
+    setChat(chatResponse.data)
+    const messagesResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/messages`, authentication))
+    if (!messagesResponse) {
+      return
+    }
+    setMessages(messagesResponse.data)
+    const chatMembersResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/members`, authentication))
+    if (!chatMembersResponse) {
+      return
+    }
+    if (chatMembersResponse.data.length > 2) {
+      setImage(chatResponse.data.image)
+      return
+    }
+    const otherChatMember = chatMembersResponse.data.find(
+      (member: ChatMemberSchema) => member.userId !== user.id)
+    if (!otherChatMember) {
+      return
+    }
+    const otherChatMemberResponse = await safelyRequest(async () => await axios.get(`${API_URL}/profiles/${otherChatMember.userId}`, authentication))
+    if (!otherChatMemberResponse) {
+      return
+    }
+    setImage(otherChatMemberResponse.data.image)
+  }, [authentication, safelyRequest, chatId, user])
 
   useEffect(() => {
-    if (!chat || !chatMembers || !user || image) {
-      return
-    }
-    if (chatMembers.length >= 2) {
-      setImage(chat.image)
-      return
-    }
-    const chatMember = chatMembers.find(member => member.id !== user.id)
-    if (!chatMember) {
-      return
-    }
-    (async () => {
-      const response = await safelyRequest(async () => await axios.get(`${API_URL}/profiles/${chatMember.id}`, authentication))
-      if (!response) {
-        return
-      }
-      setImage(response.data.image)
-    })()
-  }, [authentication, chat, image, chatMembers, safelyRequest, user])
+    asyncSetStates()
+  }, [authentication, safelyRequest, chatId, user, asyncSetStates])
 
   return { chat, messages, appendMessage, image: image ?? FALLBACK_IMAGE } as ChatInfo
 }

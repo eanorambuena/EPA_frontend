@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Availability from './components/Availability'
 import Messages from './components/Messages'
 import SendMessageForm from './components/SendMessageForm'
@@ -27,12 +27,12 @@ export default function Chat({ className  }: Props) {
     <div className={`h-full flex flex-col items-start justify-start ${className}`}>
       <header className='flex items-center justify-start w-full h-fit shadow-sm gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-t-md'>
         <img
-          alt={chat?.title}
+          alt={chat.title}
           className='size-8 sm:size-10 rounded-full'
           src={image}
         />
         <h1 className='text-sm sm:text-md md:text-lg font-bold'>
-          {chat?.title}
+          {chat.title}
         </h1>
         <Availability />
       </header>

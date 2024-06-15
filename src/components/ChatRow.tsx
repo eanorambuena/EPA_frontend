@@ -20,7 +20,6 @@ export default function ChatRow({ chatId, isSelected } : Props) {
   }, [chatId, navigate])
 
   useEffect(() => {
-    console.log({messages})
     if (messages.length === 0) return
     const lastMessage = messages.reduce(
       (prev, current) => (prev.date > current.date) ? prev : current, messages[0])
