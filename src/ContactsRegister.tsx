@@ -21,7 +21,7 @@ function ContactRegister({ searchParams }: Props) {
     console.log(nickname)
 
     try {
-      const response_post = await axios.post(`${API_URL}/contacts`, {"nickname": nickname, "userContact": userContact}, authentication)
+      const response_post = await axios.post(`${API_URL}/contacts`, {'nickname': nickname, 'userContact': userContact}, authentication)
       console.log('Contacto registrado:', response_post.data)
     } catch (error) {
       console.error('Error al registrar contacto:', error)
