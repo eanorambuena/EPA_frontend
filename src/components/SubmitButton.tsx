@@ -8,7 +8,7 @@ interface Props {
 export default function SubmitButton({ className, children }: Props) {
   return (
     <button
-      className={`flex-grow sm:flex-grow-0 bg-violet-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 ${className}`}
+      className={`bg-violet-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-violet-600 ${className}`}
       type='submit'
     >
       {children}

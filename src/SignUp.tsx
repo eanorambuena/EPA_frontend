@@ -1,14 +1,18 @@
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
 import SubmitButton from './components/SubmitButton'
-import useLocalStorage from './hooks/useLocalStorage'
-import ToastContext, { ToastType } from './hooks/useToast'
 import Layout from './Layout'
-import { ApplicationError } from './services/errors'
+import { useNavigate } from 'react-router-dom'
 import { Auth, PhoneNumber } from './services/schema'
+import useLocalStorage from './hooks/useLocalStorage'
 import { Validate } from './services/validate'
+import ToastContext, { ToastType } from './hooks/useToast'
+import { ApplicationError } from './services/errors'
 
-export default function Login() {
+interface Props {
+  searchParams?: { message: string }
+}
+
+export default function SignUp({ searchParams } : Props) {
   const navigate = useNavigate()
   const setAccessToken = useLocalStorage('accessToken', '')[1]
   const toast = useContext(ToastContext)
@@ -21,8 +25,8 @@ export default function Login() {
     try {
       Validate.PhoneNumber(phoneNumber)
       Validate.Password(password)
-      const accessToken = await Auth.login(phoneNumber, password)
-      toast('Inicio de sesión exitoso', ToastType.success)
+      const accessToken = await Auth.signUp(phoneNumber, password)
+      toast('Registro exitoso', ToastType.success)
       setAccessToken(accessToken)
       navigate('/')
     }
@@ -56,7 +60,6 @@ export default function Login() {
             name='phoneNumber'
             placeholder='+56912345678'
             required
-            type='tel'
           />
           <label
             className='text-md'
@@ -74,14 +77,19 @@ export default function Login() {
             type='password'
           />
           <SubmitButton className='mb-2'>
-            Iniciar Sesión
+            Registrarse
           </SubmitButton>
           <button
             className='bg-amber-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-amber-600 transition'
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate('/login')}
           >
-            Registrarse
+            Iniciar Sesión
           </button>
+          {searchParams?.message && (
+            <p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
+              {searchParams.message}
+            </p>
+          )}
         </form>
       </div>
     </Layout>
