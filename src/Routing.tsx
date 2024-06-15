@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import About from './About'
 import DocsPage from './DocsPage'
@@ -19,11 +19,19 @@ export default function Routing() {
   const [ref, toast] = useToaster()
   const authData = useCurrentUserOncePerContext()
   const [selectedChatId, selectChat] = useLocalStorage('selectedChatId', -1)
+  const [selectedChatIdValue, setSelectedChatIdValue] = useState<number | undefined>(selectedChatId)
+
+  useEffect(() => {
+    if (selectedChatId === -1) {
+      setSelectedChatIdValue(undefined)
+    }
+    setSelectedChatIdValue(selectedChatId)
+  }, [selectedChatId])
 
   return (
     <ToastContext.Provider value={toast}>
       <AuthContext.Provider value={authData}>
-        <SelectedChatContext.Provider value={{ selectedChatId, selectChat }}>
+        <SelectedChatContext.Provider value={{ selectedChatId: selectedChatIdValue, selectChat }}>
           <div ref={ref} />
           <BrowserRouter>
             <Routes>

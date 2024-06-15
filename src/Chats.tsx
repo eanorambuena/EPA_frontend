@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function Chats({ className }: Props) {
-  const selectedChatId = useSelectedChatId()[0]
+  const { selectedChatId } = useSelectedChatId()
   const chats = useChats()
 
   return (
@@ -19,7 +19,7 @@ export default function Chats({ className }: Props) {
       {
         chats.map((chat) => (
           <ChatRow
-            chat={chat}
+            chatId={chat.id}
             isSelected={chat.id === selectedChatId}
             key={chat.id}
           />

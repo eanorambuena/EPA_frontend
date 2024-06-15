@@ -1,12 +1,12 @@
 import { createContext, useContext } from 'react'
 
 interface SelectedChatContextType {
-  selectedChatId: number
+  selectedChatId: number | undefined
   selectChat: (id: number) => void
 }
 
 const SelectedChatContext = createContext<SelectedChatContextType>({
-  selectedChatId: 1,
+  selectedChatId: undefined,
   selectChat: () => {}
 })
 export default SelectedChatContext

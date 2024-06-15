@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Chats from './Chats'
 import Chat from './Chat'
 import Layout from './Layout'
@@ -8,9 +8,12 @@ import { useSelectedChatId } from './hooks/useSelectedChatId'
 export default function MainPage() {
   const { id } = useParams<{ id: string }>() as { id: string }
   const { selectedChatId, selectChat } = useSelectedChatId()
-  if (id && selectedChatId !== parseInt(id)) {
-    selectChat(parseInt(id))
-  }
+
+  useEffect(() => {
+    if (id && selectedChatId !== parseInt(id)) {
+      selectChat(parseInt(id))
+    }
+  }, [id, selectedChatId, selectChat])
 
   return (
     <Layout className='p-0 md:p-6'>

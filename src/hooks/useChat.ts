@@ -1,81 +1,73 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ApplicationError, ItemNotFoundError } from '../services/errors'
-import { ChatSchema, MessageSchema } from '../services/schema'
+import { useCallback, useEffect, useState } from 'react'
+import { ChatMemberSchema, ChatSchema, MessageSchema } from '../services/schema'
 import { API_URL } from '../services/variables'
+import useAuthentication from './useAuthentication'
 import { useCurrentUser } from './useCurrentUser'
-import { useSelectedChatId } from './useSelectedChatId'
-import { ToastType, useToast } from './useToast'
+import useSafeRequest from './useSafeRequest'
 
-export default function useChat() {
-  const  {selectedChatId } = useSelectedChatId()
-  const { accessToken } = useCurrentUser()
-  const toast = useToast()
-  const navigate = useNavigate()
+export type ChatInfo = {
+  chat: ChatSchema | null
+  messages: MessageSchema[]
+  appendMessage: (message: MessageSchema) => void
+  image: string
+}
+
+const FALLBACK_IMAGE = 'https://via.placeholder.com/150'
+
+export default function useChat(chatId?: number) {
+  const authentication = useAuthentication()
+  const safelyRequest = useSafeRequest()
+  const { user } = useCurrentUser()
   const [chat, setChat] = useState<ChatSchema | null>(null)
   const [messages, setMessages] = useState<MessageSchema[]>([])
+  const [image, setImage] = useState<string | null>(null)
 
   const appendMessage = async (message: MessageSchema) => {
     setMessages(messages => [...messages, message])
-    const response =  await axios.post(`${API_URL}/messages`, message, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    })
-    if (response.status !== 201) {
-      toast('Error al enviar el mensaje', ToastType.error)
+    const response =  await safelyRequest(async () => await axios.post(`${API_URL}/messages`, message, authentication))
+    if (!response) {
+      return
     }
   }
 
-  useEffect(() => {
-    console.log({selectedChatId})
-    if (!selectedChatId || selectedChatId === -1) {
+  const asyncSetStates = useCallback(async () => {
+    if (!chatId || !user) {
       return
     }
-    (async () => {
-      try {
-        const chatResponse = await axios.get(`${API_URL}/chats/${selectedChatId}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        })
-        if (chatResponse.status !== 200) {
-          console.log({chatResponse})
-          throw new ApplicationError('Error al obtener el chat')
-        }
-        if (!chatResponse.data) {
-          throw new ItemNotFoundError('Chat no encontrado')
-        }
-        setChat(chatResponse.data)
-        const messagesResponse = await axios.get(`${API_URL}/chats/${selectedChatId}/messages`)
-        if (messagesResponse.status !== 200) {
-          throw new ApplicationError('Error al obtener los mensajes')
-        }
-        setMessages(messagesResponse.data)
-      }
-      catch (error) {
-        navigate('/')
-        if (error.response?.status === 404) {
-          toast('Chat no encontrado', ToastType.error)
-          return
-        }
-        else if (error.response?.status === 403) {
-          toast('No tienes permiso para ver este chat', ToastType.error)
-          return
-        }
-        else if (error.response?.status === 401) {
-          toast('Debes iniciar sesión para ver este chat', ToastType.error)
-          return
-        }
-        else if (error instanceof ApplicationError) {
-          toast(error.message, ToastType.error)
-          return
-        }
-        toast('Ha ocurrido un error desconocido', ToastType.error)
-      }
-    })()
-  }, [accessToken, navigate, selectedChatId, toast])
+    const chatResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}`, authentication))
+    if (!chatResponse) {
+      return
+    }
+    setChat(chatResponse.data)
+    const messagesResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/messages`, authentication))
+    if (!messagesResponse) {
+      return
+    }
+    setMessages(messagesResponse.data)
+    const chatMembersResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/members`, authentication))
+    if (!chatMembersResponse) {
+      return
+    }
+    if (chatMembersResponse.data.length > 2) {
+      setImage(chatResponse.data.image)
+      return
+    }
+    const otherChatMember = chatMembersResponse.data.find(
+      (member: ChatMemberSchema) => member.userId !== user.id)
+    if (!otherChatMember) {
+      return
+    }
+    const otherChatMemberResponse = await safelyRequest(async () => await axios.get(`${API_URL}/profiles/${otherChatMember.userId}`, authentication))
+    if (!otherChatMemberResponse) {
+      return
+    }
+    setImage(otherChatMemberResponse.data.image)
+  }, [authentication, safelyRequest, chatId, user])
 
-  return { chat, messages, appendMessage }
+  useEffect(() => {
+    asyncSetStates()
+  }, [authentication, safelyRequest, chatId, user, asyncSetStates])
+
+  return { chat, messages, appendMessage, image: image ?? FALLBACK_IMAGE } as ChatInfo
 }
