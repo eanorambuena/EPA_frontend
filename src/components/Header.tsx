@@ -19,7 +19,10 @@ export default function Header() {
           </span>
           <button
             className='bg-red-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-red-600 transition'
-            onClick={logout}
+            onClick={() => {
+              logout()
+              navigate('/')
+            }}
           >
             Cerrar sesión
           </button>

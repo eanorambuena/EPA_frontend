@@ -21,7 +21,6 @@ export default function useCurrentUserOnePerContext() {
           console.log('Error getting current user', error)
           if (error instanceof ApplicationError) {
             toast(error.message, ToastType.error)
-            console.log('toasted')
             return
           }
         }

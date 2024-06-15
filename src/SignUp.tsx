@@ -28,7 +28,7 @@ export default function SignUp({ searchParams } : Props) {
       const accessToken = await Auth.signUp(phoneNumber, password)
       toast('Registro exitoso', ToastType.success)
       setAccessToken(accessToken)
-      navigate('/')
+      navigate('/profile')
     }
     catch (error) {
       if (error instanceof ApplicationError) {

@@ -75,7 +75,7 @@ export class Auth {
       throw new AuthorizationError()
     }
     else if (status === 404) {
-      throw new ItemNotFoundError()
+      throw new ItemNotFoundError('Usuario no encontrado, por favor regístrese')
     }
     else if (status == 500) {
       throw new NetworkError()

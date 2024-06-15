@@ -16,6 +16,13 @@ export default function Chats({ className }: Props) {
       className={`bg-gray-100 dark:bg-gray-800 rounded-md first:rounded-t-md last:rounded-b-md ${className}`}
       role='list'
     >
+      <button
+        className='w-full p-4 sm:p-6 font-4xl sm:font-3xl cursor-pointer rounded-md'
+        onClick={() => {}}
+        role='listitem'
+      >
+        Crear chat
+      </button>
       {
         chats.map((chat) => (
           <ChatRow
