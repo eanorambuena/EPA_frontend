@@ -12,11 +12,14 @@ export default function Navbar () {
       <NavLink to='/chats'>
         Chats
       </NavLink>
-      <NavLink to='/docs'>
-        Docs
+      <NavLink to='/profile'>
+        Perfil
       </NavLink>
       <NavLink to='/contactRegister'>
         Contactos
+      </NavLink>
+      <NavLink to='/docs'>
+        Docs
       </NavLink>
     </>
   )
