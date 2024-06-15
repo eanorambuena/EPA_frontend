@@ -79,5 +79,5 @@ export default function useSafeRequest() {
       toast('Ha ocurrido un error desconocido', ToastType.error)
       console.error(error)
     }
-  }, [logout, navigate, toast])
+  }, [getLastRequestDate, logout, navigate, toast])
 }
