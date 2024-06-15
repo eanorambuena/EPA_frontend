@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Availability from './components/Availability'
 import Messages from './components/Messages'
 import SendMessageForm from './components/SendMessageForm'
