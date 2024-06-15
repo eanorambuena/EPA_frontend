@@ -15,8 +15,8 @@ export default function Chat({ className  }: Props) {
 
   if (!chat) {
     return (
-      <div className={`h-full flex flex-col items-start justify-start ${className}`}>
-        <p className='text-lg font-bold text-gray-500 dark:text-gray-400'>
+      <div className={`h-full flex flex-col items-center justify-center ${className}`}>
+        <p className='text-lg font-bold'>
           Selecciona un chat para comenzar
         </p>
       </div>

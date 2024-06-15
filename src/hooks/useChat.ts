@@ -32,7 +32,7 @@ export default function useChat(chatId?: number) {
   }
 
   const asyncSetStates = useCallback(async () => {
-    if (!chatId || !user) {
+    if (!chatId || chatId < 0 || !user) {
       return
     }
     const chatResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}`, authentication))

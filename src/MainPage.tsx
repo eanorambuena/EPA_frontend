@@ -17,7 +17,7 @@ export default function MainPage() {
 
   return (
     <Layout className='p-0 md:p-6'>
-      <div className='w-full h-full flex md:flex-row items-start justify-center p-0 md:gap-6'>
+      <div className='w-full h-full flex md:flex-row items-start justify-center mt-4 p-0 md:gap-6'>
         { id ? (
           <>
             <Chats className='hidden lg:block w-1/2 shadow-md' />
