@@ -33,12 +33,13 @@ export type UserSchema = {
 }
 
 export type ChatSchema = {
-  id?: number
+  id: number
   title: string
+  image: string
 }
 
 export type MessageSchema = {
-  id?: number
+  id: number
   userId: number
   chatId: number
   state: MessageState

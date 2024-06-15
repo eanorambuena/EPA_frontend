@@ -19,7 +19,7 @@ export default function Chats({ className }: Props) {
       {
         chats.map((chat) => (
           <ChatRow
-            chat={chat}
+            chatId={chat.id}
             isSelected={chat.id === selectedChatId}
             key={chat.id}
           />
