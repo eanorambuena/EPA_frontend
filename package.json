@@ -5,19 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "yarn lint --fix && vite build",
-    "lint": "eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "build": "yarn lint && vite build",
+    "lint": "eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "preview": "vite preview",
     "test": "echo \"Warning: no test specified\""
   },
   "dependencies": {
+    "axios": "1.7.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.23.1",
-    "yarn": "^1.22.22"
+    "yarn": "1.22.22"
   },
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^2.1.0",
+    "@stylistic/eslint-plugin": "2.1.0",
     "@types/react": "18.2.66",
     "@types/react-dom": "18.2.22",
     "@typescript-eslint/eslint-plugin": "7.10.0",

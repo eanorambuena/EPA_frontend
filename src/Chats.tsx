@@ -1,14 +1,15 @@
 import React from 'react'
 import ChatRow from './components/ChatRow'
-import { Orm } from './services/orm'
-import useLocalStorage from './hooks/useLocalStorage'
+import useChats from './hooks/useChats'
+import { useSelectedChatId } from './hooks/useSelectedChatId'
 
 interface Props {
   className?: string
 }
 
 export default function Chats({ className }: Props) {
-  const selectedChatId = useLocalStorage('selectedChatId', 1)[0]
+  const { selectedChatId } = useSelectedChatId()
+  const chats = useChats()
 
   return (
     <section
@@ -16,9 +17,9 @@ export default function Chats({ className }: Props) {
       role='list'
     >
       {
-        Orm.Chats.all().map((chat) => (
+        chats.map((chat) => (
           <ChatRow
-            chat={chat}
+            chatId={chat.id}
             isSelected={chat.id === selectedChatId}
             key={chat.id}
           />

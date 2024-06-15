@@ -1,8 +1,15 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import ImageGallery from './components/ImageGallery'
+import { useCurrentUser } from './hooks/useCurrentUser'
+import useUserProfile from './hooks/useUserProfile'
 import Layout from './Layout'
+import { useNavigate } from 'react-router-dom'
 
 export default function Landing() {
+  const user = useCurrentUser().user
+  const profile = useUserProfile(user?.id)
+  const navigate = useNavigate()
+
   const imagesDesktop = useMemo(() => [
     {
       src: '/assets/views/ChatsDesktop.png',
@@ -82,12 +89,11 @@ export default function Landing() {
       className='p-6'
       limitHeight={false}
     >
-      <main className='w-full h-full flex flex-col gap-6 py-6 items-center justify-center text-gray-800 dark:text-gray-500 p-6'>
-
-        <h2 className='text-2xl font-bold text-gray-500'>
+      <main className='w-full h-full flex flex-col gap-6 py-6 items-center justify-center text-gray-800 dark:text-gray-50 p-6'>
+        <h2 className='text-2xl font-bold'>
           Bienvenido a EPA Chat
         </h2>
-        <h3 className='text-lg font-normal text-gray-500'>
+        <h3 className='text-lg font-normal'>
           ¡La app de chat dirigida para adultos mayores!
         </h3>
         <div
@@ -96,44 +102,64 @@ export default function Landing() {
         >
           <ImageGallery images={images} />
         </div>
-        <h2 className='text-xl font-semibold mt-6 text-gray-500'>
+        <h2 className='text-xl font-semibold mt-6'>
           ¿Qué funciones tenemos para los adultos mayores?
         </h2>
-        <ul className='text-lg font-normal text-gray-500'>
+        <ul className='text-lg font-normal'>
           <li>
-            Cambio de tamaño de letra
+            ✅ Cambio de tamaño de letra
           </li>
           <li>
-            Agrandar mensajes específicos
+            ✅ Agrandar mensajes específicos
           </li>
           <li>
-            Poder escuchar mensajes de texto en caso de no poder leerlos
+            ✅ Poder escuchar mensajes de texto en caso de no poder leerlos
           </li>
           <li>
-            Transformar audio a texto para poder enviar mensajes en caso de que sea
+            ✅ Transformar audio a texto para poder enviar mensajes en caso de que sea
             difícil escribir en el teclado
           </li>
           <li>
-            ¡Y más!
+            ¡Y mucho más!
           </li>
         </ul>
-        <h3 className='text-lg font-normal text-gray-500'>
-          ¿Ya estás convencid@? ¡Únete hoy!
-        </h3>
-        <div className='flex items-center justify-center gap-6'>
-          <button
-            className='bg-violet-500 border border-foreground/20 rounded-md px-4 py-2 text-white mb-2'
-            onClick={() => window.location.href = '/login'}
-          >
-            Iniciar Sesión
-          </button>
-          <button
-            className='bg-amber-500 border border-foreground/20 rounded-md px-4 py-2 text-white mb-2'
-            onClick={() => window.location.href = '/login'}
-          >
-            Registrarse
-          </button>
-        </div>
+        { !user && (
+          <>
+            <h3 className='text-lg font-normal'>
+              ¿Ya estás convencid@? ¡Únete hoy!
+            </h3>
+            <div className='flex items-center justify-center gap-6'>
+              <button
+                className='bg-violet-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-violet-600 transition'
+                onClick={() => navigate('/login')}
+              >
+                Iniciar Sesión
+              </button>
+              <button
+                className='bg-amber-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-amber-600 transition'
+                onClick={() => navigate('/signup')}
+              >
+                Registrarse
+              </button>
+            </div>
+          </>
+        )}
+        { user && profile?.username && (
+          <>
+            <h3 className='text-lg font-normal'>
+              ¡Hola
+              {' '}
+              {profile.username}
+              ! ¿Listo para chatear?
+            </h3>
+            <button
+              className='bg-violet-500 rounded-md shadow-sm px-4 py-2 text-white hover:scale-105 hover:bg-violet-600 transition'
+              onClick={() => navigate('/chats')}
+            >
+              Ir a chatear
+            </button>
+          </>
+        )}
       </main>
     </Layout>
   )
