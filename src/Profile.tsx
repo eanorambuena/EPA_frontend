@@ -39,9 +39,19 @@ export default function Profile() {
     }
   }
 
+  const handleDelete = async () => {
+    const response = await safeRequest(async () => {
+      return await axios.delete(`${API_URL}/users/${user?.id}`, authenticationConfig)
+    })
+    if (response?.status === 200) {
+      toast('Perfil eliminado', ToastType.success)
+      return
+    }
+  }
+
   return (
     <Layout limitHeight={false}>
-      <div className='flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2 h-fit'>
+      <div className='flex-1 flex flex-col w-full px-8 py-4 sm:max-w-md justify-center gap-2 h-fit'>
         <form
           className='animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground'
           onSubmit={handleSubmit}
@@ -107,9 +117,17 @@ export default function Profile() {
             placeholder='Imagen de Perfil'
             required={profile?.image === undefined}
           />
-          <SubmitButton className='mb-2'>
-            Actualizar Perfil
-          </SubmitButton>
+          <section className='flex md:flex-row gap-2'>
+            <SubmitButton className='flex-grow'>
+              Actualizar Perfil
+            </SubmitButton>
+            <button
+              className='bg-red-500 rounded-md shadow-sm px-4 text-white hover:scale-105 hover:bg-red-600 transition'
+              onClick={handleDelete}
+            >
+              Eliminar Cuenta
+            </button>
+          </section>
         </form>
       </div>
     </Layout>
