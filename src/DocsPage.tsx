@@ -78,6 +78,11 @@ export default function DocsPage() {
               - Eliminar usuario
               </a>
             </li>
+            <li>
+              <a href="#como_usar_docs" onClick={(e) => { e.preventDefault(); scrollToSection('como_usar_docs'); }} className="block">
+              - Como usar la documentación
+              </a>
+            </li>
         </ul>
         <div id='login'></div>
         <ExplanationCard
@@ -118,6 +123,11 @@ export default function DocsPage() {
         <ExplanationCard
           title="Eliminar usaurio"
           text={"1) Ir a la barra de navegación y presionar en perfil.<div />2) Hacer click en Eliminar Cuenta."} images={["assets/views/navbar_perfil.png", "assets/views/perfil_eliminar.png"]}
+        />
+        <div id='como_usar_docs'></div>
+        <ExplanationCard
+          title="Como usar la documentación"
+          text={"1) Ir a la barra de navegación y presionar en Docs.<div />2) Hacer click en la instrucción que deseamos conocer.<div />3) Esto nos llevará hacía la información correspondiente.<div />4) Hacer click en las flechas para ver las imagenes explicativas."} images={["assets/views/navbar_docs.png", "assets/views/seleccionar_docs.png", "assets/views/explanation_doc.png", "assets/views/carrusel_doc.png"]}
         />
       </main>
     </Layout>
