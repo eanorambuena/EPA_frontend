@@ -68,13 +68,16 @@ export default function DocsPage() {
               - Escuchar mensajes escritos
             </a>
           </li>
-          {/*
             <li>
-              <a href="#transformar_audio_texto" onClick={(e) => { e.preventDefault(); scrollToSection('transformar_audio_texto'); }} className="block">
-              - Transformar audio a texto para poder enviar mensajes en caso de que sea difícil escribir en el teclado
+              <a href="#editar_perfil" onClick={(e) => { e.preventDefault(); scrollToSection('editar_perfil'); }} className="block">
+              - Editar perfil
               </a>
             </li>
-          */}
+            <li>
+              <a href="#eliminar_usuario" onClick={(e) => { e.preventDefault(); scrollToSection('eliminar_usuario'); }} className="block">
+              - Eliminar usuario
+              </a>
+            </li>
         </ul>
         <div id='login'></div>
         <ExplanationCard
@@ -106,13 +109,16 @@ export default function DocsPage() {
           text='1) Ir a la barra de navegación y presionar en chats.<div />2) Elegir el chat que desee.<div />3) Al hacer click sobre un mensaje, una voz lo leerá.'
           title='Escuchar mensajes escritos'
         />
-        <div id='transformar_audio_texto'></div>
-        {/*
-          <ExplanationCard
-            title="Transformar audio a texto"
-            text={"1) Ir a la barra de navegación y presionar en chats.<div />2) Elegir el chat que desee.<div />3) Al hacer click sobre un mensaje, una voz lo leerá."} images={["assets/views/navbar_chat.png", "assets/views/chat_capture.png", "assets/views/voice_chat.png"]}
-          />
-        */}
+        <div id='editar_perfil'></div>
+        <ExplanationCard
+          title="Editar perfil"
+          text={"1) Ir a la barra de navegación y presionar en perfil.<div />2) Elegir el atributo a editar y escribir lo deseado.<div />3) Al hacer click sobre Actualizar perfil."} images={["assets/views/navbar_perfil.png", "assets/views/perfil_editar.png", "assets/views/perfil_editar_boton.png"]}
+        />
+        <div id='eliminar_usuario'></div>
+        <ExplanationCard
+          title="Eliminar usaurio"
+          text={"1) Ir a la barra de navegación y presionar en perfil.<div />2) Hacer click en Eliminar Cuenta."} images={["assets/views/navbar_perfil.png", "assets/views/perfil_eliminar.png"]}
+        />
       </main>
     </Layout>
   )
