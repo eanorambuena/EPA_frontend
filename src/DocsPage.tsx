@@ -68,21 +68,33 @@ export default function DocsPage() {
               - Escuchar mensajes escritos
             </a>
           </li>
-            <li>
-              <a href="#editar_perfil" onClick={(e) => { e.preventDefault(); scrollToSection('editar_perfil'); }} className="block">
+          <li>
+            <a
+              className='block'
+              href='#editar_perfil'
+              onClick={(e) => { e.preventDefault(); scrollToSection('editar_perfil') }}
+            >
               - Editar perfil
-              </a>
-            </li>
-            <li>
-              <a href="#eliminar_usuario" onClick={(e) => { e.preventDefault(); scrollToSection('eliminar_usuario'); }} className="block">
+            </a>
+          </li>
+          <li>
+            <a
+              className='block'
+              href='#eliminar_usuario'
+              onClick={(e) => { e.preventDefault(); scrollToSection('eliminar_usuario') }}
+            >
               - Eliminar usuario
-              </a>
-            </li>
-            <li>
-              <a href="#como_usar_docs" onClick={(e) => { e.preventDefault(); scrollToSection('como_usar_docs'); }} className="block">
+            </a>
+          </li>
+          <li>
+            <a
+              className='block'
+              href='#como_usar_docs'
+              onClick={(e) => { e.preventDefault(); scrollToSection('como_usar_docs') }}
+            >
               - Como usar la documentación
-              </a>
-            </li>
+            </a>
+          </li>
         </ul>
         <div id='login'></div>
         <ExplanationCard
@@ -116,18 +128,21 @@ export default function DocsPage() {
         />
         <div id='editar_perfil'></div>
         <ExplanationCard
-          title="Editar perfil"
-          text={"1) Ir a la barra de navegación y presionar en perfil.<div />2) Elegir el atributo a editar y escribir lo deseado.<div />3) Al hacer click sobre Actualizar perfil."} images={["assets/views/navbar_perfil.png", "assets/views/perfil_editar.png", "assets/views/perfil_editar_boton.png"]}
+          images={['assets/views/navbar_perfil.png', 'assets/views/perfil_editar.png', 'assets/views/perfil_editar_boton.png']}
+          text='1) Ir a la barra de navegación y presionar en perfil.<div />2) Elegir el atributo a editar y escribir lo deseado.<div />3) Al hacer click sobre Actualizar perfil.'
+          title='Editar perfil'
         />
         <div id='eliminar_usuario'></div>
         <ExplanationCard
-          title="Eliminar usaurio"
-          text={"1) Ir a la barra de navegación y presionar en perfil.<div />2) Hacer click en Eliminar Cuenta."} images={["assets/views/navbar_perfil.png", "assets/views/perfil_eliminar.png"]}
+          images={['assets/views/navbar_perfil.png', 'assets/views/perfil_eliminar.png']}
+          text='1) Ir a la barra de navegación y presionar en perfil.<div />2) Hacer click en Eliminar Cuenta.'
+          title='Eliminar usaurio'
         />
         <div id='como_usar_docs'></div>
         <ExplanationCard
-          title="Como usar la documentación"
-          text={"1) Ir a la barra de navegación y presionar en Docs.<div />2) Hacer click en la instrucción que deseamos conocer.<div />3) Esto nos llevará hacía la información correspondiente.<div />4) Hacer click en las flechas para ver las imagenes explicativas."} images={["assets/views/navbar_docs.png", "assets/views/seleccionar_docs.png", "assets/views/explanation_doc.png", "assets/views/carrusel_doc.png"]}
+          images={['assets/views/navbar_docs.png', 'assets/views/seleccionar_docs.png', 'assets/views/explanation_doc.png', 'assets/views/carrusel_doc.png']}
+          text='1) Ir a la barra de navegación y presionar en Docs.<div />2) Hacer click en la instrucción que deseamos conocer.<div />3) Esto nos llevará hacía la información correspondiente.<div />4) Hacer click en las flechas para ver las imagenes explicativas.'
+          title='Como usar la documentación'
         />
       </main>
     </Layout>

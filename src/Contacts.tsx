@@ -5,31 +5,27 @@ import { API_URL } from './services/variables'
 import useAuthentication from './hooks/useAuthentication'
 import { useCurrentUser } from './hooks/useCurrentUser'
 
-interface Props {
-  searchParams?: { message: string }
-}
-
 // Definición de la función Login sin usar React.FC
-function Contacts({ searchParams }: Props) {
+function Contacts() {
   const { user } = useCurrentUser()
   const authenticationConfig = useAuthentication()
   const [contacts, setContacts] = useState<{ nickname: string, userContact: string }[]>([])
 
-  const handleGetContacts = async () => {
-    if (user) {
-      try {
-        const response_get = await axios.get(`${API_URL}/contacts/user/${user.id}`, authenticationConfig)
-        console.log('Contactos:', response_get.data)
-        setContacts(response_get.data)
-      } catch (error) {
-        console.error('Error fetching contacts:', error)
+  useEffect(() => {
+    const handleGetContacts = async () => {
+      if (user) {
+        try {
+          const response_get = await axios.get(`${API_URL}/contacts/user/${user.id}`, authenticationConfig)
+          console.log('Contactos:', response_get.data)
+          setContacts(response_get.data)
+        } catch (error) {
+          console.error('Error fetching contacts:', error)
+        }
       }
     }
-  }
 
-  useEffect(() => {
     handleGetContacts()
-  }, [user])
+  }, [user, authenticationConfig])
 
   return (
     <Layout>
@@ -42,9 +38,16 @@ function Contacts({ searchParams }: Props) {
         </button>
         <div className='flex flex-col gap-2'>
           {contacts.map((contact, index) => (
-            <div key={index} className='p-4 rounded-md shadow-md'>
-              <p className='text-lg font-bold'>{contact.nickname}</p>
-              <p className='text-sm text-gray-500'>{contact.userContact}</p>
+            <div
+              className='p-4 rounded-md shadow-md'
+              key={index}
+            >
+              <p className='text-lg font-bold'>
+                {contact.nickname}
+              </p>
+              <p className='text-sm text-gray-500'>
+                {contact.userContact}
+              </p>
             </div>
           ))}
         </div>
