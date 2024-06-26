@@ -15,7 +15,7 @@ export default function Navbar () {
       <NavLink to='/profile'>
         Perfil
       </NavLink>
-      <NavLink to='/contactRegister'>
+      <NavLink to='/contacts'>
         Contactos
       </NavLink>
       <NavLink to='/docs'>
