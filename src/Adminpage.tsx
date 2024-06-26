@@ -1,40 +1,33 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import SubmitButton from './components/SubmitButton';
 import useLocalStorage from './hooks/useLocalStorage';
-import ToastContext, { ToastType } from './hooks/useToast';
+import ToastContext from './hooks/useToast';
 import Layout from './Layout';
-import { Auth, UserSchema, UserType } from './services/schema';
+import { UserSchema } from './services/schema';
 import { API_URL } from './services/variables';
+import useAuthentication from './hooks/useAuthentication';
+import useUser, { AllUsersInfo } from './hooks/useUsers';
 
 interface Props {
   className?: string;
 }
 
 export default function AdminPage({ className }: Props) {
+  const authentication = useAuthentication();
   const navigate = useNavigate();
   const setAccessToken = useLocalStorage('accessToken', '')[1];
   const toast = useContext(ToastContext);
-  const [users, setUsers] = useState<UserSchema[]>([]);
+  
+  const { users, fetchAllUsers, deleteUser }: AllUsersInfo = useUser();
+  
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const token = localStorage.getItem('adminToken');
-        if (!token) {
-          setError('No token found');
-          setLoading(false);
-          return;
-        }
-        const response = await axios.get(`${API_URL}/users`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        setUsers(response.data);
+        await fetchAllUsers();
         setLoading(false);
       } catch (err) {
         setError('Error fetching users');
@@ -43,12 +36,7 @@ export default function AdminPage({ className }: Props) {
     };
 
     getUsers();
-  }, []);
-
-  const handleLogout = () => {
-    Auth.logout();
-    navigate('/login');
-  };
+  }, [fetchAllUsers]);
 
   if (loading) {
     return (
@@ -67,16 +55,24 @@ export default function AdminPage({ className }: Props) {
   }
 
   return (
-    <Layout>
-      <div className={`h-full flex flex-col items-start justify-start ${className}`}>
+    <Layout limitHeight={false}>
+      <div className={`h-full items-center flex flex-col items-start justify-start ${className}`}>
+      <h1 className='text-lg font-bold text-center w-full'>Panel de administrador</h1>
+      <br />
+      <h2 className='text-lg font-bold text-center w-full'>Mensaje a la comunidad</h2>
+      <br />
+      <input
+            type='text'
+            placeholder='Escribe un mensaje para todos los usuarios...'
+            className='p-2 border rounded-md w-full'
+      />
+      <br />
+      <button className='bg-[#a78bfa] text-white rounded-md px-4 py-2 hover:bg-[#7c66db] transition'>
+        Enviar mensaje
+      </button>
+      <br />
         <div className='flex items-center justify-between w-full p-4 bg-gray-100'>
-          <h1 className='text-lg font-bold'>Lista de Usuarios</h1>
-          <button
-            className='bg-red-500 text-white rounded-md px-4 py-2 hover:bg-red-600 transition'
-            onClick={handleLogout}
-          >
-            Cerrar Sesión
-          </button>
+        <h2 className='text-lg font-bold text-center w-full'>Lista de usuarios</h2>
         </div>
         <div className='overflow-x-auto'>
           <table className='w-full border-collapse'>
@@ -85,6 +81,7 @@ export default function AdminPage({ className }: Props) {
                 <th className='border p-2'>ID</th>
                 <th className='border p-2'>Phone Number</th>
                 <th className='border p-2'>Type</th>
+                <th className='border p-2'>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -93,6 +90,7 @@ export default function AdminPage({ className }: Props) {
                   <td className='border p-2'>{user.id}</td>
                   <td className='border p-2'>{user.phoneNumber}</td>
                   <td className='border p-2'>{user.type}</td>
+                  <td className='bg-red-500 text-white rounded-md px-4 py-2 hover:bg-red-600 transition'>Eliminar usuario</td>
                 </tr>
               ))}
             </tbody>
