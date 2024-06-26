@@ -89,10 +89,10 @@ export default function DocsPage() {
           <li>
             <a
               className='block'
-              href='#como_usar_docs'
-              onClick={(e) => { e.preventDefault(); scrollToSection('como_usar_docs') }}
+              href='#cómo_usar_docs'
+              onClick={(e) => { e.preventDefault(); scrollToSection('cómo_usar_docs') }}
             >
-              - Como usar la documentación
+              - Cómo usar la documentación
             </a>
           </li>
         </ul>
@@ -138,11 +138,11 @@ export default function DocsPage() {
           text='1) Ir a la barra de navegación y presionar en perfil.<div />2) Hacer click en Eliminar Cuenta.'
           title='Eliminar usaurio'
         />
-        <div id='como_usar_docs'></div>
+        <div id='cómo_usar_docs'></div>
         <ExplanationCard
           images={['assets/views/navbar_docs.png', 'assets/views/seleccionar_docs.png', 'assets/views/explanation_doc.png', 'assets/views/carrusel_doc.png']}
           text='1) Ir a la barra de navegación y presionar en Docs.<div />2) Hacer click en la instrucción que deseamos conocer.<div />3) Esto nos llevará hacía la información correspondiente.<div />4) Hacer click en las flechas para ver las imagenes explicativas.'
-          title='Como usar la documentación'
+          title='Cómo usar la documentación'
         />
       </main>
     </Layout>
