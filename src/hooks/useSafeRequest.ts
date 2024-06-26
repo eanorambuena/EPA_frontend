@@ -30,23 +30,12 @@ const handleErrors = (status: number, config: SafeRequestConfig) => {
   }
 }
 
-const FREEZE_TIME = 1000
-
 export default function useSafeRequest() {
   const navigate = useNavigate()
   const toast = useToast()
   const { logout } = useCurrentUser()
 
-  const getLastRequestDate = useCallback(() => {
-    return parseInt(localStorage.getItem('lastRequestDate') || '0')
-  }, [])
-
   return useCallback(async function safelyRequest(request: Request, config: SafeRequestConfig = {}) {
-    if (Date.now() - getLastRequestDate() < FREEZE_TIME) {
-      await new Promise(resolve => setTimeout(resolve, FREEZE_TIME - (Date.now() - getLastRequestDate())))
-      return
-    }
-    localStorage.setItem('lastRequestDate', Date.now().toString())
     try {
       try {
         const response = await request()
@@ -79,5 +68,5 @@ export default function useSafeRequest() {
       toast('Ha ocurrido un error desconocido', ToastType.error)
       console.error(error)
     }
-  }, [getLastRequestDate, logout, navigate, toast])
+  }, [logout, navigate, toast])
 }
