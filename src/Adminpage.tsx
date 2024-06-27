@@ -79,8 +79,7 @@ export default function AdminPage({ className }: Props) {
         <br />
         <h2 className='text-lg font-bold text-center w-full'>Mensaje a la comunidad</h2>
         <br />
-        <input
-          type='text'
+        <textarea
           placeholder='Escribe un mensaje para todos los usuarios...'
           className='p-2 border rounded-md w-full'
         />
@@ -89,7 +88,7 @@ export default function AdminPage({ className }: Props) {
           Enviar mensaje
         </button>
         <br />
-        {message && <p className='text-green-500'>{message}</p>}
+        {message && <p className='text-red-500'>{message}</p>}
         <div className='flex items-center justify-between w-full p-4 bg-gray-100'>
           <h2 className='text-lg font-bold text-center w-full'>Lista de usuarios</h2>
         </div>
@@ -98,9 +97,9 @@ export default function AdminPage({ className }: Props) {
             <thead>
               <tr>
                 <th className='border p-2'>ID</th>
-                <th className='border p-2'>Phone Number</th>
-                <th className='border p-2'>Type</th>
-                <th className='border p-2'>Delete</th>
+                <th className='border p-2'>Número de telefono</th>
+                <th className='border p-2'>Tipo</th>
+                <th className='border p-2'>Eliminar</th>
               </tr>
             </thead>
             <tbody>
