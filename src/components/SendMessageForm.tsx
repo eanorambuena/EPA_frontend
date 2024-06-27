@@ -27,6 +27,10 @@ export default function SendMessageForm({ appendMessage, chat }: Props) {
     if (!chat.id) {
       return
     }
+    if (!user) {
+      return
+    }
+
     await appendMessage({
       chatId: chat.id,
       content: text,
