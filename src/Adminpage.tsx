@@ -1,28 +1,30 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import useLocalStorage from './hooks/useLocalStorage';
-import ToastContext from './hooks/useToast';
 import Layout from './Layout';
-import { UserSchema } from './services/schema';
-import { API_URL } from './services/variables';
-import useAuthentication from './hooks/useAuthentication';
 import useUser, { AllUsersInfo } from './hooks/useUsers';
+import useAuthentication from './hooks/useAuthentication';
+import useCurrentUserOncePerContext from './hooks/useCurrentUserOncePerContext';
+import axios from 'axios';
+import useSafeRequest from './hooks/useSafeRequest';
+import { API_URL } from './services/variables';
 
 interface Props {
   className?: string;
 }
 
 export default function AdminPage({ className }: Props) {
-  const authentication = useAuthentication();
   const navigate = useNavigate();
-  const setAccessToken = useLocalStorage('accessToken', '')[1];
-  const toast = useContext(ToastContext);
-  
+  const authentication = useAuthentication();
+  const currentuser = useCurrentUserOncePerContext();
+  const [accessToken] = useLocalStorage('accessToken', '');
   const { users, fetchAllUsers, deleteUser }: AllUsersInfo = useUser();
+  const safeRequest = useSafeRequest()
+  //console.log(currentuser.accessToken)
   
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -37,6 +39,22 @@ export default function AdminPage({ className }: Props) {
 
     getUsers();
   }, [fetchAllUsers]);
+
+  const handleDeleteUser = async (userId: number) => {
+    try {
+      const response = await axios.delete(`${API_URL}/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        },
+      });
+
+      setMessage('Usuario eliminado exitosamente');
+      await fetchAllUsers();
+    } catch (err) {
+      console.error(err);
+      setError('Error al eliminar el usuario');
+    }
+  };
 
   if (loading) {
     return (
@@ -57,22 +75,23 @@ export default function AdminPage({ className }: Props) {
   return (
     <Layout limitHeight={false}>
       <div className={`h-full items-center flex flex-col items-start justify-start ${className}`}>
-      <h1 className='text-lg font-bold text-center w-full'>Panel de administrador</h1>
-      <br />
-      <h2 className='text-lg font-bold text-center w-full'>Mensaje a la comunidad</h2>
-      <br />
-      <input
-            type='text'
-            placeholder='Escribe un mensaje para todos los usuarios...'
-            className='p-2 border rounded-md w-full'
-      />
-      <br />
-      <button className='bg-[#a78bfa] text-white rounded-md px-4 py-2 hover:bg-[#7c66db] transition'>
-        Enviar mensaje
-      </button>
-      <br />
+        <h1 className='text-lg font-bold text-center w-full'>Panel de administrador</h1>
+        <br />
+        <h2 className='text-lg font-bold text-center w-full'>Mensaje a la comunidad</h2>
+        <br />
+        <input
+          type='text'
+          placeholder='Escribe un mensaje para todos los usuarios...'
+          className='p-2 border rounded-md w-full'
+        />
+        <br />
+        <button className='bg-[#a78bfa] text-white rounded-md px-4 py-2 hover:bg-[#7c66db] transition'>
+          Enviar mensaje
+        </button>
+        <br />
+        {message && <p className='text-green-500'>{message}</p>}
         <div className='flex items-center justify-between w-full p-4 bg-gray-100'>
-        <h2 className='text-lg font-bold text-center w-full'>Lista de usuarios</h2>
+          <h2 className='text-lg font-bold text-center w-full'>Lista de usuarios</h2>
         </div>
         <div className='overflow-x-auto'>
           <table className='w-full border-collapse'>
@@ -90,7 +109,14 @@ export default function AdminPage({ className }: Props) {
                   <td className='border p-2'>{user.id}</td>
                   <td className='border p-2'>{user.phoneNumber}</td>
                   <td className='border p-2'>{user.type}</td>
-                  <td className='bg-red-500 text-white rounded-md px-4 py-2 hover:bg-red-600 transition'>Eliminar usuario</td>
+                  <td className='border p-2'>
+                    <button 
+                      className='bg-red-500 text-white rounded-md px-4 py-2 hover:bg-red-600 transition'
+                      onClick={() => handleDeleteUser(user.id)}
+                    >
+                      Eliminar usuario
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
