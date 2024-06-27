@@ -5,6 +5,7 @@ import SendMessageForm from './components/SendMessageForm'
 import useChat from './hooks/useChat'
 import { useSelectedChatId } from './hooks/useSelectedChatId'
 import SubmitButton from './components/SubmitButton'
+import axios from 'axios'
 
 interface Props {
   className?: string
@@ -13,6 +14,8 @@ interface Props {
 export default function Chat({ className  }: Props) {
   const { selectedChatId } = useSelectedChatId()
   const { chat, messages, appendMessage, image } = useChat(selectedChatId)
+
+  console.log('Chat', chat)
 
   if (!chat) {
     return (
@@ -25,11 +28,15 @@ export default function Chat({ className  }: Props) {
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    console.log('handleSubmit')
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const chatName = formData.get('chatName') as string
-    console.log(chatName)
+    const chatId = chat.id
+    const response = await axios.patch(`http://localhost:3001/chats/${chatId}`, { title: chatName })
+    console.log(response)
+    if (response.status === 200) {
+      window.location.reload()
+    }
   }
 
   return (
@@ -47,12 +54,14 @@ export default function Chat({ className  }: Props) {
           className='flex-1 flex justify-end'
           onSubmit={handleSubmit}  
         >
-          <input className='rounded-md px-4 py-2 bg-inherit border border-violet-300'
-          placeholder='Cambiar nombre'
-          type='text'
-          id='chatName'
-          name='chatName'
-          required
+          <label htmlFor='chatName' className='sr-only'>Cambiar nombre</label>
+          <input 
+            className='rounded-md px-4 py-2 bg-inherit border border-violet-300'
+            placeholder='Cambiar nombre'
+            type='text'
+            id='chatName'
+            name='chatName'
+            required
           />
           <SubmitButton className='ml-2'>
             Cambiar
