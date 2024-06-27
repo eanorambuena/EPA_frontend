@@ -4,6 +4,7 @@ import { UserSchema } from '../services/schema';
 import { API_URL } from '../services/variables';
 import useAuthentication from './useAuthentication';
 import useSafeRequest from './useSafeRequest';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export type UserInfo = {
   user: UserSchema | null;
@@ -13,7 +14,7 @@ export type UserInfo = {
 export type AllUsersInfo = {
   users: UserSchema[];
   fetchAllUsers: () => void;
-  deleteUser: (userId: number) => void;
+  deleteUser: (userId: number, token: string) => void; // Añadir token
 };
 
 export default function useUser(userId?: number): UserInfo & AllUsersInfo {
@@ -44,14 +45,18 @@ export default function useUser(userId?: number): UserInfo & AllUsersInfo {
     }
   }, [authentication, safelyRequest]);
 
-  const deleteUser = useCallback(async (userId: number) => {
+  const deleteUser = useCallback(async (userId: number, token: string) => {
     const response = await safelyRequest(async () =>
-      await axios.delete(`${API_URL}/users/${userId}`, authentication)
+      await axios.delete(`${API_URL}/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
     );
     if (response) {
       setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
     }
-  }, [authentication, safelyRequest]);
+  }, [safelyRequest]);
 
   useEffect(() => {
     fetchUser();
