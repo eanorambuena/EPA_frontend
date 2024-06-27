@@ -20,11 +20,11 @@ export default function AdminPage({ className }: Props) {
   const [accessToken] = useLocalStorage('accessToken', '');
   const { users, fetchAllUsers, deleteUser }: AllUsersInfo = useUser();
   const safeRequest = useSafeRequest()
-  //console.log(currentuser.accessToken)
   
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [filter, setFilter] = useState<string>('');
 
   useEffect(() => {
     const getUsers = async () => {
@@ -72,6 +72,10 @@ export default function AdminPage({ className }: Props) {
     );
   }
 
+  const filteredUsers = users.filter(user => 
+    user.phoneNumber.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
     <Layout limitHeight={false}>
       <div className={`h-full items-center flex flex-col items-start justify-start ${className}`}>
@@ -92,6 +96,14 @@ export default function AdminPage({ className }: Props) {
         <div className='flex items-center justify-between w-full p-4 bg-gray-100'>
           <h2 className='text-lg font-bold text-center w-full'>Lista de usuarios</h2>
         </div>
+        <input
+          type='text'
+          placeholder='Filtrar por número de teléfono...'
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className='p-2 border rounded-md w-full'
+        />
+        <br />
         <div className='overflow-x-auto'>
           <table className='w-full border-collapse'>
             <thead>
@@ -103,7 +115,7 @@ export default function AdminPage({ className }: Props) {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {filteredUsers.map((user) => (
                 <tr key={user.id}>
                   <td className='border p-2'>{user.id}</td>
                   <td className='border p-2'>{user.phoneNumber}</td>
