@@ -121,12 +121,14 @@ export default function AdminPage({ className }: Props) {
                   <td className='border p-2'>{user.phoneNumber}</td>
                   <td className='border p-2'>{user.type}</td>
                   <td className='border p-2'>
+                  {user.id !== 1 && (
                     <button 
                       className='bg-red-500 text-white rounded-md px-4 py-2 hover:bg-red-600 transition'
                       onClick={() => handleDeleteUser(user.id)}
                     >
                       Eliminar usuario
                     </button>
+                    )}
                   </td>
                 </tr>
               ))}
