@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import Availability from './components/Availability'
 import Messages from './components/Messages'
@@ -8,6 +9,7 @@ import SubmitButton from './components/SubmitButton'
 import axios from 'axios'
 import { API_URL } from './services/variables'
 import useAuthentication from './hooks/useAuthentication'
+
 
 interface Props {
   className?: string
@@ -67,6 +69,7 @@ export default function Chat({ className }: Props) {
   return (
     <div className={`h-full flex flex-col items-start justify-start ${className}`}>
       <header className='flex items-center justify-start w-full h-fit shadow-sm gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-t-md flex-wrap'>
+
         <img
           alt={chat.title}
           className='size-8 sm:size-10 rounded-full'
@@ -109,6 +112,7 @@ export default function Chat({ className }: Props) {
           </label>
           <input
             className='rounded-md px-4 py-2 bg-inherit border border-violet-300'
+
             id='chatName'
             name='chatName'
             placeholder='Cambiar nombre'
