@@ -21,7 +21,7 @@ export default function Chats({ className }: Props) {
       return
     }
 
-    await axios.post(`${API_URL}/chats`, 
+    await axios.post(`${API_URL}/chats`,
       { title: 'Nuevo chat' },
       {
         headers: {
@@ -29,15 +29,15 @@ export default function Chats({ className }: Props) {
         }
       }
     )
-    .then(async (response) => {
-      console.log('Chat creado:', response.data)
-      window.location.reload()
-      const chatId = response.data.id
-      window.location.href = `/chats/${chatId}`
-    })
-    .catch((error) => {
-      console.error('Error al crear chat:', error)
-    })
+      .then(async (response) => {
+        console.log('Chat creado:', response.data)
+        window.location.reload()
+        const chatId = response.data.id
+        window.location.href = `/chats/${chatId}`
+      })
+      .catch((error) => {
+        console.error('Error al crear chat:', error)
+      })
   }
 
   return (
