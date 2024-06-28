@@ -1,22 +1,24 @@
-import React from 'react';
-import Availability from './components/Availability';
-import Messages from './components/Messages';
-import SendMessageForm from './components/SendMessageForm';
-import useChat from './hooks/useChat';
-import { useSelectedChatId } from './hooks/useSelectedChatId';
-import SubmitButton from './components/SubmitButton';
-import axios from 'axios';
-import { API_URL } from './services/variables';
-import useAuthentication from './hooks/useAuthentication';
+import React from 'react'
+import Availability from './components/Availability'
+import Messages from './components/Messages'
+import SendMessageForm from './components/SendMessageForm'
+import useChat from './hooks/useChat'
+import { useSelectedChatId } from './hooks/useSelectedChatId'
+import axios from 'axios'
+import { API_URL } from './services/variables'
+import useAuthentication from './hooks/useAuthentication'
+import { useNavigate } from 'react-router-dom'
+import SubmitButton from './components/SubmitButton'
 
 interface Props {
   className?: string;
 }
 
-export default function Chat({ className }: Props) {
-  const { selectedChatId } = useSelectedChatId();
-  const { chat, messages, appendMessage, image } = useChat(selectedChatId);
-  const authenticationConfig = useAuthentication(); // Move the hook call here
+export default function Chat({ className  }: Props) {
+  const { selectedChatId } = useSelectedChatId()
+  const { chat, messages, appendMessage, image } = useChat(selectedChatId)
+  const authentication = useAuthentication()
+  const navigate = useNavigate()
 
   if (!chat) {
     return (
@@ -26,6 +28,7 @@ export default function Chat({ className }: Props) {
     );
   }
 
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     console.log('Submit');
     event.preventDefault();
@@ -34,7 +37,7 @@ export default function Chat({ className }: Props) {
     const chatId = chat.id;
 
     try {
-      const response = await axios.patch(`${API_URL}/chats/${chatId}`, { title: chatName }, authenticationConfig);
+      const response = await axios.patch(`${API_URL}/chats/${chatId}`, { title: chatName }, authentication);
       console.log(response);
       if (response.status === 200) {
         window.location.reload();
@@ -43,6 +46,17 @@ export default function Chat({ className }: Props) {
       console.error('Error updating chat:', error);
     }
   };
+
+  const handleLeaveChat = async () => {
+    console.log('Leave chat usign URL: ', `${API_URL}/chats/leave/${chat.id}`);
+    try {
+      const response = await axios.patch(`${API_URL}/chats/leave/${chat.id}`, {}, authentication)
+      console.log('Chat abandonado:', response.data)
+      navigate('/chats')
+    } catch (error) {
+      console.error('Error al abandonar chat:', error)
+    }
+  }
 
   return (
     <div className={`h-full flex flex-col items-start justify-start ${className}`}>
@@ -62,6 +76,12 @@ export default function Chat({ className }: Props) {
           <SubmitButton className='ml-2'>Cambiar</SubmitButton>
         </form>
         <Availability />
+        <button
+          className='text-red-500 dark:text-red-400'
+          onClick={handleLeaveChat}
+        >
+          Abandonar chat
+        </button>
       </header>
       <Messages messages={messages} />
       <SendMessageForm appendMessage={appendMessage} chat={chat} />
