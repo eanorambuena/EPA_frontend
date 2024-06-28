@@ -4,6 +4,13 @@ import Chat from './Chat'
 import Layout from './Layout'
 import { useParams } from 'react-router-dom'
 import { useSelectedChatId } from './hooks/useSelectedChatId'
+import { io } from 'socket.io-client'
+
+const socket = io()
+
+socket.on('connect', () => {
+  console.log('Connected to server')
+})
 
 export default function MainPage() {
   const { id } = useParams<{ id: string }>() as { id: string }
