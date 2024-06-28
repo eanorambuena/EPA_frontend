@@ -56,15 +56,16 @@ export default function SendMessageForm({ appendMessage, chat }: Props) {
     >
       <label
         className='sr-only'
-        htmlFor='text'
+        htmlFor='messageInput'
       >
         Mensaje
       </label>
       <input
         autoFocus
         className='flex-grow max-w-[60%] sm:max-w-full rounded-md px-4 py-2 bg-violet-300 border border-violet-300 placeholder-gray-800 text-gray-800'
+        id='messageInput'
         name='text'
-        placeholder='Escibe un mensaje...'
+        placeholder='Escribe un mensaje...'
         ref={$input}
         required
         type='text'
