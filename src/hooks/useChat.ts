@@ -30,30 +30,30 @@ export default function useChat(chatId?: number) {
   const [messages, setMessages] = useState<MessageSchema[]>([])
   const [image, setImage] = useState<string | null>(null)
 
-  const appendMessage = async (message: MessageSchema) => {
+  const appendMessage = useCallback(async (message: MessageSchema) => {
     setMessages(messages => [...messages, message])
-    const response =  await safelyRequest(async () => await axios.post(`${API_URL}/messages`, message, authentication))
+    const response =  await safelyRequest(async () => await axios.post(`${API_URL}/messages`, message, authentication), [Math.random()])
     if (!response) {
       return
     }
     socket.emit('add_message', message)
-  }
+  }, [safelyRequest, authentication])
 
   const asyncSetStates = useCallback(async () => {
     if (!chatId || chatId < 0 || !user) {
       return
     }
-    const chatResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}`, authentication))
+    const chatResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}`, authentication), [chatId])
     if (!chatResponse) {
       return
     }
     setChat(chatResponse.data)
-    const messagesResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/messages`, authentication))
+    const messagesResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/messages`, authentication), [chatId])
     if (!messagesResponse) {
       return
     }
     setMessages(messagesResponse.data)
-    const chatMembersResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/members`, authentication))
+    const chatMembersResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/members`, authentication), [chatId])
     if (!chatMembersResponse) {
       return
     }
@@ -66,7 +66,7 @@ export default function useChat(chatId?: number) {
     if (!otherChatMember) {
       return
     }
-    const otherChatMemberResponse = await safelyRequest(async () => await axios.get(`${API_URL}/profiles/${otherChatMember.userId}`, authentication))
+    const otherChatMemberResponse = await safelyRequest(async () => await axios.get(`${API_URL}/profiles/${otherChatMember.userId}`, authentication), [otherChatMember])
     if (!otherChatMemberResponse) {
       return
     }

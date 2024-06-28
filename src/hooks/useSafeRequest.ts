@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { ApplicationError, AuthenticationError, ItemNotFoundError } from '../services/errors'
 import { ToastType, useToast } from './useToast'
-import { useCallback } from 'react'
+import { DependencyList, useCallback } from 'react'
 import { useCurrentUser } from './useCurrentUser'
 import { useNavigate } from 'react-router-dom'
 
@@ -30,15 +30,83 @@ const handleErrors = (status: number, config: SafeRequestConfig) => {
   }
 }
 
+interface StoreValue {
+  timestamp: Date
+  value: any
+  request: Request
+  dependencies: DependencyList
+}
+
+class Store {
+  private static instance: Store
+  private memoizedValues: Map<string, StoreValue> = new Map()
+  private constructor() {}
+
+  static getInstance() {
+    if (!Store.instance) {
+      Store.instance = new Store()
+    }
+    return Store.instance
+  }
+
+  private setMemoizedValue(key: string, value: StoreValue) {
+    this.memoizedValues.set(key, value)
+  }
+
+  private getMemoizedValue(key: string): StoreValue | null {
+    return this.memoizedValues.get(key) || null
+  }
+
+  private haveDependenciesChanged(key: string, dependencies: DependencyList) {
+    const storeValue = this.getMemoizedValue(key)
+    if (!storeValue) {
+      return false
+    }
+    return dependencies.some((dependency, index) => storeValue.dependencies[index] !== dependency)
+  }
+
+  async saveResponse(key: string, request: Request, dependencies: DependencyList = []) {
+    const response = await request()
+    this.setMemoizedValue(key, {
+      timestamp: new Date(),
+      value: response,
+      request,
+      dependencies
+    })
+    return this.getMemoizedValue(key)!.value
+  }
+
+  async resolveRequest(request: Request, dependencies: DependencyList = []) {
+    const key = request.toString()
+    const storeValue = this.getMemoizedValue(key)
+    if (!storeValue) {
+      console.log(`%cRequest not found in cache, fetching request ${key}`, 'color: cyan')
+      return await this.saveResponse(key, request)
+    }
+    if (new Date().getTime() - storeValue.timestamp.getTime() > 300000) {
+      console.log(`%cCache has expired, refetching request ${key}`, 'color: purple')
+      return await this.saveResponse(key, request)
+    }
+    if (this.haveDependenciesChanged(key, dependencies)) {
+      console.log(`%cDependencies have changed, refetching request ${key} ${dependencies}`, 'color: orange')
+      return await this.saveResponse(key, request)
+    }
+    console.log(`%cResolving request from cache ${key}`, 'color: green')
+    return storeValue.value
+  }
+}
+
 export default function useSafeRequest() {
   const navigate = useNavigate()
   const toast = useToast()
   const { logout } = useCurrentUser()
+  const store = Store.getInstance()
 
-  return useCallback(async function safelyRequest(request: Request, config: SafeRequestConfig = {}) {
+  const safelyRequest = useCallback(async (
+    request: Request, dependencies: DependencyList = [], config: SafeRequestConfig = {}) => {
     try {
       try {
-        const response = await request()
+        const response = await store.resolveRequest(request, dependencies)
         handleErrors(response.status, config)
         return response
       }
@@ -68,5 +136,7 @@ export default function useSafeRequest() {
       toast('Ha ocurrido un error desconocido', ToastType.error)
       console.error(error)
     }
-  }, [logout, navigate, toast])
+  }, [logout, navigate, store, toast])
+
+  return safelyRequest
 }

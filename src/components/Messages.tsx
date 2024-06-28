@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import ChatBubble from './ChatBubble'
 import { MessageSchema } from '../services/schema'
 
@@ -12,12 +12,17 @@ export default function Messages({ messages }: Props) {
   const scrollChatToBottom = useCallback((delay = 100) => {
     const autoScroll = () => {
       if (!$messagesContainer.current) return
-      const maxScrollTop = $messagesContainer.current.scrollHeight
-      $messagesContainer.current.scrollTop = (maxScrollTop > 0 ? maxScrollTop : 0)
+      const $lastMessage = $messagesContainer.current.lastElementChild
+      if (!$lastMessage) return
+      $lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'end' })
     }
     setTimeout(autoScroll, delay)
   }, [])
-  scrollChatToBottom(10)
+  useEffect(scrollChatToBottom)
+
+  useEffect(() => {
+    scrollChatToBottom()
+  }, [messages, scrollChatToBottom])
 
   return (
     <main
