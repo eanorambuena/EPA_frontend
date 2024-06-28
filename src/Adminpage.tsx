@@ -16,7 +16,7 @@ interface Props {
 export default function AdminPage({ className }: Props) {
   const navigate = useNavigate()
   const authentication = useAuthentication()
-  const currentuser = useCurrentUserOncePerContext()
+  const { user } = useCurrentUserOncePerContext()
   const [accessToken] = useLocalStorage('accessToken', '')
   const { users, fetchAllUsers, deleteUser }: AllUsersInfo = useUser()
   const safeRequest = useSafeRequest()
@@ -56,11 +56,21 @@ export default function AdminPage({ className }: Props) {
     }
   }
 
+  if (!user || user.id !== 1) {
+    return (
+      <div className={`h-full flex flex-col items-center justify-center ${className}`}>
+        <p className='text-lg font-bold'>
+          Acceso denegado
+        </p>
+      </div>
+    )
+  }
+
   if (loading) {
     return (
       <div className={`h-full flex flex-col items-center justify-center ${className}`}>
         <p className='text-lg font-bold'>
-          Loading...
+          Cargando...
         </p>
       </div>
     )
@@ -124,7 +134,7 @@ export default function AdminPage({ className }: Props) {
                   ID
                 </th>
                 <th className='border p-2'>
-                  Número de telefono
+                  Número de teléfono
                 </th>
                 <th className='border p-2'>
                   Tipo
