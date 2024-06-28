@@ -10,6 +10,7 @@ import useAuthentication from './hooks/useAuthentication'
 import { useNavigate } from 'react-router-dom'
 import SubmitButton from './components/SubmitButton'
 
+
 interface Props {
   className?: string
 }
@@ -29,7 +30,6 @@ export default function Chat({ className  }: Props) {
       </div>
     )
   }
-
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     console.log('Submit')
@@ -53,6 +53,12 @@ export default function Chat({ className  }: Props) {
     try {
       navigate('/chats')
       await axios.patch(`${API_URL}/chats/leave/${chat.id}`, {}, authentication)
+  const handleLeaveChat = async () => {
+    console.log('Leave chat usign URL: ', `${API_URL}/chats/leave/${chat.id}`);
+    try {
+      const response = await axios.patch(`${API_URL}/chats/leave/${chat.id}`, {}, authentication)
+      console.log('Chat abandonado:', response.data)
+      navigate('/chats')
     } catch (error) {
       console.error('Error al abandonar chat:', error)
     }
