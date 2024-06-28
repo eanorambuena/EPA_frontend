@@ -49,8 +49,8 @@ export default function Chat({ className  }: Props) {
 
   const handleLeaveChat = async () => {
     try {
-      await axios.patch(`${API_URL}/chats/leave/${chat.id}`, {}, authentication)
       navigate('/chats')
+      await axios.patch(`${API_URL}/chats/leave/${chat.id}`, {}, authentication)
     } catch (error) {
       console.error('Error al abandonar chat:', error)
     }
