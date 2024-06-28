@@ -18,8 +18,6 @@ export default function Chat({ className }: Props) {
   const { chat, messages, appendMessage, image } = useChat(selectedChatId);
   const authenticationConfig = useAuthentication(); // Move the hook call here
 
-  console.log('Chat', chat);
-
   if (!chat) {
     return (
       <div className={`h-full flex flex-col items-center justify-center ${className}`}>
