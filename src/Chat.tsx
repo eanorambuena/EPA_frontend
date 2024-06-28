@@ -6,7 +6,6 @@ import SendMessageForm from './components/SendMessageForm'
 import useChat from './hooks/useChat'
 import { useSelectedChatId } from './hooks/useSelectedChatId'
 import SubmitButton from './components/SubmitButton'
-import axios from 'axios'
 import { API_URL } from './services/variables'
 import useAuthentication from './hooks/useAuthentication'
 
