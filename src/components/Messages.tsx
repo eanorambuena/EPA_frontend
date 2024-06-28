@@ -25,9 +25,9 @@ export default function Messages({ messages }: Props) {
       ref={$messagesContainer}
     >
       {
-        messages.map((message) => (
+        messages.map((message, index) => (
           <ChatBubble
-            key={message.id}
+            key={index}
             message={message}
           />
         ))

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
+import { io } from 'socket.io-client'
 import { ChatMemberSchema, ChatSchema, MessageSchema } from '../services/schema'
 import { API_URL } from '../services/variables'
 import useAuthentication from './useAuthentication'
@@ -15,6 +16,12 @@ export type ChatInfo = {
 
 const FALLBACK_IMAGE = 'https://via.placeholder.com/150'
 
+const socket = io(API_URL)
+
+socket.on('connect', () => {
+  console.log('Connected to server')
+})
+
 export default function useChat(chatId?: number) {
   const authentication = useAuthentication()
   const safelyRequest = useSafeRequest()
@@ -29,6 +36,7 @@ export default function useChat(chatId?: number) {
     if (!response) {
       return
     }
+    socket.emit('add_message', message)
   }
 
   const asyncSetStates = useCallback(async () => {

@@ -27,7 +27,7 @@ export default function SendMessageForm({ appendMessage, chat }: Props) {
     if (!chat.id) {
       return
     }
-    if (!user) {
+    if (!user || !user.id) {
       return
     }
 
@@ -36,7 +36,7 @@ export default function SendMessageForm({ appendMessage, chat }: Props) {
       content: text,
       userId: user.id,
       state: MessageState.sent,
-      date: new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' })
+      date: new Date().toISOString()
     })
     $form.current.reset()
   }, [appendMessage, chat, user])
