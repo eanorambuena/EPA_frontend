@@ -23,8 +23,8 @@ export default function Navbar() {
       </NavLink>
       {user && user.type === 'admin' && user.id === 1 && (
         <NavLink to='/admin'>
-          admin
-      </NavLink>
+          Admin
+        </NavLink>
       )}
     </>
   )
