@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import useLocalStorage from './hooks/useLocalStorage'
 import Layout from './Layout'
 import useUser, { AllUsersInfo } from './hooks/useUsers'
-import useAuthentication from './hooks/useAuthentication'
 import useCurrentUserOncePerContext from './hooks/useCurrentUserOncePerContext'
 import axios from 'axios'
-import useSafeRequest from './hooks/useSafeRequest'
 import { API_URL } from './services/variables'
 
 interface Props {
@@ -14,12 +11,9 @@ interface Props {
 }
 
 export default function AdminPage({ className }: Props) {
-  const navigate = useNavigate()
-  const authentication = useAuthentication()
   const { user } = useCurrentUserOncePerContext()
   const [accessToken] = useLocalStorage('accessToken', '')
-  const { users, fetchAllUsers, deleteUser }: AllUsersInfo = useUser()
-  const safeRequest = useSafeRequest()
+  const { users, fetchAllUsers }: AllUsersInfo = useUser()
 
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
@@ -42,7 +36,7 @@ export default function AdminPage({ className }: Props) {
 
   const handleDeleteUser = async (userId: number) => {
     try {
-      const response = await axios.delete(`${API_URL}/users/${userId}`, {
+      await axios.delete(`${API_URL}/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
