@@ -5,10 +5,10 @@ import Messages from './components/Messages'
 import SendMessageForm from './components/SendMessageForm'
 import useChat from './hooks/useChat'
 import { useSelectedChatId } from './hooks/useSelectedChatId'
-import SubmitButton from './components/SubmitButton'
 import { API_URL } from './services/variables'
 import useAuthentication from './hooks/useAuthentication'
-
+import { useNavigate } from 'react-router-dom'
+import SubmitButton from './components/SubmitButton'
 
 interface Props {
   className?: string
@@ -17,7 +17,8 @@ interface Props {
 export default function Chat({ className }: Props) {
   const { selectedChatId } = useSelectedChatId()
   const { chat, messages, appendMessage, image } = useChat(selectedChatId)
-  const authenticationConfig = useAuthentication() // Move the hook call here
+  const authentication = useAuthentication()
+  const navigate = useNavigate()
 
   if (!chat) {
     return (
@@ -37,13 +38,22 @@ export default function Chat({ className }: Props) {
     const chatId = chat.id
 
     try {
-      const response = await axios.patch(`${API_URL}/chats/${chatId}`, { title: chatName }, authenticationConfig)
+      const response = await axios.patch(`${API_URL}/chats/${chatId}`, { title: chatName }, authentication)
       console.log(response)
       if (response.status === 200) {
         window.location.reload()
       }
     } catch (error) {
       console.error('Error updating chat:', error)
+    }
+  }
+
+  const handleLeaveChat = async () => {
+    try {
+      navigate('/chats')
+      await axios.patch(`${API_URL}/chats/leave/${chat.id}`, {}, authentication)
+    } catch (error) {
+      console.error('Error al abandonar chat:', error)
     }
   }
 
@@ -55,7 +65,7 @@ export default function Chat({ className }: Props) {
     const chatId = chat.id
 
     try {
-      const response = await axios.post(`${API_URL}/chats/${chatId}/members`, { phoneNumber }, authenticationConfig)
+      const response = await axios.post(`${API_URL}/chats/${chatId}/members`, { phoneNumber }, authentication)
       console.log(response)
       if (response.status === 201) {
         window.location.reload()
@@ -68,7 +78,6 @@ export default function Chat({ className }: Props) {
   return (
     <div className={`h-full flex flex-col items-start justify-start ${className}`}>
       <header className='flex items-center justify-start w-full h-fit shadow-sm gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-t-md flex-wrap'>
-
         <img
           alt={chat.title}
           className='size-8 sm:size-10 rounded-full'
@@ -111,7 +120,6 @@ export default function Chat({ className }: Props) {
           </label>
           <input
             className='rounded-md px-4 py-2 bg-inherit border border-violet-300'
-
             id='chatName'
             name='chatName'
             placeholder='Cambiar nombre'
@@ -123,6 +131,12 @@ export default function Chat({ className }: Props) {
           </SubmitButton>
         </form>
         <Availability />
+        <button
+          className='text-red-500 dark:text-red-400'
+          onClick={handleLeaveChat}
+        >
+          Abandonar chat
+        </button>
       </header>
       <Messages messages={messages} />
       <SendMessageForm
