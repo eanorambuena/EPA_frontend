@@ -4,26 +4,36 @@ import useChat from '../hooks/useChat'
 import { getLocalDate } from '../services/date'
 import { MessageSchema } from '../services/schema'
 import Availability from './Availability'
+import { io } from 'socket.io-client'
+import { API_URL } from '../services/variables'
 
 interface Props {
   chatId: number
   isSelected: boolean
 }
 
+const socket = io(API_URL)
+
 export default function ChatRow({ chatId, isSelected } : Props) {
-  const { chat, messages, image } = useChat(chatId)
-  const navigate = useNavigate()
   const [lastMessage, setLastMessage] = useState<MessageSchema | null>(null)
+  const { chat, messages, image } = useChat(chatId, setLastMessage)
+  const navigate = useNavigate()
 
   const handleClick = useCallback(() => {
     navigate(`/chats/${chatId}`)
   }, [chatId, navigate])
 
+  socket.on('new_message', (message: MessageSchema) => {
+    if (message.chatId !== chatId) {
+      return
+    }
+    setLastMessage(message)
+  })
+
   useEffect(() => {
     if (messages.length === 0) return
-    const lastMessage = messages.reduce(
-      (prev, current) => (prev.date > current.date) ? prev : current, messages[0])
-    setLastMessage(lastMessage)
+    const getLastMessage = () => messages[messages.length - 1]
+    setLastMessage(getLastMessage())
   }, [messages])
 
   const selectedStyles = isSelected ? 'lg:bg-gray-200 lg:dark:bg-gray-700 lg:shadow-sm' : ''

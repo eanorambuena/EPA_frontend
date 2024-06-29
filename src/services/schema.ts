@@ -39,7 +39,7 @@ export type ChatSchema = {
 }
 
 export type MessageSchema = {
-  id: number
+  id?: number
   userId: number
   chatId: number
   state: MessageState

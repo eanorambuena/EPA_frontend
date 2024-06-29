@@ -1,23 +1,29 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
+import useChat from '../hooks/useChat'
 import ChatBubble from './ChatBubble'
-import { MessageSchema } from '../services/schema'
 
 interface Props {
-  messages: MessageSchema[]
+  chatId: number
 }
 
-export default function Messages({ messages }: Props) {
+export default function Messages({ chatId }: Props) {
+  const { messages } = useChat(chatId)
   const $messagesContainer = useRef<HTMLElement>(null)
 
   const scrollChatToBottom = useCallback((delay = 100) => {
     const autoScroll = () => {
       if (!$messagesContainer.current) return
-      const maxScrollTop = $messagesContainer.current.scrollHeight
-      $messagesContainer.current.scrollTop = (maxScrollTop > 0 ? maxScrollTop : 0)
+      const $lastMessage = $messagesContainer.current.lastElementChild
+      if (!$lastMessage) return
+      $lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'end' })
     }
     setTimeout(autoScroll, delay)
   }, [])
-  scrollChatToBottom(10)
+  useEffect(scrollChatToBottom)
+
+  useEffect(() => {
+    scrollChatToBottom()
+  }, [messages, scrollChatToBottom])
 
   return (
     <main
@@ -25,9 +31,9 @@ export default function Messages({ messages }: Props) {
       ref={$messagesContainer}
     >
       {
-        messages.map((message) => (
+        messages.map((message, index) => (
           <ChatBubble
-            key={message.id}
+            key={index}
             message={message}
           />
         ))

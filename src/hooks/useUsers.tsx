@@ -28,7 +28,7 @@ export default function useUser(userId?: number): UserInfo & AllUsersInfo {
       return
     }
     const userResponse = await safelyRequest(async () =>
-    await axios.get(`${API_URL}/users/${userIdToFetch}`, authentication), [userIdToFetch])
+      await axios.get(`${API_URL}/users/${userIdToFetch}`, authentication), [userIdToFetch])
     if (userResponse) {
       setUser(userResponse.data)
     }
@@ -49,8 +49,7 @@ export default function useUser(userId?: number): UserInfo & AllUsersInfo {
         headers: {
           Authorization: `Bearer ${token}`
         }
-      }, [userId, token])
-    )
+      }), [userId, token])
     if (response) {
       setUsers(prevUsers => prevUsers.filter(user => user.id !== userId))
     }

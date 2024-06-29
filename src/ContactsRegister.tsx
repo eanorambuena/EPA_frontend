@@ -57,7 +57,7 @@ function ContactRegister({ searchParams }: Props) {
             className='rounded-md px-4 py-2 bg-inherit border mb-6 border-violet-300'
             name='userContact'
             onChange={(e) => setUserContact(e.target.value)}
-            placeholder='userContact'
+            placeholder='Número de contacto'
             required
             type='userContact'
             value={userContact}

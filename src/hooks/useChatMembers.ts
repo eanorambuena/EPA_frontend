@@ -19,7 +19,7 @@ export default function useChatMembers() {
       return
     }
     (async () => {
-      const response = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${selectedChatId}/members`, authentication))
+      const response = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${selectedChatId}/members`, authentication), [selectedChatId])
       if (!response) {
         return
       }
