@@ -8,6 +8,9 @@ import useAuthentication from './hooks/useAuthentication'
 import useChat from './hooks/useChat'
 import { useSelectedChatId } from './hooks/useSelectedChatId'
 import { API_URL } from './services/variables'
+import useAuthentication from './hooks/useAuthentication'
+import { useNavigate } from 'react-router-dom'
+import SubmitButton from './components/SubmitButton'
 
 interface Props {
   className?: string
@@ -16,7 +19,9 @@ interface Props {
 export default function Chat({ className }: Props) {
   const { selectedChatId } = useSelectedChatId()
   const { chat, appendMessage, image } = useChat(selectedChatId)
-  const authenticationConfig = useAuthentication() // Move the hook call here
+  const authentication = useAuthentication()
+  const navigate = useNavigate()
+
 
   if (!chat) {
     return (
@@ -36,13 +41,22 @@ export default function Chat({ className }: Props) {
     const chatId = chat.id
 
     try {
-      const response = await axios.patch(`${API_URL}/chats/${chatId}`, { title: chatName }, authenticationConfig)
+      const response = await axios.patch(`${API_URL}/chats/${chatId}`, { title: chatName }, authentication)
       console.log(response)
       if (response.status === 200) {
         window.location.reload()
       }
     } catch (error) {
       console.error('Error updating chat:', error)
+    }
+  }
+
+  const handleLeaveChat = async () => {
+    try {
+      navigate('/chats')
+      await axios.patch(`${API_URL}/chats/leave/${chat.id}`, {}, authentication)
+    } catch (error) {
+      console.error('Error al abandonar chat:', error)
     }
   }
 
@@ -54,7 +68,7 @@ export default function Chat({ className }: Props) {
     const chatId = chat.id
 
     try {
-      const response = await axios.post(`${API_URL}/chats/${chatId}/members`, { phoneNumber }, authenticationConfig)
+      const response = await axios.post(`${API_URL}/chats/${chatId}/members`, { phoneNumber }, authentication)
       console.log(response)
       if (response.status === 201) {
         window.location.reload()
@@ -120,6 +134,12 @@ export default function Chat({ className }: Props) {
           </SubmitButton>
         </form>
         <Availability />
+        <button
+          className='text-red-500 dark:text-red-400'
+          onClick={handleLeaveChat}
+        >
+          Abandonar chat
+        </button>
       </header>
       <Messages chatId={chat.id} />
       <SendMessageForm
