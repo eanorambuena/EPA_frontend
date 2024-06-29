@@ -22,7 +22,7 @@ socket.on('connect', () => {
   console.log('Connected to server')
 })
 
-export default function useChat(chatId?: number) {
+export default function useChat(chatId?: number, setLastMessage?: (message: MessageSchema) => void){
   const authentication = useAuthentication()
   const safelyRequest = useSafeRequest()
   const { user } = useCurrentUser()
@@ -38,6 +38,14 @@ export default function useChat(chatId?: number) {
     socket.emit('add_message', message)
   }, [safelyRequest, authentication])
 
+  const updateMessages = useCallback(async () => {
+    const messagesResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/messages`, authentication), [chatId])
+    if (!messagesResponse || JSON.stringify(messagesResponse.data) == JSON.stringify(messages)) {
+      return
+    }
+    setMessages(messagesResponse.data)
+  }, [safelyRequest, chatId, messages, authentication])
+
   const addSocketListeners = useCallback(() => {
     socket.on('new_message', (message: MessageSchema) => {
       console.log('New message', message)
@@ -46,11 +54,15 @@ export default function useChat(chatId?: number) {
       }
       console.log('Appending message')
       setMessages(messages => [...messages, message])
+      updateMessages()
+      if (setLastMessage) {
+        setLastMessage(message)
+      }
     })
     return () => {
       socket.off('new_message')
     }
-  }, [chatId])
+  }, [chatId, setLastMessage, updateMessages])
 
   useEffect(addSocketListeners, [addSocketListeners])
 
@@ -63,11 +75,7 @@ export default function useChat(chatId?: number) {
       return
     }
     setChat(chatResponse.data)
-    const messagesResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/messages`, authentication), [chatId])
-    if (!messagesResponse) {
-      return
-    }
-    setMessages(messagesResponse.data)
+    await updateMessages()
     const chatMembersResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/members`, authentication), [chatId])
     if (!chatMembersResponse) {
       return
@@ -86,11 +94,11 @@ export default function useChat(chatId?: number) {
       return
     }
     setImage(otherChatMemberResponse.data.image)
-  }, [authentication, safelyRequest, chatId, user])
+  }, [chatId, user, safelyRequest, updateMessages, authentication])
 
   useEffect(() => {
     asyncSetStates()
-  }, [authentication, safelyRequest, chatId, user, asyncSetStates])
+  }, [authentication, safelyRequest, chatId, user, asyncSetStates, updateMessages])
 
   return { chat, messages, appendMessage, image: image ?? FALLBACK_IMAGE } as ChatInfo
 }

@@ -22,7 +22,6 @@ export default function Messages({ chatId }: Props) {
   useEffect(scrollChatToBottom)
 
   useEffect(() => {
-    console.log('Messages changed', messages)
     scrollChatToBottom()
   }, [messages, scrollChatToBottom])
 

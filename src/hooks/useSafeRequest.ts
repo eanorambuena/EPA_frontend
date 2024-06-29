@@ -37,6 +37,8 @@ interface StoreValue {
   request: Request
 }
 
+const STORE_EXPIRATION = 500
+
 class Store {
   private static instance: Store
   private memoizedValues: Map<string, StoreValue> = new Map()
@@ -74,7 +76,7 @@ class Store {
       Debug.log(`Request not found in cache, fetching request ${key}`, 'yellow')
       return await this.saveResponse(key, request)
     }
-    if (new Date().getTime() - storeValue.timestamp.getTime() > 300000) {
+    if (new Date().getTime() - storeValue.timestamp.getTime() > STORE_EXPIRATION) {
       Debug.log(`Cache has expired, refetching request ${key}`, 'cyan')
       return await this.saveResponse(key, request)
     }
