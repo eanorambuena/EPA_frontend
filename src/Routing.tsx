@@ -6,6 +6,7 @@ import Landing from './Landing'
 import Login from './Login'
 import MainPage from './MainPage'
 import SignUp from './SignUp'
+import Contacts from './Contacts'
 import ContactRegister from './ContactsRegister'
 import useToaster from './hooks/useToaster'
 import ToastContext from './hooks/useToast'
@@ -66,6 +67,10 @@ export default function Routing() {
               <Route
                 element={<Profile />}
                 path='/profile'
+              />
+              <Route
+                element={<Contacts />}
+                path='/contacts'
               />
               <Route
                 element={<ContactRegister />}

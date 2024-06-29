@@ -39,7 +39,7 @@ export type ChatSchema = {
 }
 
 export type MessageSchema = {
-  id: number
+  id?: number
   userId: number
   chatId: number
   state: MessageState
@@ -75,7 +75,7 @@ export class Auth {
       throw new AuthorizationError()
     }
     else if (status === 404) {
-      throw new ItemNotFoundError()
+      throw new ItemNotFoundError('Usuario no encontrado, por favor regístrese')
     }
     else if (status == 500) {
       throw new NetworkError()

@@ -4,8 +4,8 @@ import './navbar.css'
 import Logo from '../../icons/Logo'
 import AuthContext from '../../hooks/useCurrentUser'
 
-export default function Navbar () {
-  const user = useContext(AuthContext).user
+export default function Navbar() {
+  const { user } = useContext(AuthContext)
 
   const protectedRoutes = (
     <>
@@ -15,17 +15,22 @@ export default function Navbar () {
       <NavLink to='/profile'>
         Perfil
       </NavLink>
-      <NavLink to='/contactRegister'>
+      <NavLink to='/contacts'>
         Contactos
       </NavLink>
       <NavLink to='/docs'>
         Docs
       </NavLink>
+      {user && user.type === 'admin' && user.id === 1 && (
+        <NavLink to='/admin'>
+          Admin
+        </NavLink>
+      )}
     </>
   )
 
   return (
-    <nav className='flex items-center justify-between navbar-links bg-inherit p-2 g-2 '>
+    <nav className='flex items-center justify-between navbar-links bg-inherit p-2 g-2'>
       <NavLink
         className='flex items-center gap-2'
         to='/'

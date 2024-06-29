@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
 import axios from 'axios'
+import React, { useState } from 'react'
 import Layout from './Layout'
 import { API_URL } from './services/variables'
+import useAuthentication from './hooks/useAuthentication'
 
 interface Props {
   searchParams?: { message: string }
@@ -10,25 +11,17 @@ interface Props {
 // Definición de la función Login sin usar React.FC
 function ContactRegister({ searchParams }: Props) {
   const [nickname, setNickname] = useState('')
-  const [userBase, setUserBase] = useState('')
   const [userContact, setUserContact] = useState('')
+
+  const authentication = useAuthentication()
 
   const handleRegisterContact = async (e) => {
     e.preventDefault()
-    console.log(userBase)
     console.log(userContact)
     console.log(nickname)
-    const config_post = {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'post',
-      url: `${API_URL}/contacts`,
-      data: { 'nickname': nickname, 'userBase': userBase, 'userContact': userContact}
-    }
 
     try {
-      const response_post = await axios(config_post)
+      const response_post = await axios.post(`${API_URL}/contacts`, {'nickname': nickname, 'userContact': userContact}, authentication)
       console.log('Contacto registrado:', response_post.data)
     } catch (error) {
       console.error('Error al registrar contacto:', error)
@@ -58,28 +51,13 @@ function ContactRegister({ searchParams }: Props) {
             className='text-md'
             htmlFor='password'
           >
-            User base
-          </label>
-          <input
-            className='rounded-md px-4 py-2 bg-inherit border mb-6 border-violet-300'
-            name='userBase'
-            onChange={(e) => setUserBase(e.target.value)}
-            placeholder='userBase'
-            required
-            type='userBase'
-            value={userBase}
-          />
-          <label
-            className='text-md'
-            htmlFor='password'
-          >
-            User Contact
+            Número de contacto
           </label>
           <input
             className='rounded-md px-4 py-2 bg-inherit border mb-6 border-violet-300'
             name='userContact'
             onChange={(e) => setUserContact(e.target.value)}
-            placeholder='userContact'
+            placeholder='Número de contacto'
             required
             type='userContact'
             value={userContact}
