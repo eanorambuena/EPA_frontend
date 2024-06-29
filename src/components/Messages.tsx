@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useRef } from 'react'
+import useChat from '../hooks/useChat'
 import ChatBubble from './ChatBubble'
-import { MessageSchema } from '../services/schema'
 
 interface Props {
-  messages: MessageSchema[]
+  chatId: number
 }
 
-export default function Messages({ messages }: Props) {
+export default function Messages({ chatId }: Props) {
+  const { messages } = useChat(chatId)
   const $messagesContainer = useRef<HTMLElement>(null)
 
   const scrollChatToBottom = useCallback((delay = 100) => {
@@ -21,6 +22,7 @@ export default function Messages({ messages }: Props) {
   useEffect(scrollChatToBottom)
 
   useEffect(() => {
+    console.log('Messages changed', messages)
     scrollChatToBottom()
   }, [messages, scrollChatToBottom])
 

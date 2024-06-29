@@ -15,7 +15,7 @@ interface Props {
 
 export default function Chat({ className }: Props) {
   const { selectedChatId } = useSelectedChatId()
-  const { chat, messages, appendMessage, image } = useChat(selectedChatId)
+  const { chat, appendMessage, image } = useChat(selectedChatId)
   const authenticationConfig = useAuthentication() // Move the hook call here
 
   if (!chat) {
@@ -81,7 +81,7 @@ export default function Chat({ className }: Props) {
         </form>
         <Availability />
       </header>
-      <Messages messages={messages} />
+      <Messages chatId={chat.id} />
       <SendMessageForm
         appendMessage={appendMessage}
         chat={chat}

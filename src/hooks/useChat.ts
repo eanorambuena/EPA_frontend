@@ -31,13 +31,28 @@ export default function useChat(chatId?: number) {
   const [image, setImage] = useState<string | null>(null)
 
   const appendMessage = useCallback(async (message: MessageSchema) => {
-    setMessages(messages => [...messages, message])
-    const response =  await safelyRequest(async () => await axios.post(`${API_URL}/messages`, message, authentication), [Math.random()])
+    const response =  await safelyRequest(async () => await axios.post(`${API_URL}/messages`, message, authentication), [message])
     if (!response) {
       return
     }
     socket.emit('add_message', message)
   }, [safelyRequest, authentication])
+
+  const addSocketListeners = useCallback(() => {
+    socket.on('new_message', (message: MessageSchema) => {
+      console.log('New message', message)
+      if (message.chatId !== chatId) {
+        return
+      }
+      console.log('Appending message')
+      setMessages(messages => [...messages, message])
+    })
+    return () => {
+      socket.off('new_message')
+    }
+  }, [chatId])
+
+  useEffect(addSocketListeners, [addSocketListeners])
 
   const asyncSetStates = useCallback(async () => {
     if (!chatId || chatId < 0 || !user) {
