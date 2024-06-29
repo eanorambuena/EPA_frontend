@@ -1,21 +1,20 @@
+import axios from 'axios'
 import React from 'react'
 import Availability from './components/Availability'
 import Messages from './components/Messages'
 import SendMessageForm from './components/SendMessageForm'
 import useChat from './hooks/useChat'
 import { useSelectedChatId } from './hooks/useSelectedChatId'
-import axios from 'axios'
 import { API_URL } from './services/variables'
 import useAuthentication from './hooks/useAuthentication'
 import { useNavigate } from 'react-router-dom'
 import SubmitButton from './components/SubmitButton'
 
-
 interface Props {
   className?: string
 }
 
-export default function Chat({ className  }: Props) {
+export default function Chat({ className }: Props) {
   const { selectedChatId } = useSelectedChatId()
   const { chat, messages, appendMessage, image } = useChat(selectedChatId)
   const authentication = useAuthentication()
@@ -58,9 +57,27 @@ export default function Chat({ className  }: Props) {
     }
   }
 
+  const handleAdd = async (event: React.FormEvent<HTMLFormElement>) => {
+    console.log('Add')
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    const phoneNumber = formData.get('phoneNumber') as string
+    const chatId = chat.id
+
+    try {
+      const response = await axios.post(`${API_URL}/chats/${chatId}/members`, { phoneNumber }, authentication)
+      console.log(response)
+      if (response.status === 201) {
+        window.location.reload()
+      }
+    } catch (error) {
+      console.error('Error adding member:', error)
+    }
+  }
+
   return (
     <div className={`h-full flex flex-col items-start justify-start ${className}`}>
-      <header className='flex items-center justify-start w-full h-fit shadow-sm gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-t-md'>
+      <header className='flex items-center justify-start w-full h-fit shadow-sm gap-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-t-md flex-wrap'>
         <img
           alt={chat.title}
           className='size-8 sm:size-10 rounded-full'
@@ -69,6 +86,28 @@ export default function Chat({ className  }: Props) {
         <h1 className='text-sm sm:text-md md:text-lg font-bold'>
           {chat.title}
         </h1>
+        <form
+          className='flex-1 flex justify-end'
+          onSubmit={handleAdd}
+        >
+          <label
+            className='sr-only'
+            htmlFor='phoneNumber'
+          >
+            Añadir miembro
+          </label>
+          <input
+            className='rounded-md px-4 py-2 bg-inherit border border-violet-300'
+            id='phoneNumber'
+            name='phoneNumber'
+            placeholder='+56912345678'
+            required
+            type='text'
+          />
+          <SubmitButton className='ml-2'>
+            Añadir
+          </SubmitButton>
+        </form>
         <form
           className='flex-1 flex justify-end'
           onSubmit={handleSubmit}
