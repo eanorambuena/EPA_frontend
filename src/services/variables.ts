@@ -3,7 +3,7 @@ export const API_URL = import.meta.env.VITE_BACKEND_URL
 
 let production
 try {
-  production = import.meta.env.PROD === true
+  production = import.meta.env.VITE_PRODUCTION === 'true'
 }
 catch (error) {
   production = false

@@ -22,7 +22,7 @@ socket.on('connect', () => {
   console.log('Connected to server')
 })
 
-export default function useChat(chatId?: number) {
+export default function useChat(chatId?: number, setLastMessage?: (message: MessageSchema) => void){
   const authentication = useAuthentication()
   const safelyRequest = useSafeRequest()
   const { user } = useCurrentUser()
@@ -30,30 +30,53 @@ export default function useChat(chatId?: number) {
   const [messages, setMessages] = useState<MessageSchema[]>([])
   const [image, setImage] = useState<string | null>(null)
 
-  const appendMessage = async (message: MessageSchema) => {
-    setMessages(messages => [...messages, message])
-    const response =  await safelyRequest(async () => await axios.post(`${API_URL}/messages`, message, authentication))
+  const appendMessage = useCallback(async (message: MessageSchema) => {
+    const response =  await safelyRequest(async () => await axios.post(`${API_URL}/messages`, message, authentication), [message])
     if (!response) {
       return
     }
     socket.emit('add_message', message)
-  }
+  }, [safelyRequest, authentication])
+
+  const updateMessages = useCallback(async () => {
+    const messagesResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/messages`, authentication), [chatId])
+    if (!messagesResponse || JSON.stringify(messagesResponse.data) == JSON.stringify(messages)) {
+      return
+    }
+    setMessages(messagesResponse.data)
+  }, [safelyRequest, chatId, messages, authentication])
+
+  const addSocketListeners = useCallback(() => {
+    socket.on('new_message', (message: MessageSchema) => {
+      console.log('New message', message)
+      if (message.chatId !== chatId) {
+        return
+      }
+      console.log('Appending message')
+      setMessages(messages => [...messages, message])
+      updateMessages()
+      if (setLastMessage) {
+        setLastMessage(message)
+      }
+    })
+    return () => {
+      socket.off('new_message')
+    }
+  }, [chatId, setLastMessage, updateMessages])
+
+  useEffect(addSocketListeners, [addSocketListeners])
 
   const asyncSetStates = useCallback(async () => {
     if (!chatId || chatId < 0 || !user) {
       return
     }
-    const chatResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}`, authentication))
+    const chatResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}`, authentication), [chatId])
     if (!chatResponse) {
       return
     }
     setChat(chatResponse.data)
-    const messagesResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/messages`, authentication))
-    if (!messagesResponse) {
-      return
-    }
-    setMessages(messagesResponse.data)
-    const chatMembersResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/members`, authentication))
+    await updateMessages()
+    const chatMembersResponse = await safelyRequest(async () => await axios.get(`${API_URL}/chats/${chatId}/members`, authentication), [chatId])
     if (!chatMembersResponse) {
       return
     }
@@ -66,16 +89,16 @@ export default function useChat(chatId?: number) {
     if (!otherChatMember) {
       return
     }
-    const otherChatMemberResponse = await safelyRequest(async () => await axios.get(`${API_URL}/profiles/${otherChatMember.userId}`, authentication))
+    const otherChatMemberResponse = await safelyRequest(async () => await axios.get(`${API_URL}/profiles/${otherChatMember.userId}`, authentication), [otherChatMember])
     if (!otherChatMemberResponse) {
       return
     }
     setImage(otherChatMemberResponse.data.image)
-  }, [authentication, safelyRequest, chatId, user])
+  }, [chatId, user, safelyRequest, updateMessages, authentication])
 
   useEffect(() => {
     asyncSetStates()
-  }, [authentication, safelyRequest, chatId, user, asyncSetStates])
+  }, [authentication, safelyRequest, chatId, user, asyncSetStates, updateMessages])
 
   return { chat, messages, appendMessage, image: image ?? FALLBACK_IMAGE } as ChatInfo
 }

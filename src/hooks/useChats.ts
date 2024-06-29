@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { ChatSchema } from '../services/schema'
 import { API_URL } from '../services/variables'
 import useAuthentication from './useAuthentication'
@@ -10,15 +10,17 @@ export default function useChats() {
   const safelyRequest = useSafeRequest()
   const authentication = useAuthentication()
 
-  useEffect(() => {
-    (async () => {
-      const response = await safelyRequest(async () => axios.get(`${API_URL}/chats`, authentication))
-      if (!response) {
-        return
-      }
-      setChats(response.data)
-    })()
+  const fetchChats = useCallback(async () => {
+    const response = await safelyRequest(async () => axios.get(`${API_URL}/chats`, authentication))
+    if (!response) {
+      return
+    }
+    setChats(response.data)
   }, [authentication, safelyRequest])
+
+  useEffect(() => {
+    fetchChats()
+  }, [authentication, fetchChats, safelyRequest])
 
   return chats
 }

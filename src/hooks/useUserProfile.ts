@@ -12,7 +12,7 @@ export default function useUserProfile(userId?: number) {
   const [profileRequested, setProfileRequested] = useState(false)
 
   const asyncSetStates = useCallback(async () => {
-    const response = await safelyRequest(async () => axios.get(`${API_URL}/profiles/${userId}`, authorizationConfig),
+    const response = await safelyRequest(async () => axios.get(`${API_URL}/profiles/${userId}`, authorizationConfig), [userId],
       {
         itemNotFoundError: 'No tienes un perfil, por favor crea uno',
         applicationError: 'Error al obtener el perfil'

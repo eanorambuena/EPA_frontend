@@ -3,6 +3,8 @@ import React from 'react'
 import Availability from './components/Availability'
 import Messages from './components/Messages'
 import SendMessageForm from './components/SendMessageForm'
+import SubmitButton from './components/SubmitButton'
+import useAuthentication from './hooks/useAuthentication'
 import useChat from './hooks/useChat'
 import { useSelectedChatId } from './hooks/useSelectedChatId'
 import { API_URL } from './services/variables'
@@ -16,9 +18,10 @@ interface Props {
 
 export default function Chat({ className }: Props) {
   const { selectedChatId } = useSelectedChatId()
-  const { chat, messages, appendMessage, image } = useChat(selectedChatId)
+  const { chat, appendMessage, image } = useChat(selectedChatId)
   const authentication = useAuthentication()
   const navigate = useNavigate()
+
 
   if (!chat) {
     return (
@@ -138,7 +141,7 @@ export default function Chat({ className }: Props) {
           Abandonar chat
         </button>
       </header>
-      <Messages messages={messages} />
+      <Messages chatId={chat.id} />
       <SendMessageForm
         appendMessage={appendMessage}
         chat={chat}
