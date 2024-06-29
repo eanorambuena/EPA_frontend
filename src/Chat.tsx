@@ -8,9 +8,7 @@ import useAuthentication from './hooks/useAuthentication'
 import useChat from './hooks/useChat'
 import { useSelectedChatId } from './hooks/useSelectedChatId'
 import { API_URL } from './services/variables'
-import useAuthentication from './hooks/useAuthentication'
 import { useNavigate } from 'react-router-dom'
-import SubmitButton from './components/SubmitButton'
 
 interface Props {
   className?: string
