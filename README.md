@@ -55,20 +55,20 @@ Además de estos colores, pequeñas variaciones de estos también podrán ser ut
 
 <!-- Vistas principales -->
 ### :mag: Vistas principales
-![Login Mobile](assets/views/LoginMobile.png)
-![Login Tablet](assets/views/LoginTablet.png)
-![Login Desktop](assets/views/LoginDesktop.png)
-![Chats Mobile](assets/views/ChatsMobile.png)
-![Chats Tablet](assets/views/ChatsTablet.png)
-![Chats Desktop](assets/views/ChatsDesktop.png)
-![Chat Mobile](assets/views/ChatMobile.png)
-![Chat Tablet](assets/views/ChatTablet.png)
-![Chat Desktop](assets/views/ChatDesktop.png)
+![Login Mobile](public/assets/views/LoginMobile.png)
+![Login Tablet](public/assets/views/LoginTablet.png)
+![Login Desktop](public/assets/views/LoginDesktop.png)
+![Chats Mobile](public/assets/views/ChatsMobile.png)
+![Chats Tablet](public/assets/views/ChatsTablet.png)
+![Chats Desktop](public/assets/views/ChatsDesktop.png)
+![Chat Mobile](public/assets/views/ChatMobile.png)
+![Chat Tablet](public/assets/views/ChatTablet.png)
+![Chat Desktop](public/assets/views/ChatDesktop.png)
 
 
 <!-- Logo -->
 ### :art: Logo
-![Logo](assets/EPAChatLogo.png)
+![Logo](public/assets/EPAChatLogo.png)
 ![Logo2](assets/EPAChatLogoDarkmode.png)
 
 <!-- ejemplo de aplicacion -->
@@ -80,3 +80,13 @@ Otros ejemplos de uso de los colores se pueden ver en las vistas principales, ya
 
 Además, utilizamos códigos de internet para ciertas funcionalidades de nuestra aplicación. Son los siguientes:
 1. Para el archivo About.css//About.tsx se utilizó código disponible en https://codepen.io/nathanlong/pen/abayBej para crear la animación del corazón
+
+### Eliminar un producto
+Para eliminar un usuario debes agregar id como parámetro:/users/<id>
+```
+[DELETE] https://epa-backend-1.onrender.com/users/22
+```
+Response:
+```
+true
+```
